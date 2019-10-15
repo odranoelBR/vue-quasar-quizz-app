@@ -5,6 +5,12 @@
 </template>
 
 <script>
+import { LocalStorage } from 'quasar'
+
+import value from './data.json'
+
+LocalStorage.set('perguntas', value)
+
 export default {
   name: 'App'
 }

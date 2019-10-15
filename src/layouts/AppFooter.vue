@@ -19,7 +19,9 @@
       <q-toolbar-title>
         <div class="row text-center items-center">
 
-          <div class="col-4"></div>
+          <div class="col-4">
+            <span class="text-subtitle1 text-blue-grey-3">Questão 1/20</span>
+          </div>
           <div class="col-4 ">
 
             <q-btn

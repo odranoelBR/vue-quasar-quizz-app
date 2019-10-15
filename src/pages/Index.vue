@@ -1,84 +1,90 @@
 <template>
   <q-page>
 
-    <span class="text-subtitle1 text-blue-grey-3">Questão 1/20</span>
-
     <q-separator
       dark
       class="q-mb-md q-mt-sm"
     />
 
-    <span class="text-h5 text-white ">
-      Qual a pergunta mais interessante ?
+    <span
+      class="text-white"
+      v-html="pergunta.valor"
+    >
     </span>
 
-    <div class="row q-pt-xl">
+    <q-separator class="q-pb-md bg-info" />
+
+    <div
+      class="row"
+      v-for="(resposta, index) in pergunta.respostas"
+      :key="index"
+    >
+
       <q-chip
-        class="full-width "
+        class="fit"
         outline
         square
         color="primary"
         text-color="white"
-        :selected="perguntas.a"
-        @click="toggleChoice('a')"
+        :selected="resposta.selecionada"
+        @click="toggleChoice(resposta)"
       >
         <q-avatar
           font-size="24px"
-          icon="mdi-alpha-a"
+          :icon="`mdi-alpha-${resposta.letra}`"
           color="primary"
           text-color="white"
         />
 
-        Primera resposta
+        <span v-html="resposta.valor"></span>
       </q-chip>
     </div>
-    <div>
 
-      <q-chip
-        class="full-width "
-        outline
-        square
-        color="primary"
-        text-color="white"
-        :selected="perguntas.b"
-        @click="toggleChoice('b')"
-      >
-        <q-avatar
-          font-size="24px"
-          icon="mdi-alpha-b"
-          color="primary"
-          text-color="white"
-        />
-
-        Get directions
-      </q-chip>
+    <div class="row text-right q-pt-md">
+      <div class="col">
+        <q-btn
+          color="accent"
+          @click="next"
+        >
+          Próxima
+        </q-btn>
+      </div>
     </div>
 
   </q-page>
 </template>
 
 <script>
+import { LocalStorage } from 'quasar'
+
 export default {
   name: 'PageIndex',
+  created () {
+    this.getPergunta()
+  },
   data: () => ({
-    teste: '',
-    perguntas: {
-      a: false,
-      c: false,
-      d: false,
-      e: false
-    }
+    pergunta: {},
+    perguntaCorrente: 0
   }),
   methods: {
-    toggleChoice (value) {
+    toggleChoice (pergunta) {
       this.reset()
-      this.perguntas[value] = true
+      pergunta.selecionada = true
     },
     reset () {
-      Object.keys(this.perguntas)
-        .forEach(key => {
-          this.perguntas[key] = false
-        })
+      this.pergunta.respostas.forEach(pergunta => {
+        pergunta.selecionada = false
+      })
+    },
+    next () {
+      this.perguntaCorrente++
+      this.getPergunta()
+    },
+    getPergunta () {
+      this.pergunta = LocalStorage.getItem('perguntas')[this.perguntaCorrente]
+      this.pergunta.respostas.forEach(pergunta => {
+        this.$set(pergunta, 'selecionada', false)
+      })
     }
   }
 }
@@ -89,5 +95,8 @@ export default {
 }
 .q-chip__content {
   color: white;
+}
+.q-chip {
+  padding: 0px 12px;
 }
 </style>
