@@ -936,6 +936,13 @@
   resolved "https://registry.yarnpkg.com/@quasar/fastclick/-/fastclick-1.1.4.tgz#21ed3e9a4387dcb43022a08af4ef08a5f1abf159"
   integrity sha512-i9wbyV4iT+v4KhtHJynUFhH5LiEPvAEgSnwMqPN4hf/8uRe82nDl5qP5agrp2el1h0HzyBpbvHaW7NB0BPrtvA==
 
+"@quasar/quasar-app-extension-qribbon@^1.0.0-beta.8":
+  version "1.0.0-beta.8"
+  resolved "http://10.52.140.102:8081/repository/npm-fab-agrupado-internet-ccarj/@quasar/quasar-app-extension-qribbon/-/quasar-app-extension-qribbon-1.0.0-beta.8.tgz#cd1c40179867fcdab8fed6398321072dca6a01cd"
+  integrity sha512-QuHZu+91pDWHdl71lprcq9KJ21HNTl56CEmoCUjkhcqWEwLmrfh/eQ5Ow/jd4FKEF7wyJyzzmU5T/QfF79/PSA==
+  dependencies:
+    q-colorize-mixin "^1.0.0-alpha.3"
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -6871,6 +6878,11 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+q-colorize-mixin@^1.0.0-alpha.3:
+  version "1.0.0-alpha.3"
+  resolved "http://10.52.140.102:8081/repository/npm-fab-agrupado-internet-ccarj/q-colorize-mixin/-/q-colorize-mixin-1.0.0-alpha.3.tgz#0b9c16091d44d3328c73afa835000869f28f7a33"
+  integrity sha512-W2aIrhBZB3EoZdC41bk4/ywjIibFWfgptHbldDb7MP5CdLsM5WkfRDvvqezJKcMWzkoy6ONU+h/ogqH9IHdelQ==
 
 q@^1.1.2:
   version "1.5.1"

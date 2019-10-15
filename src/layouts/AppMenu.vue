@@ -1,8 +1,10 @@
 <template>
   <q-menu
-    class="fit"
-    transition-show="flip-right"
-    transition-hide="flip-left"
+    fit
+    v-model="opened"
+    transition-show="jump-down"
+    transition-hide="jump-up"
+    @before-hide="beforeHide"
   >
     <q-list
       class="bg-white rounded-borders "
@@ -38,6 +40,24 @@
 </template>
 <script>
 export default {
-
+  props: {
+    showing: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data: () => ({
+    opened: false
+  }),
+  watch: {
+    showing (newValue) {
+      this.opened = newValue
+    }
+  },
+  methods: {
+    beforeHide () {
+      this.$emit('hide')
+    }
+  }
 }
 </script>

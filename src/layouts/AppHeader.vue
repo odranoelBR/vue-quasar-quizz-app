@@ -1,36 +1,54 @@
 <template>
-  <div>
-    <div class="row text-h5 text-bold text-white">
-      <div class="col">Rebel
+  <div :class="position">
+    <div class="row text-h6 text-weight-light text-white">
+      <div class="col-auto ">
+        Rebel
+      </div>
+      <div
+        class="col "
+        @click="toggleMenu"
+      >
         <q-icon
+          size="22px"
           :name="arrowIcon"
-          @click="toggleMenu"
         />
       </div>
       <div class="col text-right">
         <q-icon
+          size="25px"
           :name="searchingIcon"
           @click="toggleSearch"
         />
       </div>
     </div>
-    <div class="row">
-      <app-menu
-        v-show="menuOpen"
-        :showing="menuOpen"
-      ></app-menu>
+    <div>
+
     </div>
+    <div>
+      <app-menu
+        :showing="menuOpen"
+        @hide="toggleMenu"
+      ></app-menu>
+      <search-menu
+        :showing="searchingNow"
+        @hide="toggleSearch"
+      ></search-menu>
+    </div>
+
   </div>
+
 </template>
 <script>
 import AppMenu from 'layouts/AppMenu'
+import SearchMenu from 'components/SearchMenu'
 export default {
   data: () => ({
     menuOpen: false,
     searchingNow: false
   }),
   components: {
-    AppMenu
+    AppMenu, SearchMenu
+
   },
   computed: {
     arrowIcon () {
@@ -38,6 +56,11 @@ export default {
     },
     searchingIcon () {
       return `mdi-${this.searchingNow ? 'close' : 'magnify'}`
+    },
+    position () {
+      if (this.menuOpen) return 'get-down-menu'
+      if (this.searchingNow) return 'get-down-search'
+      return ''
     }
   },
   methods: {
@@ -52,3 +75,5 @@ export default {
   }
 }
 </script>
+<style scoped>
+</style>

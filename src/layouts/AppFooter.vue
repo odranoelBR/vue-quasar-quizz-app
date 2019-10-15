@@ -2,6 +2,7 @@
   <q-footer
     reveal
     elevated
+    class="bg-secondary"
   >
     <div class="wraper ">
       <svg
@@ -14,10 +15,7 @@
         <path d="M120.8,26C98.1,26,86.4,0,60.4,0C35.9,0,21.1,26,0.5,26H120.8z" />
       </svg>
     </div>
-    <q-toolbar
-      style="height: 10.5vh;"
-      class="bg-tertiary"
-    >
+    <q-toolbar style="height: 10.5vh;">
       <q-toolbar-title>
         <div class="row text-center items-center">
 
@@ -27,7 +25,7 @@
             <q-btn
               fab
               class="shadow-18"
-              color="accent"
+              color="primary"
               size="xl"
               :icon="running ? 'mdi-stop' : 'mdi-play'"
               @click="run"

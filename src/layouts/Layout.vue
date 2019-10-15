@@ -1,12 +1,12 @@
 <template>
   <div
     class="q-pa-lg"
-    style="background-color: #005AA7"
+    style="background-color: #1D2833"
   >
     <q-layout view="lHh Lpr lFf">
-      <app-header class="q-pb-md" />
+      <app-header />
 
-      <q-page-container class="padding">
+      <q-page-container class="padding q-pt-md">
         <router-view />
       </q-page-container>
 
@@ -18,6 +18,7 @@
 <script>
 import AppHeader from 'layouts/AppHeader.vue'
 import AppFooter from 'layouts/AppFooter.vue'
+
 export default {
   name: 'MyLayout',
   components: {
