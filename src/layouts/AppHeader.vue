@@ -13,13 +13,13 @@
           :name="arrowIcon"
         />
       </div>
-      <div class="col text-right">
+      <!-- <div class="col text-right">
         <q-icon
           size="25px"
           :name="searchingIcon"
           @click="toggleSearch"
         />
-      </div>
+      </div> -->
     </div>
     <div>
 
@@ -29,10 +29,10 @@
         :showing="menuOpen"
         @hide="toggleMenu"
       ></app-menu>
-      <search-menu
+      <!-- <search-menu
         :showing="searchingNow"
         @hide="toggleSearch"
-      ></search-menu>
+      ></search-menu> -->
     </div>
 
   </div>
@@ -40,14 +40,14 @@
 </template>
 <script>
 import AppMenu from 'layouts/AppMenu'
-import SearchMenu from 'components/SearchMenu'
+// import SearchMenu from 'components/SearchMenu'
 export default {
   data: () => ({
     menuOpen: false,
     searchingNow: false
   }),
   components: {
-    AppMenu, SearchMenu
+    AppMenu
 
   },
   computed: {

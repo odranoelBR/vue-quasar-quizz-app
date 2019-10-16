@@ -1,23 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// import example from './module-example'
+import global from './global'
+import questionario from './questionario'
 
 Vue.use(Vuex)
-
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      questionario
     },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode only
+    global,
     strict: process.env.DEV
   })
 

@@ -20,7 +20,7 @@
         <div class="row text-center items-center">
 
           <div class="col-4">
-            <span class="text-subtitle1 text-blue-grey-3">Questão 1/20</span>
+            <span class="text-subtitle1 text-blue-grey-3">Questão {{currentIndex}}/20</span>
           </div>
           <div class="col-4 ">
 
@@ -47,11 +47,18 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     menuAtual: 'play',
     running: false
   }),
+  computed: {
+    ...mapGetters('questionario', ['getCurrentQuestionIndex']),
+    currentIndex () {
+      return this.getCurrentQuestionIndex + 1
+    }
+  },
   components: {
     StopWatch
   },
