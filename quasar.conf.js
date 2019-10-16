@@ -64,7 +64,10 @@ module.exports = function (ctx) {
         'QMenu',
         'QSeparator',
         'QInput',
-        'QAvatar'
+        'QAvatar',
+        'QTab',
+        'QTabs',
+        'QBadge'
       ],
 
       directives: [
