@@ -1,17 +1,19 @@
 <template>
   <div :class="position">
-    <div class="row text-h6 text-weight-light text-white">
-      <div class="col-auto ">
+    <div class="row text-h6  text-white">
+      <div class="col"></div>
+      <div class="col">
+
         Rebel
-      </div>
-      <div
-        class="col "
-        @click="toggleMenu"
-      >
+
         <q-icon
           size="22px"
+          @click="toggleMenu"
           :name="arrowIcon"
         />
+      </div>
+      <div class="col ">
+
       </div>
       <!-- <div class="col text-right">
         <q-icon

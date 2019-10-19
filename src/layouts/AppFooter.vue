@@ -5,6 +5,7 @@
     class="bg-secondary"
   >
     <q-tabs
+      align="justify"
       v-model="tab"
       class="text-white "
     >
@@ -24,7 +25,7 @@
       <q-tab
         name="configs"
         icon="mdi-settings"
-        label="Configurações"
+        label="Config."
       />
     </q-tabs>
 
@@ -45,5 +46,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 </style>

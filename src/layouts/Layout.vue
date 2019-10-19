@@ -1,9 +1,10 @@
 <template>
-  <div
-    class="q-pa-lg"
+
+  <q-layout
+    view="lHh Lpr lFf"
     style="background-color: #1D2833"
   >
-    <q-layout view="lHh Lpr lFf">
+    <div class="q-pa-lg">
       <header-questionario v-if="questionario" />
       <app-header v-else />
 
@@ -33,8 +34,14 @@
           :key="2"
         />
       </transition-group>
-    </q-layout>
-  </div>
+      <img
+        id="img-gladio"
+        class="absolute-bottom q-pb-xl q-mb-lg"
+        src="~assets/gladio.png"
+      >
+    </div>
+  </q-layout>
+
 </template>
 
 <script>
