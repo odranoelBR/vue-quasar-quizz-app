@@ -4,6 +4,6 @@ export function getCurrentQuestion (state) {
 export function getCurrentQuestionIndex (state) {
   return state.currentQuestionIndex
 }
-export function getName (state) {
-  return state.name
+export function getChoosedQuestionary (state) {
+  return state.choosedQuestionary
 }

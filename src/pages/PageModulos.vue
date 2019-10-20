@@ -19,9 +19,9 @@
         >
           <q-btn
             no-caps
-            to="questionario"
+            to="modulo"
             color="primary"
-            @click="choose('Remuneração militar')"
+            @click="choose(modulo)"
           >
             <span class="text-weight-light">{{modulo.name}}</span>
           </q-btn>
@@ -43,10 +43,10 @@
           :key="index"
         >
           <q-btn
-            to="questionario"
+            to="modulo"
             class="fit"
             color="primary"
-            @click="choose('Remuneração militar')"
+            @click="choose(modulo)"
           >
             <span class="text-weight-light">{{modulo.name}}</span>
           </q-btn>
@@ -75,9 +75,9 @@ export default {
     ]
   }),
   methods: {
-    ...mapMutations('questionario', ['setName']),
-    choose (name) {
-      this.setName(name)
+    ...mapMutations('questionario', ['setChoosedQuestionary']),
+    choose (modulo) {
+      this.setChoosedQuestionary(modulo)
     }
   }
 

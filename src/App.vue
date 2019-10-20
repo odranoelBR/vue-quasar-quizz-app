@@ -40,7 +40,6 @@ export default {
 }
 
 .q-layout__shadow:after {
-  box-shadow: 0 0 10px 2px rgba(216, 221, 252, 0.2),
-    0 0px 10px rgba(216, 221, 252, 0.24);
+  box-shadow: none;
 }
 </style>

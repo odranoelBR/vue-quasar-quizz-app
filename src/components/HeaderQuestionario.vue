@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-auto">
+    <div class="col-4">
       <q-icon
         name="mdi-arrow-left"
         color="white"
@@ -9,8 +9,8 @@
       ></q-icon>
 
     </div>
-    <div class="col text-center">
-      <span class="text-white text-h6"> {{ getName }} </span>
+    <div class="col">
+      <span class="text-white text-h6"> {{ getChoosedQuestionary.name }} </span>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('questionario', ['getName'])
+    ...mapGetters('questionario', ['getChoosedQuestionary'])
   },
   methods: {
     goHome () {

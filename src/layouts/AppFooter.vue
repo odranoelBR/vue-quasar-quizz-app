@@ -7,25 +7,31 @@
     <q-tabs
       align="justify"
       v-model="tab"
-      class="text-white "
+      class="text-white"
+      switch-indicator
+      indicator-color="accent"
     >
 
-      <q-tab
+      <q-route-tab
         name="alarms"
         icon="alarm"
         label="Histórico"
-      >
-      </q-tab>
-      <q-tab
+        to="historico"
+        exact
+      />
+      <q-route-tab
         name="mails"
         icon="mail"
         label="Modulos"
-      >
-      </q-tab>
-      <q-tab
+        to="/"
+        exact
+      />
+      <q-route-tab
         name="configs"
         icon="mdi-settings"
         label="Config."
+        to="configuracoes"
+        exact
       />
     </q-tabs>
 

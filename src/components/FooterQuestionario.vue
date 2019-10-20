@@ -20,7 +20,9 @@
         <div class="row text-center items-center">
 
           <div class="col-4">
-            <span class="text-subtitle1 text-blue-grey-3">Questão {{currentIndex}}/20</span>
+            <span class="text-subtitle1 text-blue-grey-3">Questão
+              <span class="text-h6 text-white">{{currentIndex}}</span>
+              /20</span>
           </div>
           <div class="col-4 ">
 
