@@ -71,7 +71,8 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QCheckbox',
         'QToggle',
-        'QSlider'
+        'QSlider',
+        'QBtnToggle'
       ],
 
       directives: [

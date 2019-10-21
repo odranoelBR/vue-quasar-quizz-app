@@ -33,8 +33,7 @@
         <q-item-section side>
           <q-toggle
             color="green"
-            v-model="configs.cronometro"
-            val="battery"
+            v-model="cronometro"
           />
         </q-item-section>
       </q-item>
@@ -52,8 +51,38 @@
         >
           <q-toggle
             color="green"
-            v-model="configs.correcaoFinal"
-            val="friend"
+            v-model="correcaoFinal"
+          />
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-item-label>Quantidade de questões ?</q-item-label>
+        </q-item-section>
+        <q-item-section
+          side
+          top
+        >
+          <q-input
+            dark
+            mask="##"
+            v-model.number="qtsQuestoes"
+          />
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-item-label>Quantidade de questões ?</q-item-label>
+        </q-item-section>
+        <q-item-section
+          side
+          top
+        >
+          <q-btn-toggle
+            dark
+            v-model="typeQuestion"
+            toggle-color="green"
+            :options="tipos"
           />
         </q-item-section>
       </q-item>
@@ -62,13 +91,48 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
-    configs: {
-      cronometro: true,
-      correcaoFinal: false
-
+    tipos: [
+      { label: 'Básica', value: 1 },
+      { label: 'Avançada', value: 2 }
+    ]
+  }),
+  computed: {
+    ...mapGetters('questionario', ['getConfigQuestionary']),
+    cronometro: {
+      get () {
+        return this.getConfigQuestionary.cronometro
+      },
+      set (value) {
+        this.$store.commit('questionario/updateCronometro', value)
+      }
+    },
+    correcaoFinal: {
+      get () {
+        return this.getConfigQuestionary.correcaoFinal
+      },
+      set (value) {
+        this.$store.commit('questionario/updateCorrecaoFinal', value)
+      }
+    },
+    qtsQuestoes: {
+      get () {
+        return this.getConfigQuestionary.qtsQuestoes
+      },
+      set (value) {
+        this.$store.commit('questionario/updateQtdQuestoes', value)
+      }
+    },
+    typeQuestion: {
+      get () {
+        return this.getConfigQuestionary.typeQuestion
+      },
+      set (value) {
+        this.$store.commit('questionario/updateTypeQuestion', value)
+      }
     }
-  })
+  }
 }
 </script>

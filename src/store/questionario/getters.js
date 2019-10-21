@@ -7,3 +7,6 @@ export function getCurrentQuestionIndex (state) {
 export function getChoosedQuestionary (state) {
   return state.choosedQuestionary
 }
+export function getConfigQuestionary (state) {
+  return state.configQuestionary
+}
