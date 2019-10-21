@@ -28,7 +28,7 @@
         v-ripple
       >
         <q-item-section>
-          <q-item-label>Cronometro ?</q-item-label>
+          <q-item-label>Cronometro</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-toggle
@@ -43,7 +43,7 @@
         v-ripple
       >
         <q-item-section>
-          <q-item-label>Correção somente no final ?</q-item-label>
+          <q-item-label>Correção somente no final</q-item-label>
         </q-item-section>
         <q-item-section
           side
@@ -56,23 +56,28 @@
         </q-item-section>
       </q-item>
       <q-item>
-        <q-item-section>
-          <q-item-label>Quantidade de questões ?</q-item-label>
-        </q-item-section>
-        <q-item-section
-          side
-          top
-        >
-          <q-input
-            dark
-            mask="##"
-            v-model.number="qtsQuestoes"
-          />
-        </q-item-section>
+        <div class="row items-center">
+          <div class="col-9">
+            <q-item-section>
+              <q-item-label>Quantidade de questões</q-item-label>
+            </q-item-section>
+          </div>
+          <div class="col">
+            <q-item-section>
+              <q-input
+                dark
+                filled
+                dense
+                mask="##"
+                v-model.number="qtsQuestoes"
+              />
+            </q-item-section>
+          </div>
+        </div>
       </q-item>
       <q-item>
         <q-item-section>
-          <q-item-label>Quantidade de questões ?</q-item-label>
+          <q-item-label>Nivel</q-item-label>
         </q-item-section>
         <q-item-section
           side
@@ -95,8 +100,8 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     tipos: [
-      { label: 'Básica', value: 1 },
-      { label: 'Avançada', value: 2 }
+      { label: 'Básico', value: 1 },
+      { label: 'Avançado', value: 2 }
     ]
   }),
   computed: {

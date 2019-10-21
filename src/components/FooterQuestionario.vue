@@ -22,7 +22,7 @@
           <div class="col-4">
             <span class="text-subtitle1 text-blue-grey-3">Questão
               <span class="text-h6 text-white">{{currentIndex}}</span>
-              /20</span>
+              / {{qtdQuestoes}} </span>
           </div>
           <div class="col-4 ">
 
@@ -37,7 +37,10 @@
 
             </q-btn>
           </div>
-          <div class="col-4">
+          <div
+            class="col-4"
+            v-if="cronometro"
+          >
             <stop-watch :running="running" />
           </div>
         </div>
@@ -56,9 +59,15 @@ export default {
     running: false
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestionIndex']),
+    ...mapGetters('questionario', ['getCurrentQuestionIndex', 'getConfigQuestionary']),
     currentIndex () {
       return this.getCurrentQuestionIndex + 1
+    },
+    qtdQuestoes () {
+      return this.getConfigQuestionary.qtsQuestoes
+    },
+    cronometro () {
+      return this.getConfigQuestionary.cronometro
     }
   },
   components: {
