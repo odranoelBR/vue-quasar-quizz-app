@@ -76,6 +76,9 @@ export default {
   methods: {
     run () {
       this.running = !this.running
+      if (!this.$route.path.includes('questionario')) {
+        this.$router.push('/questionario')
+      }
     }
   }
 }

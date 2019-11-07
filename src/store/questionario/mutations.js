@@ -27,3 +27,17 @@ export function updateQtdQuestoes (state, payload) {
 export function updateTypeQuestion (state, payload) {
   state.configQuestionary.typeQuestion = payload
 }
+export function resetState (state) {
+  state.currentQuestionIndex = 0
+  state.configQuestionary = {
+    cronometro: false,
+    correcaoFinal: false,
+    qtsQuestoes: 15,
+    typeQuestion: 1
+  }
+  state.questions.forEach(question => {
+    question.answers.forEach(answer => {
+      answer.selected = false
+    })
+  })
+}

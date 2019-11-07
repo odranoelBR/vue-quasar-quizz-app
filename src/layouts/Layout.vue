@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     questionario () {
-      return this.$route.path === '/modulo'
+      return this.$route.path.includes('modulo/') || this.$route.path === '/questionario'
     }
   }
 }

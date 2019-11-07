@@ -96,8 +96,11 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
+  created () {
+    this.resetState()
+  },
   data: () => ({
     tipos: [
       { label: 'Básico', value: 1 },
@@ -138,6 +141,9 @@ export default {
         this.$store.commit('questionario/updateTypeQuestion', value)
       }
     }
+  },
+  methods: {
+    ...mapMutations('questionario', ['resetState'])
   }
 }
 </script>

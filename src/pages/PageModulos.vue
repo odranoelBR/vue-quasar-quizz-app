@@ -19,7 +19,7 @@
         >
           <q-btn
             no-caps
-            to="modulo"
+            :to="`modulo/${modulo.id}`"
             color="primary"
             @click="choose(modulo)"
           >
@@ -43,7 +43,7 @@
           :key="index"
         >
           <q-btn
-            to="modulo"
+            :to="`modulo/${modulo.id}`"
             class="fit"
             color="primary"
             @click="choose(modulo)"
@@ -61,17 +61,17 @@ import { mapMutations } from 'vuex'
 export default {
   data: () => ({
     modulosMilitar: [
-      { name: 'RDAER', icon: '' },
-      { name: 'RCONT', icon: '' },
-      { name: 'RISAER', icon: '' },
-      { name: 'SINDICÂNCIA', icon: '' }
+      { name: 'RDAER', icon: '', id: 1 },
+      { name: 'RCONT', icon: '', id: 2 },
+      { name: 'RISAER', icon: '', id: 3 },
+      { name: 'SINDICÂNCIA', icon: '', id: 4 }
     ],
     modulosSVA: [
-      { name: '35-1', icon: '' },
-      { name: 'FCA', icon: '' },
-      { name: 'ICAER', icon: '' },
-      { name: 'LICITAÇÃO', icon: '' },
-      { name: 'REMUN.', icon: '' }
+      { name: '35-1', icon: '', id: 5 },
+      { name: 'FCA', icon: '', id: 6 },
+      { name: 'ICAER', icon: '', id: 7 },
+      { name: 'LICITAÇÃO', icon: '', id: 8 },
+      { name: 'REMUN.', icon: '', id: 9 }
     ]
   }),
   methods: {
