@@ -52,19 +52,21 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
-import { mapGetters } from 'vuex'
+import { db } from '../boot/db'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
     menuAtual: 'play',
-    running: false
+    running: false,
+    perguntas: []
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestionIndex', 'getConfigQuestionary']),
+    ...mapGetters('questionario', ['getCurrentQuestionIndex', 'getConfigQuestionary', 'getChoosedQuestionary']),
     currentIndex () {
       return this.getCurrentQuestionIndex + 1
     },
     qtdQuestoes () {
-      return this.getConfigQuestionary.qtsQuestoes
+      return this.getConfigQuestionary.qtdQuestoes
     },
     cronometro () {
       return this.getConfigQuestionary.cronometro
@@ -74,11 +76,25 @@ export default {
     StopWatch
   },
   methods: {
+    ...mapMutations('questionario', ['setQuestions']),
     run () {
+      this.getQuestions()
+    },
+    changePage () {
       this.running = !this.running
       if (!this.$route.path.includes('questionario')) {
         this.$router.push('/questionario')
       }
+    },
+    getQuestions () {
+      db.collection('perguntas')
+        .limit(this.qtdQuestoes)
+        .get()
+        .then(snapshot => {
+          const data = snapshot.docs.map(doc => doc.data())
+          this.setQuestions(data)
+          this.changePage()
+        })
     }
   }
 }

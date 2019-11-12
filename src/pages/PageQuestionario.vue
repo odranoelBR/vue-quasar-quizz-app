@@ -8,7 +8,7 @@
 
     <span
       class="text-white"
-      v-html="getCurrentQuestion.value"
+      v-html="getCurrentQuestion.texto"
     >
     </span>
 
@@ -16,29 +16,31 @@
 
     <div
       class="row question-row"
-      v-for="(answer, index) in getCurrentQuestion.answers"
+      v-for="(resposta, index) in getCurrentQuestion.respostas"
       :key="index"
     >
 
       <q-chip
         class="fit"
-        :outline="getOutline(answer)"
+        :outline="getOutline(resposta)"
         square
-        :color="getButtonColor(answer)"
+        :color="getButtonColor(resposta)"
         text-color="white"
-        :selected="answer.selected"
+        :selected="resposta.selecionada"
         @click="toggleChoice(index)"
       >
         <q-avatar
           class="full-height"
-          :icon="`mdi-alpha-${answer.letter}`"
+          :icon="`mdi-alpha-${resposta.letra}`"
         >)</q-avatar>
 
-        <span v-html="answer.value"></span>
+        <div class="row">
+          <span v-html="resposta.texto"></span>
+        </div>
       </q-chip>
     </div>
 
-    <div class="row q-pt-md justify-between text-right">
+    <div class="row q-pa-xs q-gutter-sm justify-between text-right">
       <transition
         appear
         :duration="{ enter: 300, leave: 300 }"
@@ -58,12 +60,23 @@
           </q-btn>
         </div>
       </transition>
+
       <div class="col">
         <q-btn
           color="accent"
-          @click="next"
+          @click="back"
+          v-show="!ehPrimeiraQuestao"
         >
-          Próxima
+          <q-icon name="arrow_back" />
+        </q-btn>
+      </div>
+      <div class="col-auto">
+        <q-btn
+          color="accent"
+          @click="next"
+          v-show="!ehUltimaQuestao"
+        >
+          <q-icon name="arrow_forward" />
         </q-btn>
       </div>
     </div>
@@ -74,46 +87,49 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 export default {
-
   data: () => ({
-    answerAnalized: false
+    respostaAnalisada: false
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary']),
+    ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao']),
     showButtonAnalisar () {
-      return !this.getConfigQuestionary.correcaoFinal && this.someAnswerSelected
+      return !this.getConfigQuestionary.correcaoFinal && this.algumaRespostaSelecionada
     },
-    someAnswerSelected () {
-      return this.getCurrentQuestion.answers.some(answer => answer.selected)
+    algumaRespostaSelecionada () {
+      return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     }
   },
   methods: {
-    ...mapMutations('questionario', ['nextQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    back () {
+      this.respostaAnalisada = false
+      this.backQuestion()
+    },
     next () {
-      this.answerAnalized = false
+      this.respostaAnalisada = false
       this.nextQuestion()
     },
-    toggleChoice (answerIndex) {
-      this.resetChoices(answerIndex)
-      this.updateCurrentQuestionChoice(answerIndex)
+    toggleChoice (respostaIndex) {
+      this.resetChoices(respostaIndex)
+      this.updateCurrentQuestionChoice(respostaIndex)
     },
     analisar () {
-      this.answerAnalized = true
+      this.respostaAnalisada = true
     },
-    getButtonColor (answer) {
-      if (this.answerAnalized && answer.correct) {
+    getButtonColor (resposta) {
+      if (this.respostaAnalisada && resposta.correta) {
         return 'positive'
       }
-      if (this.answerAnalized && !answer.correct && answer.selected) {
+      if (this.respostaAnalisada && !resposta.correta && resposta.selecionada) {
         return 'negative'
       }
       return 'primary'
     },
-    getOutline (answer) {
-      if (this.answerAnalized && answer.correct) {
+    getOutline (resposta) {
+      if (this.respostaAnalisada && resposta.correta) {
         return false
       }
-      if (!answer.selected) {
+      if (!resposta.selecionada) {
         return true
       }
       return false

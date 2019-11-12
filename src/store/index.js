@@ -11,8 +11,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       questionario
     },
-    global,
-    strict: process.env.DEV
+    global
+    // strict: process.env.DEV
   })
 
   return Store

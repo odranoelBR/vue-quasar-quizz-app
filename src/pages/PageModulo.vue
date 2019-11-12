@@ -69,7 +69,7 @@
                 filled
                 dense
                 mask="##"
-                v-model.number="qtsQuestoes"
+                v-model.number="qtdQuestoes"
               />
             </q-item-section>
           </div>
@@ -125,9 +125,9 @@ export default {
         this.$store.commit('questionario/updateCorrecaoFinal', value)
       }
     },
-    qtsQuestoes: {
+    qtdQuestoes: {
       get () {
-        return this.getConfigQuestionary.qtsQuestoes
+        return this.getConfigQuestionary.qtdQuestoes
       },
       set (value) {
         this.$store.commit('questionario/updateQtdQuestoes', value)

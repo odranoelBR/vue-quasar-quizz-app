@@ -5,25 +5,11 @@
 </template>
 
 <script>
-import { LocalStorage } from 'quasar'
-import { mapMutations } from 'vuex'
-
-import value from './data.json'
-
-LocalStorage.set('perguntas', value)
-
 export default {
   name: 'App',
   created () {
-    value.forEach(question => {
-      question.answers.forEach(answer => {
-        this.$set(answer, 'selected', false)
-      })
-    })
-    this.setQuestions(value)
   },
   methods: {
-    ...mapMutations('questionario', ['setQuestions'])
   }
 }
 </script>

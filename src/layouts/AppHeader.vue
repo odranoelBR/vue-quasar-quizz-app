@@ -1,7 +1,13 @@
 <template>
   <div :class="position">
     <div class="row text-h6  text-white">
-      <div class="col"></div>
+      <div class="col text-right q-mr-sm">
+        <img
+          style="width:36px"
+          src="~assets/wings.svg"
+          alt=""
+        >
+      </div>
       <div class="col">
 
         Rebel
