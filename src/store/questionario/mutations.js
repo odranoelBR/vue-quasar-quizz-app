@@ -36,8 +36,8 @@ export function updateCorrecaoFinal (state, payload) {
 export function updateQtdQuestoes (state, payload) {
   state.configQuestionary.qtdQuestoes = payload
 }
-export function updateTypeQuestion (state, payload) {
-  state.configQuestionary.typeQuestion = payload
+export function updateNivel (state, payload) {
+  state.configQuestionary.nivel = payload
 }
 export function resetState (state) {
   state.currentQuestionIndex = 0
@@ -45,7 +45,7 @@ export function resetState (state) {
     cronometro: false,
     correcaoFinal: false,
     qtdQuestoes: 15,
-    typeQuestion: 1
+    nivel: 1
   }
   state.questions.forEach(question => {
     question.respostas.forEach(resposta => {

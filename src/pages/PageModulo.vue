@@ -85,7 +85,7 @@
         >
           <q-btn-toggle
             dark
-            v-model="typeQuestion"
+            v-model="nivel"
             toggle-color="green"
             :options="tipos"
           />
@@ -133,12 +133,12 @@ export default {
         this.$store.commit('questionario/updateQtdQuestoes', value)
       }
     },
-    typeQuestion: {
+    nivel: {
       get () {
-        return this.getConfigQuestionary.typeQuestion
+        return this.getConfigQuestionary.nivel
       },
       set (value) {
-        this.$store.commit('questionario/updateTypeQuestion', value)
+        this.$store.commit('questionario/updateNivel', value)
       }
     }
   },

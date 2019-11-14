@@ -9,6 +9,13 @@ const routes = [
       { path: '/configuracoes', component: () => import('pages/PageConfiguracao.vue') },
       { path: '/historico', component: () => import('pages/PageHistorico.vue') },
       { path: '/questionario', component: () => import('pages/PageQuestionario.vue') }
+    ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
+      { path: '/login', name: 'Login', component: () => import('pages/PageLogin.vue'), meta: { guest: true } }
 
     ]
   }

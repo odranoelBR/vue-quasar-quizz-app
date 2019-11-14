@@ -15,6 +15,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "firebase": "^7.3.0",
+    "firebaseui": "^4.2.0",
     "localforage": "^1.7.3",
     "quasar": "^1.0.0",
     "vuefire": "^2.2.0"

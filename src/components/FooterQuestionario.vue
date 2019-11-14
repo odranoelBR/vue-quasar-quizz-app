@@ -52,7 +52,7 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
-import { db } from '../boot/db'
+import { db } from '../boot/app'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
@@ -67,6 +67,9 @@ export default {
     },
     qtdQuestoes () {
       return this.getConfigQuestionary.qtdQuestoes
+    },
+    nivel () {
+      return this.getConfigQuestionary.nivel
     },
     cronometro () {
       return this.getConfigQuestionary.cronometro
@@ -89,6 +92,7 @@ export default {
     getQuestions () {
       db.collection('perguntas')
         .limit(this.qtdQuestoes)
+        .where('nivel', '==', this.nivel)
         .get()
         .then(snapshot => {
           const data = snapshot.docs.map(doc => doc.data())

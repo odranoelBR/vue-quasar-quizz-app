@@ -6,6 +6,6 @@ export default {
     cronometro: false,
     correcaoFinal: false,
     qtdQuestoes: 15,
-    typeQuestion: 1
+    nivel: 1
   }
 }
