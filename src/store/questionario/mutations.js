@@ -12,6 +12,7 @@ export function setChoosedQuestionary (state, payload) {
   state.choosedQuestionary = payload
 }
 export function setQuestions (state, payload) {
+  console.log(payload)
   payload.forEach(question => {
     question.respostas.forEach(resposta => {
       resposta.selecionada = false

@@ -71,7 +71,8 @@ module.exports = function (ctx) {
         'QCheckbox',
         'QToggle',
         'QSlider',
-        'QBtnToggle'
+        'QBtnToggle',
+        'QForm'
       ],
 
       directives: [

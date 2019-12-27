@@ -1,2 +1,3 @@
-export function someMutation (/* state */) {
+export function setUsuario (state, payload) {
+  state.usuario = payload
 }
