@@ -3,8 +3,6 @@ import VueRouter from 'vue-router'
 import { LocalStorage } from 'quasar'
 import routes from './routes'
 
-let isAuthenticated = LocalStorage.has('usuario')
-
 Vue.use(VueRouter)
 
 /*
@@ -25,9 +23,12 @@ export default function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach((to, from, next) => {
+    let isAuthenticated = LocalStorage.has('usuario')
     let nextRouteIsLogin = to.path === '/login'
-    console.log(isAuthenticated)
-    if (isAuthenticated) {
+
+    if (isAuthenticated && nextRouteIsLogin) {
+      next('/')
+    } else if (isAuthenticated) {
       next()
     } else if (!isAuthenticated && nextRouteIsLogin) {
       next()
