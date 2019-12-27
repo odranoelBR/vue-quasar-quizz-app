@@ -7,5 +7,6 @@ export default {
     correcaoFinal: false,
     qtdQuestoes: 15,
     nivel: 1
-  }
+  },
+  answers: []
 }

@@ -2,13 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { LocalStorage } from 'quasar'
 import routes from './routes'
+import store from '../store'
 
 Vue.use(VueRouter)
-
-/*
- * If not building with SSR mode, you can
- * directly export the Router instantiation
- */
 
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
@@ -25,10 +21,11 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     let isAuthenticated = LocalStorage.has('usuario')
     let nextRouteIsLogin = to.path === '/login'
-
     if (isAuthenticated && nextRouteIsLogin) {
+      store().commit('setUsuario', LocalStorage.getItem('usuario'))
       next('/')
     } else if (isAuthenticated) {
+      store().commit('setUsuario', LocalStorage.getItem('usuario'))
       next()
     } else if (!isAuthenticated && nextRouteIsLogin) {
       next()

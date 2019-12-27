@@ -1,3 +1,5 @@
+import { db } from '../../boot/app'
+
 export function nextQuestion (state) {
   if ((state.currentQuestionIndex + 1) === state.questions.length) return
 
@@ -12,7 +14,6 @@ export function setChoosedQuestionary (state, payload) {
   state.choosedQuestionary = payload
 }
 export function setQuestions (state, payload) {
-  console.log(payload)
   payload.forEach(question => {
     question.respostas.forEach(resposta => {
       resposta.selecionada = false
@@ -39,6 +40,20 @@ export function updateQtdQuestoes (state, payload) {
 }
 export function updateNivel (state, payload) {
   state.configQuestionary.nivel = payload
+}
+export function updateAnswer (state, payload) {
+  state.answers[payload.id] = payload
+  db.collection('respostas').doc(state.a).set({
+    name: 'Los Angeles',
+    state: 'CA',
+    country: 'USA'
+  })
+    .then(function () {
+      console.log('Document successfully written!')
+    })
+    .catch(function (error) {
+      console.error('Error writing document: ', error)
+    })
 }
 export function resetState (state) {
   state.currentQuestionIndex = 0

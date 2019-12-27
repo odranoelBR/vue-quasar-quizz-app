@@ -83,6 +83,7 @@ export default {
           }
           db.collection('usuarios').add(usuario)
             .then(function (docRef) {
+              usuario.id = docRef.id
               vm.setUsuario(usuario)
               vm.$q.localStorage.set('usuario', usuario)
 

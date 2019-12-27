@@ -10,7 +10,7 @@
       </div>
       <div class="col">
 
-        Rebel
+        {{ getUsuario.usuario.nome }}
 
         <q-icon
           size="22px"
@@ -48,6 +48,7 @@
 </template>
 <script>
 import AppMenu from 'layouts/AppMenu'
+import { mapGetters } from 'vuex'
 // import SearchMenu from 'components/SearchMenu'
 export default {
   data: () => ({
@@ -59,6 +60,7 @@ export default {
 
   },
   computed: {
+    ...mapGetters(['getUsuario']),
     arrowIcon () {
       return `mdi-arrow-${this.menuOpen ? 'up' : 'down'}`
     },

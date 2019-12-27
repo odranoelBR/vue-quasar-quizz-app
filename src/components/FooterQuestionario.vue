@@ -95,7 +95,10 @@ export default {
         .where('nivel', '==', this.nivel)
         .get()
         .then(snapshot => {
-          const data = snapshot.docs.map(doc => doc.data())
+          const data = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }))
           this.setQuestions(data)
           this.changePage()
         })

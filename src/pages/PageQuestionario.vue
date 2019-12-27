@@ -100,7 +100,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
     back () {
       this.respostaAnalisada = false
       this.backQuestion()
@@ -115,6 +115,8 @@ export default {
     },
     analisar () {
       this.respostaAnalisada = true
+      let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
+      this.updateAnswer({ id: this.getCurrentQuestion.id, answer: answer.letra })
     },
     getButtonColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {
