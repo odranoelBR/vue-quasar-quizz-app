@@ -56,7 +56,8 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
+import { db } from '../boot/app'
 
 export default {
   data: () => ({
@@ -74,10 +75,27 @@ export default {
       { name: 'REMUN.', icon: '', id: 9 }
     ]
   }),
+  created () {
+    this.getAnswers()
+  },
+  computed: {
+    ...mapGetters(['getUsuario'])
+  },
   methods: {
-    ...mapMutations('questionario', ['setChoosedQuestionary']),
+    ...mapMutations('questionario', ['setChoosedQuestionary', 'setAnswers']),
     choose (modulo) {
       this.setChoosedQuestionary(modulo)
+    },
+    getAnswers () {
+      db.collection('respostas')
+        .where('idUsuario', '==', this.getUsuario.usuario.id)
+        .get()
+        .then(snapshot => {
+          this.setAnswers(snapshot.empty ? [] : snapshot.docs.map(doc => doc.data()))
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     }
   }
 

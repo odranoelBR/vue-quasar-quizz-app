@@ -32,7 +32,7 @@
           <q-icon name="mdi-account-circle-outline" />
         </q-item-section>
 
-        <q-item-section>Minha conta</q-item-section>
+        <q-item-section @click="goMinhaConta">Minha conta</q-item-section>
       </q-item>
     </q-list>
   </q-menu>
@@ -57,6 +57,9 @@ export default {
   methods: {
     beforeHide () {
       this.$emit('hide')
+    },
+    goMinhaConta () {
+      this.$router.push('minha-conta')
     }
   }
 }

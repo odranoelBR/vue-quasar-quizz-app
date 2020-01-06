@@ -41,13 +41,13 @@ export function updateQtdQuestoes (state, payload) {
 export function updateNivel (state, payload) {
   state.configQuestionary.nivel = payload
 }
+export function setAnswers (state, payload) {
+  state.answers = payload
+}
 export function updateAnswer (state, payload) {
-  state.answers[payload.id] = payload
-  db.collection('respostas').doc(state.a).set({
-    name: 'Los Angeles',
-    state: 'CA',
-    country: 'USA'
-  })
+  payload['idUsuario'] = this.state.usuario.id
+  state.answers[payload.idQuestao] = payload
+  db.collection('respostas').add(payload)
     .then(function () {
       console.log('Document successfully written!')
     })

@@ -8,7 +8,8 @@ const routes = [
       { path: '/modulo/:id', component: () => import('pages/PageModulo.vue') },
       { path: '/configuracoes', component: () => import('pages/PageConfiguracao.vue') },
       { path: '/historico', component: () => import('pages/PageHistorico.vue') },
-      { path: '/questionario', component: () => import('pages/PageQuestionario.vue') }
+      { path: '/questionario', component: () => import('pages/PageQuestionario.vue') },
+      { path: '/minha-conta', component: () => import('pages/PageMinhaConta.vue') }
     ]
   },
   {

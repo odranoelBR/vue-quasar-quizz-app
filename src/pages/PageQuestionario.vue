@@ -90,8 +90,11 @@ export default {
   data: () => ({
     respostaAnalisada: false
   }),
+  created () {
+    this.syncronize()
+  },
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao']),
+    ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'getAnswers']),
     showButtonAnalisar () {
       return !this.getConfigQuestionary.correcaoFinal && this.algumaRespostaSelecionada
     },
@@ -99,8 +102,22 @@ export default {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     }
   },
+  watch: {
+    respostaAnalisada () {
+      this.syncronize()
+    }
+  },
   methods: {
     ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
+    syncronize () {
+      let answer = this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
+      this.getCurrentQuestion.respostas.forEach(resposta => {
+        if (resposta.letra === answer.letra) {
+          resposta.selecionada = true
+          this.respostaAnalisada = true
+        }
+      })
+    },
     back () {
       this.respostaAnalisada = false
       this.backQuestion()
@@ -116,7 +133,7 @@ export default {
     analisar () {
       this.respostaAnalisada = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
-      this.updateAnswer({ id: this.getCurrentQuestion.id, answer: answer.letra })
+      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra })
     },
     getButtonColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {
