@@ -7,7 +7,8 @@
     />
 
     <span
-      class="text-white"
+      class="text-white texto-courier"
+      style="font-size: 11pt"
       v-html="getCurrentQuestion.texto"
     >
     </span>
@@ -34,13 +35,19 @@
           :icon="`mdi-alpha-${resposta.letra}`"
         >)</q-avatar>
 
-        <div class="row">
-          <span v-html="resposta.texto"></span>
-        </div>
+        <span
+          v-html="resposta.texto"
+          class="texto-courier"
+        ></span>
       </q-chip>
     </div>
 
-    <div class="row q-pa-xs q-gutter-sm justify-between text-right">
+    <div class="
+          row
+          q-pa-xs
+          q-gutter-sm
+          justify-between
+          text-right">
       <transition
         appear
         :duration="{ enter: 300, leave: 300 }"
@@ -111,6 +118,8 @@ export default {
     ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
     syncronize () {
       let answer = this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
+      if (!answer) return
+
       this.getCurrentQuestion.respostas.forEach(resposta => {
         if (resposta.letra === answer.letra) {
           resposta.selecionada = true
@@ -163,5 +172,9 @@ export default {
 .question-row .q-chip__content {
   color: white;
   padding: 6px;
+}
+.texto-courier {
+  font-family: "Courier New", Courier, monospace;
+  word-break: break-all;
 }
 </style>
