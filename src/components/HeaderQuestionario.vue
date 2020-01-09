@@ -10,7 +10,7 @@
 
     </div>
     <div class="col">
-      <span class="text-white text-h6"> {{ getChoosedQuestionary.name }} </span>
+      <span class="text-white text-h6"> {{ getChoosedQuestionary.nome }} </span>
     </div>
   </div>
 </template>

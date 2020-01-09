@@ -175,6 +175,6 @@ export default {
 }
 .texto-courier {
   font-family: "Courier New", Courier, monospace;
-  word-break: break-all;
+  white-space: normal;
 }
 </style>

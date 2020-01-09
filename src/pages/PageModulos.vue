@@ -23,7 +23,7 @@
             color="primary"
             @click="choose(modulo)"
           >
-            <span class="text-weight-light">{{modulo.name}}</span>
+            <span class="text-weight-light">{{modulo.nome}}</span>
           </q-btn>
         </div>
       </div>
@@ -48,7 +48,7 @@
             color="primary"
             @click="choose(modulo)"
           >
-            <span class="text-weight-light">{{modulo.name}}</span>
+            <span class="text-weight-light">{{modulo.nome}}</span>
           </q-btn>
         </div>
       </div>
@@ -60,35 +60,38 @@ import { mapMutations, mapGetters } from 'vuex'
 import { db } from '../boot/app'
 
 export default {
-  data: () => ({
-    modulosMilitar: [
-      { name: 'RDAER', icon: '', id: 1 },
-      { name: 'RCONT', icon: '', id: 2 },
-      { name: 'RISAER', icon: '', id: 3 },
-      { name: 'SINDICÂNCIA', icon: '', id: 4 }
-    ],
-    modulosSVA: [
-      { name: '35-1', icon: '', id: 5 },
-      { name: 'FCA', icon: '', id: 6 },
-      { name: 'ICAER', icon: '', id: 7 },
-      { name: 'LICITAÇÃO', icon: '', id: 8 },
-      { name: 'REMUN.', icon: '', id: 9 }
-    ]
-  }),
   created () {
-    this.getAnswers()
+    this.getAnswersFromDB()
+    this.getModulosFromDB()
   },
   computed: {
-    ...mapGetters(['getUsuario'])
+    ...mapGetters(['getUsuario', 'getModulos']),
+    modulosMilitar () {
+      return this.getModulos.filter(modulo => modulo.tipo === 'MILITAR')
+    },
+    modulosSVA () {
+      return this.getModulos.filter(modulo => modulo.tipo === 'SVA')
+    }
   },
   methods: {
     ...mapMutations('questionario', ['setChoosedQuestionary', 'setAnswers']),
+    ...mapMutations(['setModulos']),
     choose (modulo) {
       this.setChoosedQuestionary(modulo)
     },
-    getAnswers () {
+    getModulosFromDB () {
+      db.collection('modulos')
+        .get()
+        .then(snapshot => {
+          this.setModulos(snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    },
+    getAnswersFromDB () {
       db.collection('respostas')
-        .where('idUsuario', '==', this.getUsuario.usuario.id)
+        .where('idUsuario', '==', this.getUsuario.id)
         .get()
         .then(snapshot => {
           this.setAnswers(snapshot.empty ? [] : snapshot.docs.map(doc => doc.data()))

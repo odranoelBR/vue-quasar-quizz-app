@@ -1,3 +1,4 @@
 export default {
-  usuario: {}
+  usuario: {},
+  modulos: []
 }

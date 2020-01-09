@@ -10,7 +10,7 @@
       </div>
       <div class="col">
 
-        {{ getUsuario.usuario.nome }}
+        {{ getUsuario.nome }}
 
         <q-icon
           size="22px"

@@ -93,6 +93,7 @@ export default {
       db.collection('perguntas')
         .limit(this.qtdQuestoes)
         .where('nivel', '==', this.nivel)
+        .where('modulo', '==', `modulos/${this.getChoosedQuestionary.id}`)
         .get()
         .then(snapshot => {
           const data = snapshot.docs.map(doc => ({
