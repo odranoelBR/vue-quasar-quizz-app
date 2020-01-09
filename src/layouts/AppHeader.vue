@@ -8,18 +8,17 @@
           alt=""
         >
       </div>
-      <div class="col">
+      <div class="col-auto">
 
         {{ getUsuario.nome }}
 
+      </div>
+      <div class="col text-left">
         <q-icon
           size="22px"
           @click="toggleMenu"
           :name="arrowIcon"
         />
-      </div>
-      <div class="col ">
-
       </div>
       <!-- <div class="col text-right">
         <q-icon

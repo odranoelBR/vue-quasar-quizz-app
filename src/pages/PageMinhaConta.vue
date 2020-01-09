@@ -15,7 +15,7 @@
 
         <div class="row q-pa-md justify-center q-pt-md">
           <q-input
-            v-model="nome"
+            v-model="usuario.nome"
             placeholder="Nome"
             class="full-width"
             type="text"
@@ -27,9 +27,10 @@
         </div>
         <div class="row q-pa-md justify-center">
           <q-input
-            v-model="email"
+            v-model="usuario.email"
             placeholder="Email"
             class="full-width"
+            disable
             type="email"
             :rules="[
             val => val !== null && val !== '' || 'Preencha o email',
@@ -41,7 +42,7 @@
             type="submit"
             color="primary"
           >
-            Entrar
+            Atualizar
           </q-btn>
         </div>
       </q-form>
@@ -50,13 +51,25 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import { db } from '../boot/app'
-import { mapMutations } from 'vuex'
+import { Notify } from 'quasar'
+
 export default {
   data: () => ({
-    email: '',
-    nome: ''
+    usuario: {}
   }),
+  computed: {
+    ...mapGetters(['getUsuario'])
+  },
+  watch: {
+    getUsuario: {
+      handler () {
+        this.usuario = this.getUsuario
+      },
+      immediate: true
+    }
+  },
   methods: {
     ...mapMutations(['setUsuario']),
     saveUser () {
@@ -64,18 +77,15 @@ export default {
 
       this.$refs.form.validate().then(success => {
         if (success) {
-          let usuario = {
-            nome: this.nome,
-            email: this.email,
-            data: new Date()
-          }
-          db.collection('usuarios').add(usuario)
-            .then(function (docRef) {
-              usuario.id = docRef.id
-              vm.setUsuario(usuario)
-              vm.$q.localStorage.set('usuario', usuario)
+          var usuarioRef = db.collection('usuarios').doc(this.getUsuario.id)
 
-              vm.$router.push('/')
+          usuarioRef.update({
+            nome: vm.usuario.nome
+          })
+            .then(function (docRef) {
+              vm.setUsuario(vm.usuario)
+              vm.$q.localStorage.set('usuario', vm.usuario)
+              Notify.create({ message: 'Atualizado!', color: 'positive' })
             })
             .catch(function (error) {
               console.error('Error adding document: ', error)
@@ -90,18 +100,4 @@ export default {
 }
 </script>
 <style scoped>
-.q-card {
-  position: absolute;
-  width: 90%;
-}
-#card-login {
-  top: 20vw;
-  left: 5vw;
-  min-height: 40%;
-}
-
-#card-test {
-  top: 115vw;
-  left: 5vw;
-}
 </style>

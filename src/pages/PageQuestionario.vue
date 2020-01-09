@@ -142,7 +142,7 @@ export default {
     analisar () {
       this.respostaAnalisada = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
-      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra })
+      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo })
     },
     getButtonColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {

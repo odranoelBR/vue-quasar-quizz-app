@@ -5,7 +5,7 @@ export default {
   configQuestionary: {
     cronometro: false,
     correcaoFinal: false,
-    qtdQuestoes: 15,
+    qtdQuestoes: 3,
     nivel: 1
   },
   answers: []
