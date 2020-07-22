@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
 
     <q-card id="card-login">
@@ -52,7 +52,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import { db } from '../boot/app'
+import { db } from 'boot/firebase'
 import { Notify } from 'quasar'
 
 export default {
@@ -87,8 +87,7 @@ export default {
               vm.$q.localStorage.set('usuario', vm.usuario)
               Notify.create({ message: 'Atualizado!', color: 'positive' })
             })
-            .catch(function (error) {
-              console.error('Error adding document: ', error)
+            .catch(function () {
             })
         } else {
           // oh no, user has filled in

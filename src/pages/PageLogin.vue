@@ -62,7 +62,7 @@
   </div>
 </template>
 <script>
-import { db } from '../boot/app'
+import { db } from 'boot/firebase'
 import { mapMutations } from 'vuex'
 export default {
   data: () => ({
@@ -89,8 +89,7 @@ export default {
 
               vm.$router.push('/')
             })
-            .catch(function (error) {
-              console.error('Error adding document: ', error)
+            .catch(function () {
             })
         } else {
           // oh no, user has filled in

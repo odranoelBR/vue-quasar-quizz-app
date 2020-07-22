@@ -52,7 +52,7 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
-import { db } from '../boot/app'
+import { db } from 'boot/firebase'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({

@@ -75,14 +75,12 @@ export default {
       let organizadas = []
       this.getAnswers.forEach(answer => {
         let modulo = this.getModulos.find(modulo => answer.modulo.search(modulo.id))
-        console.log(modulo)
         if (organizadas[modulo.nome]) {
           organizadas[modulo.nome].push(answer)
         } else {
           organizadas[modulo.nome] = []
         }
       })
-      console.log(organizadas)
       return organizadas
     }
   },

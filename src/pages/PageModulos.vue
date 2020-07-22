@@ -57,7 +57,7 @@
 </template>
 <script>
 import { mapMutations, mapGetters } from 'vuex'
-import { db } from '../boot/app'
+import { db } from 'boot/firebase'
 
 export default {
   created () {
@@ -85,8 +85,8 @@ export default {
         .then(snapshot => {
           this.setModulos(snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
         })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
+        .catch(function () {
+          // console.error('Error writing document: ', error)
         })
     },
     getAnswersFromDB () {
@@ -96,8 +96,7 @@ export default {
         .then(snapshot => {
           this.setAnswers(snapshot.empty ? [] : snapshot.docs.map(doc => doc.data()))
         })
-        .catch(function (error) {
-          console.error('Error writing document: ', error)
+        .catch(function () {
         })
     }
   }

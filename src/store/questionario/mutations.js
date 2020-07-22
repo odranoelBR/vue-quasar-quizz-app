@@ -1,4 +1,4 @@
-import { db } from '../../boot/app'
+import { db } from 'boot/firebase'
 
 export function nextQuestion (state) {
   if ((state.currentQuestionIndex + 1) === state.questions.length) return
@@ -49,10 +49,9 @@ export function updateAnswer (state, payload) {
   state.answers[payload.idQuestao] = payload
   db.collection('respostas').add(payload)
     .then(function () {
-      console.log('Document successfully written!')
     })
     .catch(function (error) {
-      console.error('Error writing document: ', error)
+      // console.error('Error writing document: ', error)
     })
 }
 export function resetState (state) {
