@@ -56,13 +56,13 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import { db } from 'boot/firebase'
 
 export default {
   created () {
-    this.getAnswersFromDB()
-    this.getModulosFromDB()
+    this.bindModulos()
+    this.bindAnswers()
   },
   computed: {
     ...mapGetters(['getUsuario', 'getModulos']),
@@ -73,31 +73,16 @@ export default {
       return this.getModulos.filter(modulo => modulo.tipo === 'SVA')
     }
   },
+  firestore: {
+    respostas: db.collection('modulos')
+  },
   methods: {
+    ...mapActions(['bindModulos']),
+    ...mapActions('questionario', ['bindAnswers']),
     ...mapMutations('questionario', ['setChoosedQuestionary', 'setAnswers']),
     ...mapMutations(['setModulos']),
     choose (modulo) {
       this.setChoosedQuestionary(modulo)
-    },
-    getModulosFromDB () {
-      db.collection('modulos')
-        .get()
-        .then(snapshot => {
-          this.setModulos(snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-        })
-        .catch(function () {
-          // console.error('Error writing document: ', error)
-        })
-    },
-    getAnswersFromDB () {
-      db.collection('respostas')
-        .where('idUsuario', '==', this.getUsuario.id)
-        .get()
-        .then(snapshot => {
-          this.setAnswers(snapshot.empty ? [] : snapshot.docs.map(doc => doc.data()))
-        })
-        .catch(function () {
-        })
     }
   }
 

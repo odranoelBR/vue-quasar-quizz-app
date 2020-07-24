@@ -28,6 +28,7 @@
         :color="getButtonColor(resposta)"
         text-color="white"
         :selected="resposta.selecionada"
+        :disable="respostaAnalisada"
         @click="toggleChoice(index)"
       >
         <q-avatar
@@ -61,6 +62,7 @@
         >
           <q-btn
             color="positive"
+            v-show="!disableAnalise"
             @click="analisar"
           >
             Analisar
@@ -95,7 +97,8 @@
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
-    respostaAnalisada: false
+    respostaAnalisada: false,
+    disableAnalise: false
   }),
   created () {
     this.syncronize()
@@ -107,21 +110,26 @@ export default {
     },
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
+    },
+    answer () {
+      return this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
     }
   },
   watch: {
-    respostaAnalisada () {
+    'getCurrentQuestion.id' () {
+      this.respostaAnalisada = false
+      this.disableAnalise = false
       this.syncronize()
     }
   },
   methods: {
     ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
     syncronize () {
-      let answer = this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
-      if (!answer) return
+      if (!this.answer) return
 
+      this.disableAnalise = true
       this.getCurrentQuestion.respostas.forEach(resposta => {
-        if (resposta.letra === answer.letra) {
+        if (resposta.letra === this.answer.letra) {
           resposta.selecionada = true
           this.respostaAnalisada = true
         }
@@ -141,6 +149,7 @@ export default {
     },
     analisar () {
       this.respostaAnalisada = true
+      this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
       this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo })
     },
