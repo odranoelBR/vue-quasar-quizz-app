@@ -1,9 +1,13 @@
 <template>
   <div class="row q-gutter-sm">
-    <div class="col">
+    <div
+      class="col"
+      v-for="(modulo, index) in modulosComRespostas"
+      :key="index"
+    >
       <q-card>
         <q-card-section>
-          <div class="text-h6 text-center text-grey-8">RISAER</div>
+          <div class="text-h6 text-center text-grey-8">{{modulo.nome}}</div>
         </q-card-section>
 
         <q-separator inset />
@@ -13,50 +17,26 @@
             show-value
             font-size="16px"
             class="text-red q-ma-md"
-            v-model="risaer"
-            size="90px"
+            :value="getPorcentagemAcertos(modulo.answers)"
+            size="110px"
             :thickness="0.23"
+            disable
             color="red"
             track-color="grey-3"
           >
-            {{risaer}} %
+            {{getPorcentagemAcertos(modulo.answers)}} %
             <span class="text-caption text-weight-regular text-grey-9"> de acertos</span>
           </q-knob>
         </q-card-section>
         <q-card-section>
           <div class="row  justify-center">
-            <span class="text-red text-bold">105</span> respostas
+            <span class="text-red text-bold">{{modulo.answers.length}} </span> respostas
           </div>
           <div class="row  justify-center">
-            <span class="text-red text-bold">90</span> acertos
+            <span class="text-red text-bold">{{filterAcertos(modulo.answers)}} </span> acertos
           </div>
         </q-card-section>
 
-      </q-card>
-    </div>
-    <div class="col">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6 text-center text-grey-8">RISAER</div>
-        </q-card-section>
-
-        <q-separator inset />
-
-        <q-card-section class="text-center">
-          <q-knob
-            show-value
-            font-size="16px"
-            class="text-red q-ma-md"
-            v-model="risaer"
-            size="90px"
-            :thickness="0.23"
-            color="red"
-            track-color="grey-3"
-          >
-            {{risaer}} %
-            <span class="text-caption text-weight-regular text-grey-9"> de acertos</span>
-          </q-knob>
-        </q-card-section>
       </q-card>
     </div>
   </div>
@@ -71,22 +51,24 @@ export default {
   computed: {
     ...mapGetters('questionario', ['getAnswers']),
     ...mapGetters(['getModulos']),
-    respostasOrganizadas () {
-      let organizadas = []
-      this.getAnswers.forEach(answer => {
-        let modulo = this.getModulos.find(modulo => answer.modulo.search(modulo.id))
-        if (organizadas[modulo.nome]) {
-          organizadas[modulo.nome].push(answer)
-        } else {
-          organizadas[modulo.nome] = []
-        }
-      })
-      return organizadas
+    modulosComRespostas () {
+      return this.getModulos.map(modulo => ({
+        nome: modulo.nome,
+        answers: this.getAnswers.filter(answer => answer.modulo.includes(modulo.id))
+      }))
+        .filter(modulo => modulo.answers.length > 0)
     }
+
   },
   methods: {
     choose (name) {
       this.setName(name)
+    },
+    filterAcertos (answers) {
+      return answers.filter(modulo => modulo.correta).length
+    },
+    getPorcentagemAcertos (answers) {
+      return parseFloat(((this.filterAcertos(answers) / answers.length) * 100).toFixed(2))
     }
   }
 

@@ -56,14 +56,10 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import { db } from 'boot/firebase'
 
 export default {
-  created () {
-    this.bindModulos()
-    this.bindAnswers()
-  },
   computed: {
     ...mapGetters(['getUsuario', 'getModulos']),
     modulosMilitar () {
@@ -77,8 +73,6 @@ export default {
     respostas: db.collection('modulos')
   },
   methods: {
-    ...mapActions(['bindModulos']),
-    ...mapActions('questionario', ['bindAnswers']),
     ...mapMutations('questionario', ['setChoosedQuestionary', 'setAnswers']),
     ...mapMutations(['setModulos']),
     choose (modulo) {

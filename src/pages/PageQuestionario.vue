@@ -151,7 +151,7 @@ export default {
       this.respostaAnalisada = true
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
-      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo })
+      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
     },
     getButtonColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {
