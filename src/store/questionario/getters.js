@@ -1,4 +1,5 @@
 export function getCurrentQuestion (state) {
+  if (state.questions.length === 0) return false
   return state.questions[state.currentQuestionIndex]
 }
 export function getCurrentQuestionIndex (state) {

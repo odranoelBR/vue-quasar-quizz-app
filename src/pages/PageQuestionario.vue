@@ -1,5 +1,8 @@
 <template>
-  <q-page id="questionario">
+  <q-page
+    id="questionario"
+    v-if="getCurrentQuestion"
+  >
 
     <q-separator
       dark
@@ -89,6 +92,28 @@
         </q-btn>
       </div>
     </div>
+
+  </q-page>
+  <q-page v-else>
+    <q-separator
+      dark
+      class="q-mb-md"
+    />
+    <q-banner class="bg-grey-3">
+      <template v-slot:avatar>
+        <q-icon
+          name="mdi-database-remove"
+          color="primary"
+        />
+      </template>
+      Sem Questões Cadastradas desta disciplina
+    </q-banner>
+    <span
+      class="text-white texto-courier"
+      style="font-size: 11pt"
+    >
+
+    </span>
 
   </q-page>
 </template>
