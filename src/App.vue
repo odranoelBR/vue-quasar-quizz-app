@@ -5,11 +5,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'App',
   created () {
+    this.bindModulos()
+    this.bindAnswers()
   },
   methods: {
+    ...mapActions(['bindModulos']),
+    ...mapActions('questionario', ['bindAnswers'])
   }
 }
 </script>

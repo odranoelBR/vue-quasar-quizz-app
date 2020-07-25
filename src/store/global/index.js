@@ -1,4 +1,4 @@
-import { vuexfireMutations, firestoreAction } from 'vuexfire'
+import { vuexfireMutations } from 'vuexfire'
 import { db } from 'boot/firebase'
 
 import state from './state'
@@ -13,9 +13,13 @@ export default {
   },
   actions: {
     ...actions,
-    bindModulos: firestoreAction(({ bindFirestoreRef }) => {
-      return bindFirestoreRef('modulos', db.collection('modulos'))
-    })
+    bindModulos: (context) => {
+      db.collection('modulos')
+        .get()
+        .then(snapshot => {
+          context.commit('setModulos', snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        })
+    }
   },
   state
 }
