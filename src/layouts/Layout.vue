@@ -34,11 +34,11 @@
           :key="2"
         />
       </transition-group>
-      <img
+      <!-- <img
         id="img-gladio"
         class="absolute-bottom q-pb-xl q-mb-lg"
         src="~assets/gladio.png"
-      >
+      > -->
     </div>
   </q-layout>
 

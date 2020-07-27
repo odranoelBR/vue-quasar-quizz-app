@@ -15,6 +15,11 @@
       v-html="getCurrentQuestion.texto"
     >
     </span>
+    <div class="row">
+      <span class="text-caption text-blue-grey-3">
+        {{ getCurrentQuestion.referencia }}
+      </span>
+    </div>
 
     <q-separator class="q-pb-md bg-info" />
 
@@ -123,7 +128,9 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data: () => ({
     respostaAnalisada: false,
-    disableAnalise: false
+    disableAnalise: false,
+    respostaCorreta: { icon: 'thumb_up', color: 'positive' },
+    respostaErrada: { icon: 'thumb_down', color: 'negative' }
   }),
   created () {
     this.syncronize()
@@ -176,7 +183,10 @@ export default {
       this.respostaAnalisada = true
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
-      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
+      // this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
+      this.$q.notify({
+        ...{ position: 'bottom-right', classes: 'notify-questionario' }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
+      })
     },
     getButtonColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {
