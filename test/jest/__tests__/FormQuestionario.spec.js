@@ -97,4 +97,7 @@ describe('Montar form Questionario já respondido', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
+  it('Verifica se resposta já salva esta selecionada', async () => {
+    expect(wrapper.vm.currentQuestion.respostas[3].selecionada).toBe(true)
+  })
 })
