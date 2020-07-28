@@ -11,7 +11,6 @@
       switch-indicator
       indicator-color="accent"
     >
-
       <q-route-tab
         name="alarms"
         icon="alarm"
@@ -34,7 +33,6 @@
         exact
       />
     </q-tabs>
-
   </q-footer>
 </template>
 

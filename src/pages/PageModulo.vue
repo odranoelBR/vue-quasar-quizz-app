@@ -8,7 +8,6 @@
     />
 
     <q-list class="text-white">
-
       <q-item>
         <div class="row items-center">
           <div class="col-9">
@@ -45,7 +44,6 @@
           />
         </q-item-section>
       </q-item>
-
     </q-list>
   </div>
 </template>

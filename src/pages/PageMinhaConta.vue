@@ -1,6 +1,5 @@
- <template>
+<template>
   <div>
-
     <q-card id="card-login">
       <q-form
         no-error-focus
@@ -10,7 +9,9 @@
         ref="form"
       >
         <q-card-section>
-          <div class="text-h6 text-grey-6 text-center">Dados da conta</div>
+          <div class="text-h6 text-grey-6 text-center">
+            Dados da conta
+          </div>
         </q-card-section>
 
         <div class="row q-pa-md justify-center q-pt-md">
@@ -21,9 +22,9 @@
             type="text"
             lazy-rules
             :rules="[
-            val => val !== null && val !== '' || 'Preencha o nome',
-          ]"
-          ></q-input>
+              val => val !== null && val !== '' || 'Preencha o nome',
+            ]"
+          />
         </div>
         <div class="row q-pa-md justify-center">
           <q-input
@@ -33,9 +34,9 @@
             disable
             type="email"
             :rules="[
-            val => val !== null && val !== '' || 'Preencha o email',
-          ]"
-          ></q-input>
+              val => val !== null && val !== '' || 'Preencha o email',
+            ]"
+          />
         </div>
         <div class="row q-pa-lg justify-center">
           <q-btn
@@ -47,7 +48,6 @@
         </div>
       </q-form>
     </q-card>
-
   </div>
 </template>
 <script>

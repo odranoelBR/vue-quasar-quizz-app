@@ -1,10 +1,10 @@
 /* eslint-disable */
-/**
+/*
  * @jest-environment jsdom
  */
 
 import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
-import QBUTTON from './demo/QBtn-demo.vue'
+import FormQuestionario from 'components/FormQuestionario'
 import * as All from 'quasar'
 // import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
 const { Quasar, date } = All
@@ -17,11 +17,11 @@ const components = Object.keys(All).reduce((object, key) => {
   return object
 }, {})
 
-describe('Mount Quasar', () => {
+describe('Montar form Questionario', () => {
   const localVue = createLocalVue()
   localVue.use(Quasar, { components }) // , lang: langEn
 
-  const wrapper = mount(QBUTTON, {
+  const wrapper = mount(FormQuestionario, {
     localVue
   })
   const vm = wrapper.vm

@@ -18,14 +18,12 @@
     <q-toolbar style="height: 10.5vh;">
       <q-toolbar-title>
         <div class="row text-center items-center">
-
           <div class="col-4">
             <span class="text-subtitle1 text-blue-grey-3">Questão
-              <span class="text-h6 text-white">{{currentIndex}}</span>
-              / {{qtdQuestoes}} </span>
+              <span class="text-h6 text-white">{{ currentIndex }}</span>
+              / {{ qtdQuestoes }} </span>
           </div>
           <div class="col-4 ">
-
             <q-btn
               fab
               class="shadow-18"
@@ -33,9 +31,7 @@
               size="xl"
               :icon="running ? 'mdi-stop' : 'mdi-play'"
               @click="run"
-            >
-
-            </q-btn>
+            />
           </div>
           <div
             class="col-4"
@@ -46,7 +42,6 @@
         </div>
       </q-toolbar-title>
     </q-toolbar>
-
   </q-footer>
 </template>
 

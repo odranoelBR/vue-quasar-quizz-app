@@ -10,7 +10,9 @@
       class="bg-white rounded-borders "
       padding
     >
-      <q-item-label header>Menu</q-item-label>
+      <q-item-label header>
+        Menu
+      </q-item-label>
 
       <q-item
         clickable
@@ -32,11 +34,12 @@
           <q-icon name="mdi-account-circle-outline" />
         </q-item-section>
 
-        <q-item-section @click="goMinhaConta">Minha conta</q-item-section>
+        <q-item-section @click="goMinhaConta">
+          Minha conta
+        </q-item-section>
       </q-item>
     </q-list>
   </q-menu>
-
 </template>
 <script>
 export default {

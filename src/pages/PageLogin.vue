@@ -6,7 +6,6 @@
           src="~assets/wings.svg"
           alt=""
         >
-
       </div>
       <div class="row justify-center q-mb-xl">
         <span class="text-white">Quizz EAOF</span>
@@ -22,7 +21,9 @@
         ref="form"
       >
         <q-card-section>
-          <div class="text-h6 text-grey-6 text-center">Preencha para testar</div>
+          <div class="text-h6 text-grey-6 text-center">
+            Preencha para testar
+          </div>
         </q-card-section>
 
         <div class="row q-pa-md justify-center q-pt-md">
@@ -33,9 +34,9 @@
             type="text"
             lazy-rules
             :rules="[
-            val => val !== null && val !== '' || 'Preencha o nome',
-          ]"
-          ></q-input>
+              val => val !== null && val !== '' || 'Preencha o nome',
+            ]"
+          />
         </div>
         <div class="row q-pa-md justify-center">
           <q-input
@@ -44,9 +45,9 @@
             class="full-width"
             type="email"
             :rules="[
-            val => val !== null && val !== '' || 'Preencha o email',
-          ]"
-          ></q-input>
+              val => val !== null && val !== '' || 'Preencha o email',
+            ]"
+          />
         </div>
         <div class="row q-pa-lg justify-center">
           <q-btn
@@ -58,7 +59,6 @@
         </div>
       </q-form>
     </q-card>
-
   </div>
 </template>
 <script>
