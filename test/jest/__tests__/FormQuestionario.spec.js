@@ -1,61 +1,100 @@
 /* eslint-disable */
-/*
- * @jest-environment jsdom
- */
 
-import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
-import FormQuestionario from 'components/FormQuestionario'
-import * as All from 'quasar'
-// import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
-const { Quasar, date } = All
+import { mountQuasar } from '../utils/index'
+import FormQuestionario from 'src/components/FormQuestionario'
 
-const components = Object.keys(All).reduce((object, key) => {
-  const val = All[key]
-  if (val && val.component && val.component.name != null) {
-    object[key] = val
+describe('Montar form Questionario sem estar respondido', () => {
+
+  let options = {
+    propsData: {
+      respostaAnalisada: false,
+      currentQuestion: {
+        id: "CVAKZNtLrxDaaMNWa9v8",
+        modulo: "modulos/Jom34TmjNRvbvYEwGo5M",
+        nivel: 1,
+        referencia: "art. 362",
+        respostas: [
+          { correta: false, letra: 'a', texto: 'a avó materna' },
+          { correta: true, letra: 'b', texto: 'a madastra' },
+          { correta: false, letra: 'c', texto: 'o primo' },
+          { correta: false, letra: 'd', texto: 'do genro do militar' }
+        ],
+        texto: "De acordo com o RCONT, são elementos essenciais da continência individual, exceto:"
+      }
+    }
   }
-  return object
-}, {})
+  const wrapper = mountQuasar(FormQuestionario, options)
 
-describe('Montar form Questionario', () => {
-  const localVue = createLocalVue()
-  localVue.use(Quasar, { components }) // , lang: langEn
-
-  const wrapper = mount(FormQuestionario, {
-    localVue
+  it('Instancia esta ok ', async () => {
+    await expect(wrapper.isVueInstance()).toBe(true)
   })
-  const vm = wrapper.vm
-
-  it('passes the sanity check and creates a wrapper', () => {
-    expect(wrapper.isVueInstance()).toBe(true)
+  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', async () => {
+    expect(wrapper.emitted()['resposta-analisada'].length).toBe(1)
   })
-
-  it('has a created hook', () => {
-    expect(typeof vm.increment).toBe('function')
+  it('Verifica cor de botão para resposta NÃO analisada', async () => {
+    let resposta = { correta: false }
+    expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
   })
-
-  it('accesses the shallowMount', () => {
-    expect(vm.$el.textContent).toContain('rocket muffin')
-    expect(wrapper.text()).toContain('rocket muffin') // easier
-    expect(wrapper.find('p').text()).toContain('rocket muffin')
+  it('Verifica linha de botão para resposta não analisada e NÃO selecionada', async () => {
+    let resposta = { correta: false }
+    expect(wrapper.vm.getOutline(resposta)).toBe(true)
   })
-
-  it('sets the correct default data', () => {
-    expect(typeof vm.counter).toBe('number')
-    const defaultData2 = QBUTTON.data()
-    expect(defaultData2.counter).toBe(0)
+  it('Verifica linha de botão para resposta não analisada e SELECIONADA', async () => {
+    let resposta = { correta: false, selecionada: true }
+    expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
+})
 
-  it('correctly updates data when button is pressed', () => {
-    const button = wrapper.find('button')
-    button.trigger('click')
-    expect(vm.counter).toBe(1)
+
+describe('Montar form Questionario já respondido', () => {
+
+  let options = {
+    propsData: {
+      respostaAnalisada: true,
+      answer: {
+        correta: false,
+        idQuestao: 'CVAKZNtLrxDaaMNWa9v8',
+        idUsuario: 'gOru4vlt5Jzzlw64i30P',
+        letra: 'd',
+        modulo: 'modulos/Jom34TmjNRvbvYEwGo5M'
+      },
+      currentQuestion: {
+        id: "CVAKZNtLrxDaaMNWa9v8",
+        modulo: "modulos/Jom34TmjNRvbvYEwGo5M",
+        nivel: 1,
+        referencia: "art. 362",
+        respostas: [
+          { correta: false, letra: 'a', texto: 'a avó materna' },
+          { correta: true, letra: 'b', texto: 'a madastra' },
+          { correta: false, letra: 'c', texto: 'o primo' },
+          { correta: false, letra: 'd', texto: 'do genro do militar' }
+        ],
+        texto: "De acordo com o RCONT, são elementos essenciais da continência individual, exceto:"
+      }
+    }
+  }
+  const wrapper = mountQuasar(FormQuestionario, options)
+
+  it('Instancia esta ok ', async () => {
+    await expect(wrapper.isVueInstance()).toBe(true)
   })
-
-  it('formats a date without throwing exception', () => {
-    // test will automatically fail if an exception is thrown
-    // MMMM and MMM require that a language is 'installed' in Quasar
-    let formattedString = date.formatDate(Date.now(), 'YYYY MMMM MMM DD')
-    console.log('formattedString', formattedString)
+  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', async () => {
+    expect(wrapper.emitted()['resposta-analisada'].length).toBe(2)
+  })
+  it('Verifica cor de botão para resposta analisada', async () => {
+    let resposta = { correta: false }
+    expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
+  })
+  it('Verifica se botão da resposta esta vermelho', async () => {
+    let resposta = { correta: false, selecionada: true }
+    expect(wrapper.vm.getButtonColor(resposta)).toBe('negative')
+  })
+  it('Verifica LINHA de botão para resposta analisada e selecionada', async () => {
+    let resposta = { correta: false, selecionada: true }
+    expect(wrapper.vm.getOutline(resposta)).toBe(false)
+  })
+  it('Verifica LINHA de botão para resposta não analisada e SELECIONADA', async () => {
+    let resposta = { correta: false, selecionada: true }
+    expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
 })
