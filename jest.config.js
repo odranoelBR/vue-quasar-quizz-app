@@ -13,17 +13,21 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.vue',
-    '<rootDir>/src/**/*.js',
-    '<rootDir>/src/**/*.ts',
-    '<rootDir>/src/**/*.jsx'
+    '<rootDir>/src/components/*.vue',
+    '<rootDir>/src/components/*.js',
+    '<rootDir>/src/components/*.ts',
+    '<rootDir>/src/components/*.jsx',
+    '<rootDir>/src/pages/*.vue',
+    '<rootDir>/src/pages/*.js',
+    '<rootDir>/src/pages/*.ts',
+    '<rootDir>/src/pages/*.jsx'
   ],
   coverageThreshold: {
     global: {
-    //  branches: 50,
-    //  functions: 50,
-    //  lines: 50,
-    //  statements: 50
+      //  branches: 50,
+      //  functions: 50,
+      //  lines: 50,
+      //  statements: 50
     }
   },
   testMatch: [
@@ -50,13 +54,15 @@ module.exports = {
   transform: {
     '.*\\.vue$': 'vue-jest',
     '.*\\.js$': 'babel-jest',
-    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
     // use these if NPM is being flaky
     // '.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
     // '.*\\.js$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!quasar/lang)'
+    '<rootDir>/node_modules/(?!quasar/lang)',
+    '<rootDir>/src-codrova/',
+    '<rootDir>/dist/'
   ],
   snapshotSerializers: [
     '<rootDir>/node_modules/jest-serializer-vue'
