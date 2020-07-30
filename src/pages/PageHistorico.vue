@@ -1,7 +1,7 @@
 <template>
-  <div class="row q-gutter-sm">
+  <div class="column q-gutter-sm">
     <div
-      class="col"
+      class="col-6"
       v-for="(modulo, index) in modulosComRespostas"
       :key="index"
     >
