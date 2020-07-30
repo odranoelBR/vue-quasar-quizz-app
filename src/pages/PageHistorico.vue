@@ -7,7 +7,9 @@
     >
       <q-card>
         <q-card-section>
-          <div class="text-h6 text-center text-grey-8">{{modulo.nome}}</div>
+          <div class="text-h6 text-center text-grey-8">
+            {{ modulo.nome }}
+          </div>
         </q-card-section>
 
         <q-separator inset />
@@ -24,19 +26,18 @@
             color="red"
             track-color="grey-3"
           >
-            {{getPorcentagemAcertos(modulo.answers)}} %
+            {{ getPorcentagemAcertos(modulo.answers) }} %
             <span class="text-caption text-weight-regular text-grey-9"> de acertos</span>
           </q-knob>
         </q-card-section>
         <q-card-section>
           <div class="row  justify-center">
-            <span class="text-red text-bold">{{modulo.answers.length}} </span> respostas
+            <span class="text-red text-bold">{{ modulo.answers.length }} </span> respostas
           </div>
           <div class="row  justify-center">
-            <span class="text-red text-bold">{{filterAcertos(modulo.answers)}} </span> acertos
+            <span class="text-red text-bold">{{ filterAcertos(modulo.answers) }} </span> acertos
           </div>
         </q-card-section>
-
       </q-card>
     </div>
   </div>

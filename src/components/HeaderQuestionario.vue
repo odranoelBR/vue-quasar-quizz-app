@@ -6,8 +6,7 @@
         color="white"
         size="26px"
         @click="goHome"
-      ></q-icon>
-
+      />
     </div>
     <div class="col">
       <span class="text-white text-h6"> {{ getChoosedQuestionary.nome }} </span>

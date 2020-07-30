@@ -23,7 +23,7 @@
             color="primary"
             @click="choose(modulo)"
           >
-            <span class="text-weight-light">{{modulo.nome}}</span>
+            <span class="text-weight-light">{{ modulo.nome }}</span>
           </q-btn>
         </div>
       </div>
@@ -48,7 +48,7 @@
             color="primary"
             @click="choose(modulo)"
           >
-            <span class="text-weight-light">{{modulo.nome}}</span>
+            <span class="text-weight-light">{{ modulo.nome }}</span>
           </q-btn>
         </div>
       </div>

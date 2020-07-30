@@ -9,9 +9,7 @@
         >
       </div>
       <div class="col-auto">
-
         {{ getUsuario.nome }}
-
       </div>
       <div class="col text-left">
         <q-icon
@@ -28,22 +26,18 @@
         />
       </div> -->
     </div>
-    <div>
-
-    </div>
+    <div />
     <div>
       <app-menu
         :showing="menuOpen"
         @hide="toggleMenu"
-      ></app-menu>
+      />
       <!-- <search-menu
         :showing="searchingNow"
         @hide="toggleSearch"
       ></search-menu> -->
     </div>
-
   </div>
-
 </template>
 <script>
 import AppMenu from 'layouts/AppMenu'

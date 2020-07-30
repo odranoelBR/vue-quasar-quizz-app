@@ -3,60 +3,23 @@
     id="questionario"
     v-if="getCurrentQuestion"
   >
-
     <q-separator
       dark
       class="q-mb-md"
     />
 
-    <span
-      class="text-white texto-courier"
-      style="font-size: 11pt"
-      v-html="getCurrentQuestion.texto"
-    >
-    </span>
-    <div class="row">
-      <span class="text-caption text-blue-grey-3">
-        {{ getCurrentQuestion.referencia }}
-      </span>
-    </div>
+    <form-questionario
+      v-if="getCurrentQuestion.id"
+      @reset="reset"
+      @update="updateCurrent"
+      @disable-analise="setDisableAnalise"
+      @resposta-analisada="setRespostaAnalisada "
+      :answer="answer"
+      :current-question="getCurrentQuestion"
+      :resposta-analisada="respostaAnalisada"
+    />
 
-    <q-separator class="q-pb-md bg-info" />
-
-    <div
-      class="row question-row"
-      v-for="(resposta, index) in getCurrentQuestion.respostas"
-      :key="index"
-    >
-
-      <q-chip
-        class="fit"
-        :outline="getOutline(resposta)"
-        square
-        :color="getButtonColor(resposta)"
-        text-color="white"
-        :selected="resposta.selecionada"
-        :disable="respostaAnalisada"
-        @click="toggleChoice(index)"
-      >
-        <q-avatar
-          class="full-height"
-          :icon="`mdi-alpha-${resposta.letra}`"
-        >)</q-avatar>
-
-        <span
-          v-html="resposta.texto"
-          class="texto-courier"
-        ></span>
-      </q-chip>
-    </div>
-
-    <div class="
-          row
-          q-pa-xs
-          q-gutter-sm
-          justify-between
-          text-right">
+    <div class="row q-pa-xs q-gutter-sm justify-between text-right">
       <transition
         appear
         :duration="{ enter: 300, leave: 300 }"
@@ -66,7 +29,7 @@
       >
         <div
           class="col-auto"
-          v-if="showButtonAnalisar "
+          v-if="showButtonAnalisar"
         >
           <q-btn
             color="positive"
@@ -77,7 +40,6 @@
           </q-btn>
         </div>
       </transition>
-
       <div class="col">
         <q-btn
           color="accent"
@@ -97,44 +59,27 @@
         </q-btn>
       </div>
     </div>
-
   </q-page>
+
   <q-page v-else>
-    <q-separator
-      dark
-      class="q-mb-md"
-    />
-    <q-banner class="bg-grey-3">
-      <template v-slot:avatar>
-        <q-icon
-          name="mdi-database-remove"
-          color="primary"
-        />
-      </template>
-      Sem Questões Cadastradas desta disciplina
-    </q-banner>
-    <span
-      class="text-white texto-courier"
-      style="font-size: 11pt"
-    >
-
-    </span>
-
+    <div-sem-questoes-cadastradas />
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import FormQuestionario from 'components/FormQuestionario'
+import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
 export default {
-  data: () => ({
-    respostaAnalisada: false,
-    disableAnalise: false,
-    respostaCorreta: { icon: 'thumb_up', color: 'positive' },
-    respostaErrada: { icon: 'thumb_down', color: 'negative' }
-  }),
-  created () {
-    this.syncronize()
+  components: {
+    FormQuestionario, DivSemQuestoesCadastradas
   },
+  data: () => ({
+    respostaCorreta: { icon: 'thumb_up', color: 'positive' },
+    respostaErrada: { icon: 'thumb_down', color: 'negative' },
+    disableAnalise: false,
+    respostaAnalisada: false
+  }),
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'getAnswers']),
     showButtonAnalisar () {
@@ -147,26 +92,22 @@ export default {
       return this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
     }
   },
-  watch: {
-    'getCurrentQuestion.id' () {
-      this.respostaAnalisada = false
-      this.disableAnalise = false
-      this.syncronize()
-    }
-  },
+
   methods: {
     ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
-    syncronize () {
-      if (!this.answer) return
-
-      this.disableAnalise = true
-      this.getCurrentQuestion.respostas.forEach(resposta => {
-        if (resposta.letra === this.answer.letra) {
-          resposta.selecionada = true
-          this.respostaAnalisada = true
-        }
-      })
+    setDisableAnalise (flag) {
+      this.disableAnalise = flag
     },
+    setRespostaAnalisada (flag) {
+      this.respostaAnalisada = flag
+    },
+    reset (respostaIndex) {
+      this.resetChoices(respostaIndex)
+    },
+    updateCurrent (respostaIndex) {
+      this.updateCurrentQuestionChoice(respostaIndex)
+    },
+
     back () {
       this.respostaAnalisada = false
       this.backQuestion()
@@ -175,50 +116,19 @@ export default {
       this.respostaAnalisada = false
       this.nextQuestion()
     },
-    toggleChoice (respostaIndex) {
-      this.resetChoices(respostaIndex)
-      this.updateCurrentQuestionChoice(respostaIndex)
-    },
+
     analisar () {
       this.respostaAnalisada = true
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
-      // this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
+      this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
       this.$q.notify({
         ...{ position: 'bottom-right', classes: 'notify-questionario' }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
       })
-    },
-    getButtonColor (resposta) {
-      if (this.respostaAnalisada && resposta.correta) {
-        return 'positive'
-      }
-      if (this.respostaAnalisada && !resposta.correta && resposta.selecionada) {
-        return 'negative'
-      }
-      return 'primary'
-    },
-    getOutline (resposta) {
-      if (this.respostaAnalisada && resposta.correta) {
-        return false
-      }
-      if (!resposta.selecionada) {
-        return true
-      }
-      return false
     }
+
   }
 }
 </script>
 <style scoped>
-#lista-questoes .q-item {
-  padding: 0px 12px;
-}
-.question-row .q-chip__content {
-  color: white;
-  padding: 6px;
-}
-.texto-courier {
-  font-family: "Courier New", Courier, monospace;
-  white-space: normal;
-}
 </style>

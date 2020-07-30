@@ -1,5 +1,4 @@
 <template>
-
   <q-layout
     view="lHh Lpr lFf"
     style="background-color: #1D2833"
@@ -41,7 +40,6 @@
       > -->
     </div>
   </q-layout>
-
 </template>
 
 <script>
