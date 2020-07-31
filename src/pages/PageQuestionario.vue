@@ -27,13 +27,10 @@
         enter-active-class="animated fadeIn"
         leave-active-class="animated fadeOut"
       >
-        <div
-          class="col-auto"
-          v-if="showButtonAnalisar"
-        >
+        <div class="col-auto">
           <q-btn
             color="positive"
-            v-show="!disableAnalise"
+            v-if="!disableAnalise && algumaRespostaSelecionada"
             @click="analisar"
           >
             Analisar
@@ -82,9 +79,6 @@ export default {
   }),
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'getAnswers']),
-    showButtonAnalisar () {
-      return !this.getConfigQuestionary.correcaoFinal && this.algumaRespostaSelecionada
-    },
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     },

@@ -47,7 +47,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    risaer: 88
   }),
   computed: {
     ...mapGetters('questionario', ['getAnswers']),

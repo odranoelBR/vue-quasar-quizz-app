@@ -12,12 +12,16 @@
     "build": "quasar build",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
-    "test:unit": "jest --updateSnapshot",
+    "test:unit": "jest --coverage=false",
+    "test:unit:update": "jest --updateSnapshot",
     "test:unit:coverage": "jest --coverage",
-    "test:unit:watch": "jest --watch",
+    "test:unit:watch": "jest --watch --coverage=false",
     "test:unit:watchAll": "jest --watchAll",
     "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
     "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\""
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@quasar/extras": "^1.9.0",

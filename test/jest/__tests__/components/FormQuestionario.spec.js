@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { mountQuasar } from '../utils/index'
+import { mountQuasar } from '../../utils/index'
 import FormQuestionario from 'src/components/FormQuestionario'
 
 describe('Montar form Questionario sem estar respondido', () => {
@@ -25,21 +25,18 @@ describe('Montar form Questionario sem estar respondido', () => {
   }
   const wrapper = mountQuasar(FormQuestionario, options)
 
-  it('Instancia esta ok ', async () => {
-    await expect(wrapper.isVueInstance()).toBe(true)
-  })
-  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', async () => {
+  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
     expect(wrapper.emitted()['resposta-analisada'].length).toBe(1)
   })
-  it('Verifica cor de botão para resposta NÃO analisada', async () => {
+  it('Verifica cor de botão para resposta NÃO analisada', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
   })
-  it('Verifica linha de botão para resposta não analisada e NÃO selecionada', async () => {
+  it('Verifica linha de botão para resposta não analisada e NÃO selecionada', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getOutline(resposta)).toBe(true)
   })
-  it('Verifica linha de botão para resposta não analisada e SELECIONADA', async () => {
+  it('Verifica linha de botão para resposta não analisada e SELECIONADA', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
@@ -75,25 +72,22 @@ describe('Montar form Questionario já respondido', () => {
   }
   const wrapper = mountQuasar(FormQuestionario, options)
 
-  it('Instancia esta ok ', async () => {
-    await expect(wrapper.isVueInstance()).toBe(true)
-  })
-  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', async () => {
+  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
     expect(wrapper.emitted()['resposta-analisada'].length).toBe(2)
   })
-  it('Verifica cor de botão para resposta analisada', async () => {
+  it('Verifica cor de botão para resposta analisada', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
   })
-  it('Verifica se botão da resposta esta vermelho', async () => {
+  it('Verifica se botão da resposta esta vermelho', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('negative')
   })
-  it('Verifica LINHA de botão para resposta analisada e selecionada', async () => {
+  it('Verifica LINHA de botão para resposta analisada e selecionada', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
-  it('Verifica LINHA de botão para resposta não analisada e SELECIONADA', async () => {
+  it('Verifica LINHA de botão para resposta não analisada e SELECIONADA', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })

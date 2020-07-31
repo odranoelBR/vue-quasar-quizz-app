@@ -73,10 +73,10 @@ export default {
       this.$emit('disable-analise', false)
       if (!this.answer) return
 
-      this.$emit('disable-analise', true)
       this.currentQuestion.respostas.forEach(resposta => {
         if (resposta.letra === this.answer.letra) {
           resposta.selecionada = true
+          this.$emit('disable-analise', true)
           this.$emit('resposta-analisada', true)
         }
       })

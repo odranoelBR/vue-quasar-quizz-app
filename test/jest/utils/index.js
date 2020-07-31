@@ -6,7 +6,7 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import * as All from 'quasar'
 import Vue from 'vue'
-
+Vue.use(Vuex)
 const { Quasar } = All
 
 const components = Object.keys(All).reduce((object, key) => {
@@ -67,8 +67,7 @@ export const mountQuasar = (component, componentOptions, options = {}) => {
   const $d = () => { }
 
   return shallowMount(component, {
-    localVue: localVue,
-    store,
+    localVue,
     ...componentOptions,
     router,
     mocks: { $t, $tc, $n, $d },

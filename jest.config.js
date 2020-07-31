@@ -15,12 +15,8 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/components/*.vue',
     '<rootDir>/src/components/*.js',
-    '<rootDir>/src/components/*.ts',
-    '<rootDir>/src/components/*.jsx',
     '<rootDir>/src/pages/*.vue',
-    '<rootDir>/src/pages/*.js',
-    '<rootDir>/src/pages/*.ts',
-    '<rootDir>/src/pages/*.jsx'
+    '<rootDir>/src/pages/*.js'
   ],
   coverageThreshold: {
     global: {
@@ -37,11 +33,7 @@ module.exports = {
   ],
   moduleFileExtensions: [
     'vue',
-    'js',
-    'jsx',
-    'json',
-    'ts',
-    'tsx'
+    'js'
   ],
   moduleNameMapper: {
     '^vue$': '<rootDir>/node_modules/vue/dist/vue.common.js',
@@ -49,7 +41,9 @@ module.exports = {
     '^quasar$': '<rootDir>/node_modules/quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
-    '.*css$': '<rootDir>/test/jest/utils/stub.css'
+    '.*css$': '<rootDir>/test/jest/utils/stub.css',
+    '^components/(.*)$': '<rootDir>/src/components/$1'
+
   },
   transform: {
     '.*\\.vue$': 'vue-jest',
