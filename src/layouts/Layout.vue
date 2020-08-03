@@ -10,7 +10,7 @@
       <q-page-container class="padding q-pt-md">
         <transition
           appear
-          :duration="{ enter: 300, leave: 300 }"
+          :duration="{ enter: 200, leave: 200 }"
           mode="out-in"
           enter-active-class="animated fadeIn"
           leave-active-class="animated fadeOut"
@@ -20,7 +20,7 @@
       </q-page-container>
 
       <transition-group
-        :duration="{ enter: 300, leave: 300 }"
+        :duration="{ enter: 200, leave: 200 }"
         enter-active-class="animated slideInUp"
         leave-active-class="animated slideOutDown"
       >

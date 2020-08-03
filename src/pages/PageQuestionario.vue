@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
 export default {
@@ -88,7 +88,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'updateAnswer']),
+    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    ...mapActions('questionario', ['updateAnswer']),
     setDisableAnalise (flag) {
       this.disableAnalise = flag
     },

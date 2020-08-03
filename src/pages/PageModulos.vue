@@ -73,7 +73,7 @@ export default {
     respostas: db.collection('modulos')
   },
   methods: {
-    ...mapMutations('questionario', ['setChoosedQuestionary', 'setAnswers']),
+    ...mapMutations('questionario', ['setChoosedQuestionary']),
     ...mapMutations(['setModulos']),
     choose (modulo) {
       this.setChoosedQuestionary(modulo)
