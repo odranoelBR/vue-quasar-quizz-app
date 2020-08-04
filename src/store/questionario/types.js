@@ -1,5 +1,5 @@
-/* eslint-disable indent */
 const UPDATE_ANSWER = 'questionario/UPDATE_ANSWER'
 const SET_ANSWERS = 'questionario/SET_ANSWERS'
+const SET_REPETIR_QUESTOES = 'questionario/SET_REPETIR_QUESTOES'
 
-export default { UPDATE_ANSWER, SET_ANSWERS }
+export default { UPDATE_ANSWER, SET_ANSWERS, SET_REPETIR_QUESTOES }

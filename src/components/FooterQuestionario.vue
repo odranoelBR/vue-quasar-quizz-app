@@ -4,7 +4,7 @@
     elevated
     class="bg-secondary"
   >
-    <div class="wraper ">
+    <div class="wraper">
       <svg
         class="text-center"
         version="1.1"
@@ -76,7 +76,11 @@ export default {
   methods: {
     ...mapMutations('questionario', ['setQuestions']),
     run () {
-      this.getQuestions()
+      if (!this.running) {
+        this.getQuestions()
+        return
+      }
+      this.$router.push('/historico')
     },
     changePage () {
       this.running = !this.running

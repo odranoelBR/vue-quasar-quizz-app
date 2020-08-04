@@ -6,7 +6,8 @@ export default {
     cronometro: false,
     correcaoFinal: false,
     qtdQuestoes: 3,
-    nivel: 1
+    nivel: 1,
+    repetirQuestoes: false
   },
   answers: []
 }

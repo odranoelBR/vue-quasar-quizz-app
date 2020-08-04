@@ -44,11 +44,29 @@
           />
         </q-item-section>
       </q-item>
+      <q-item>
+        <q-item-section>
+          <q-item-label>Repetir questões ?</q-item-label>
+        </q-item-section>
+        <q-item-section
+          side
+          top
+        >
+          <q-btn-toggle
+            dark
+            v-model="repetirQuestoes"
+            toggle-color="green"
+            :options="simNao"
+          />
+        </q-item-section>
+      </q-item>
     </q-list>
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
+
 export default {
   created () {
     this.resetState()
@@ -57,42 +75,16 @@ export default {
     tipos: [
       { label: 'Básico', value: 1 },
       { label: 'Avançado', value: 2 }
+    ],
+    simNao: [
+      { label: 'Sim', value: true },
+      { label: 'Não', value: false }
     ]
   }),
   computed: {
-    ...mapGetters('questionario', ['getConfigQuestionary']),
-    cronometro: {
-      get () {
-        return this.getConfigQuestionary.cronometro
-      },
-      set (value) {
-        this.$store.commit('questionario/updateCronometro', value)
-      }
-    },
-    correcaoFinal: {
-      get () {
-        return this.getConfigQuestionary.correcaoFinal
-      },
-      set (value) {
-        this.$store.commit('questionario/updateCorrecaoFinal', value)
-      }
-    },
-    qtdQuestoes: {
-      get () {
-        return this.getConfigQuestionary.qtdQuestoes
-      },
-      set (value) {
-        this.$store.commit('questionario/updateQtdQuestoes', value)
-      }
-    },
-    nivel: {
-      get () {
-        return this.getConfigQuestionary.nivel
-      },
-      set (value) {
-        this.$store.commit('questionario/updateNivel', value)
-      }
-    }
+    ...mapFields('questionario', ['currentQuestionIndex'])
+    // ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel']
+    //        .map(field => `configQuestionary.${field}`))
   },
   methods: {
     ...mapMutations('questionario', ['resetState'])

@@ -34,6 +34,7 @@
     "quasar": "^1.12.13",
     "vue-rollbar": "^1.0.0",
     "vuefire": "^2.2.0",
+    "vuex-map-fields": "^1.4.0",
     "vuexfire": "^3.2.3"
   },
   "devDependencies": {

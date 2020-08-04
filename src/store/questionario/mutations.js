@@ -7,6 +7,9 @@ export default {
   [types.SET_ANSWERS] (state, payload) {
     state.answers = payload
   },
+  [types.SET_REPETIR_QUESTOES] (state, payload) {
+    state.repetirQuestoes = payload
+  },
   nextQuestion (state) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return
 
