@@ -64,7 +64,7 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -82,12 +82,11 @@ export default {
     ]
   }),
   computed: {
-    ...mapFields('questionario', ['currentQuestionIndex'])
-    // ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel']
-    //        .map(field => `configQuestionary.${field}`))
+    ...mapFields('questionario', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes']
+      .map(field => `configQuestionary.${field}`))
   },
   methods: {
-    ...mapMutations('questionario', ['resetState'])
+    ...mapActions('questionario', ['resetState'])
   }
 }
 </script>

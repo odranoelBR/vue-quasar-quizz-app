@@ -1,15 +1,4 @@
-import types from './types'
-
 export default {
-  [types.UPDATE_ANSWER] (state, payload) {
-    state.answers[payload.idQuestao] = payload
-  },
-  [types.SET_ANSWERS] (state, payload) {
-    state.answers = payload
-  },
-  [types.SET_REPETIR_QUESTOES] (state, payload) {
-    state.repetirQuestoes = payload
-  },
   nextQuestion (state) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return
 
@@ -19,9 +8,6 @@ export default {
     if (state.currentQuestionIndex === 0) return
 
     state.currentQuestionIndex--
-  },
-  setChoosedQuestionary (state, payload) {
-    state.choosedQuestionary = payload
   },
   setQuestions (state, payload) {
     payload.forEach(question => {
@@ -39,22 +25,6 @@ export default {
       element.selecionada = false
     })
   },
-  updateCronometro (state, payload) {
-    state.configQuestionary.cronometro = payload
-  },
-  updateCorrecaoFinal (state, payload) {
-    state.configQuestionary.correcaoFinal = payload
-  },
-  updateQtdQuestoes (state, payload) {
-    state.configQuestionary.qtdQuestoes = payload
-  },
-  updateNivel (state, payload) {
-    state.configQuestionary.nivel = payload
-  },
-  setAnswers (state, payload) {
-    state.answers = payload
-  },
-
   resetState (state) {
     state.currentQuestionIndex = 0
     state.configQuestionary = {

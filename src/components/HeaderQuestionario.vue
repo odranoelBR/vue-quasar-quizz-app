@@ -9,16 +9,16 @@
       />
     </div>
     <div class="col">
-      <span class="text-white text-h6"> {{ getChoosedQuestionary.nome }} </span>
+      <span class="text-white text-h6"> {{ nome }} </span>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
-    ...mapGetters('questionario', ['getChoosedQuestionary'])
+    ...mapFields('questionario', ['choosedQuestionary.nome'])
   },
   methods: {
     goHome () {
