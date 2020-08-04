@@ -102,7 +102,6 @@ export default {
     updateCurrent (respostaIndex) {
       this.updateCurrentQuestionChoice(respostaIndex)
     },
-
     back () {
       this.respostaAnalisada = false
       this.backQuestion()

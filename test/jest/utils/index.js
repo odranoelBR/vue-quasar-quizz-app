@@ -1,6 +1,7 @@
 // import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
 // this is mapped in jest.config.js to resolve @vue/test-utils
-import { createLocalVue, shallowMount } from 'test-utils'
+
+import { createLocalVue, shallowMount, mount } from 'test-utils'
 
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
@@ -31,7 +32,7 @@ const mockSsrContext = () => {
 }
 
 // https://eddyerburgh.me/mock-vuex-in-vue-unit-tests
-export const mountQuasar = (component, componentOptions, options = {}) => {
+export const mountQuasar = (component, componentOptions, enableChilds = false, options = {}) => {
   const localVue = createLocalVue()
   const app = {}
 
@@ -39,7 +40,6 @@ export const mountQuasar = (component, componentOptions, options = {}) => {
   localVue.use(VueRouter)
   localVue.use(Quasar)
   localVue.use(Quasar, { components })
-  const store = new Vuex.Store({})
   const router = new VueRouter()
 
   if (options) {
@@ -66,7 +66,11 @@ export const mountQuasar = (component, componentOptions, options = {}) => {
   const $n = () => { }
   const $d = () => { }
 
-  return shallowMount(component, {
+  let method = shallowMount
+  if (enableChilds) {
+    method = mount
+  }
+  return method(component, {
     localVue,
     ...componentOptions,
     router,
