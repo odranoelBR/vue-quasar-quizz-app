@@ -4,6 +4,9 @@ export default {
   [types.UPDATE_ANSWER] (state, payload) {
     state.answers[payload.idQuestao] = payload
   },
+  [types.SET_ANSWERS] (state, payload) {
+    state.answers = payload
+  },
   nextQuestion (state) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return
 
