@@ -57,11 +57,13 @@
 </template>
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 import { db } from 'boot/firebase'
 
 export default {
   computed: {
     ...mapGetters(['getUsuario', 'getModulos']),
+    ...mapFields('questionario', ['choosedQuestionary']),
     modulosMilitar () {
       return this.getModulos.filter(modulo => modulo.tipo === 'MILITAR')
     },
@@ -73,10 +75,9 @@ export default {
     respostas: db.collection('modulos')
   },
   methods: {
-    ...mapMutations('questionario', ['setChoosedQuestionary']),
     ...mapMutations(['setModulos']),
     choose (modulo) {
-      this.setChoosedQuestionary(modulo)
+      this.choosedQuestionary = modulo
     }
   }
 

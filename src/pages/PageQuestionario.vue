@@ -64,7 +64,8 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
 export default {
@@ -78,18 +79,17 @@ export default {
     respostaAnalisada: false
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion', 'getConfigQuestionary', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'getAnswers']),
+    ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao']),
+    ...mapFields('questionario', ['configQuestionary', 'answers']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     },
     answer () {
-      return this.getAnswers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
+      return this.answers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
     }
   },
-
   methods: {
-    ...mapMutations('questionario', ['nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
-    ...mapActions('questionario', ['updateAnswer']),
+    ...mapActions('questionario', ['updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
     setDisableAnalise (flag) {
       this.disableAnalise = flag
     },
@@ -100,6 +100,7 @@ export default {
       this.resetChoices(respostaIndex)
     },
     updateCurrent (respostaIndex) {
+      console.log(respostaIndex)
       this.updateCurrentQuestionChoice(respostaIndex)
     },
     back () {
@@ -110,7 +111,6 @@ export default {
       this.respostaAnalisada = false
       this.nextQuestion()
     },
-
     analisar () {
       this.respostaAnalisada = true
       this.disableAnalise = true

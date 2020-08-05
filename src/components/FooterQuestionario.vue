@@ -47,8 +47,9 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
-import { db } from 'boot/firebase'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
+
 export default {
   data: () => ({
     menuAtual: 'play',
@@ -56,28 +57,22 @@ export default {
     perguntas: []
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestionIndex', 'getConfigQuestionary', 'getChoosedQuestionary']),
+    ...mapFields('questionario', ['currentQuestionIndex', 'choosedQuestionary']
+      .concat(['qtdQuestoes', 'nivel', 'cronometro']
+        .map(field => `configQuestionary.${field}`))),
     currentIndex () {
-      return this.getCurrentQuestionIndex + 1
-    },
-    qtdQuestoes () {
-      return this.getConfigQuestionary.qtdQuestoes
-    },
-    nivel () {
-      return this.getConfigQuestionary.nivel
-    },
-    cronometro () {
-      return this.getConfigQuestionary.cronometro
+      return this.currentQuestionIndex + 1
     }
   },
   components: {
     StopWatch
   },
   methods: {
-    ...mapMutations('questionario', ['setQuestions']),
+    ...mapActions('questionario', ['getQuestions']),
     run () {
       if (!this.running) {
         this.getQuestions()
+        this.changePage()
         return
       }
       this.$router.push('/historico')
@@ -87,21 +82,6 @@ export default {
       if (!this.$route.path.includes('questionario')) {
         this.$router.push('/questionario')
       }
-    },
-    getQuestions () {
-      db.collection('perguntas')
-        .limit(this.qtdQuestoes)
-        .where('nivel', '==', this.nivel)
-        .where('modulo', '==', `modulos/${this.getChoosedQuestionary.id}`)
-        .get()
-        .then(snapshot => {
-          const data = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }))
-          this.setQuestions(data)
-          this.changePage()
-        })
     }
   }
 }

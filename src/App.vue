@@ -11,11 +11,11 @@ export default {
   name: 'App',
   created () {
     this.bindModulos()
-    this.bindAnswers()
+    this.getAnswers()
   },
   methods: {
     ...mapActions(['bindModulos']),
-    ...mapActions('questionario', ['bindAnswers'])
+    ...mapActions('questionario', ['getAnswers'])
   }
 }
 </script>

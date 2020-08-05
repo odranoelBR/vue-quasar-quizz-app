@@ -82,6 +82,7 @@ export default {
       })
     },
     toggleChoice (respostaIndex) {
+      console.log(respostaIndex)
       this.$emit('reset', respostaIndex)
       this.$emit('update', respostaIndex)
     },
