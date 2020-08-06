@@ -3,9 +3,13 @@
 import { mountQuasar } from '../../utils/index'
 import Vuex from 'vuex'
 import PageQuestionario from 'src/pages/PageQuestionario'
-import mutations from '../../../../src/store/questionario/mutations'
-import state from '../../../../src/store/questionario/state'
-import * as getters from '../../../../src/store/questionario/getters'
+
+jest.mock('vuex-map-fields', () => ({
+  getterType: jest.fn(),
+  mapFields: jest.fn().mockReturnValue({
+    answers: jest.fn().mockReturnValue([])
+  }),
+}));
 
 let questionOne = {
   id: "CVAKZNtLrxDaaMNWa9v8",
@@ -32,9 +36,11 @@ describe('Questionario sem respostas selecionadas', () => {
           namespaced: true,
           getters: {
             getCurrentQuestion: jest.fn().mockReturnValue(currentQuestion),
-            getAnswers: jest.fn().mockReturnValue([]),
             ehPrimeiraQuestao: jest.fn().mockReturnValue(true),
             ehUltimaQuestao: jest.fn().mockReturnValue(false)
+          },
+          actions: {
+            getQuestions: jest.fn().mockReturnValue(currentQuestion)
           }
         }
       }
@@ -94,13 +100,20 @@ describe('Questionario com resposta selecionada já salva no banco', () => {
   let currentQuestion = Object.assign(questionOne, {})
   currentQuestion.respostas[0].selecionada = true
 
-  let answer = {
-    correta: false,
-    idQuestao: 'CVAKZNtLrxDaaMNWa9v8',
-    idUsuario: 'gOru4vlt5Jzzlw64i30P',
-    letra: 'a',
-    modulo: 'modulos/Jom34TmjNRvbvYEwGo5M'
-  }
+  jest.mock('vuex-map-fields', () => ({
+    getterType: jest.fn(),
+    mapFields: jest.fn().mockReturnValue({
+      answers: jest.fn().mockReturnValue([
+        {
+          correta: false,
+          idQuestao: 'CVAKZNtLrxDaaMNWa9v8',
+          idUsuario: 'gOru4vlt5Jzzlw64i30P',
+          letra: 'a',
+          modulo: 'modulos/Jom34TmjNRvbvYEwGo5M'
+        }
+      ])
+    }),
+  }));
 
   let options = {
     store: new Vuex.Store({
@@ -109,7 +122,6 @@ describe('Questionario com resposta selecionada já salva no banco', () => {
           namespaced: true,
           getters: {
             getCurrentQuestion: jest.fn().mockReturnValue(currentQuestion),
-            getAnswers: jest.fn().mockReturnValue([answer]),
             ehPrimeiraQuestao: jest.fn().mockReturnValue(true),
             ehUltimaQuestao: jest.fn().mockReturnValue(false)
           }
@@ -121,6 +133,9 @@ describe('Questionario com resposta selecionada já salva no banco', () => {
 
   it('Verifica se alguma resposta foi selecionada', () => {
     expect(wrapper.vm.algumaRespostaSelecionada).toBeTruthy()
+  })
+  it('Verifica se tem uma única resposta', () => {
+    expect(wrapper.vm.answer).toBe({})
   })
   it('Verifica se botão de analise esta habilitado', () => {
     expect(wrapper.vm.disableAnalise).toBeTruthy()
@@ -135,7 +150,7 @@ describe('Questionario com 2 questões, alterando entre questões', () => {
   let questionTwo = Object.assign(questionOne, {})
   questionTwo.texto = 'Segundo o RISAER, o luto é o afastamento total do serviço concedido pelo Comandante, Chefe, Diretor ou Prefeito da OM tão logo tenha conhecimento do óbito,'
   questionTwo.id = 'CVAKZNtLrxDaaMNWa9v8'
-  state.questions = [questionOne, questionTwo]
+  let state = { questions: [questionOne, questionTwo] }
 
   let options = {
     store: new Vuex.Store({
