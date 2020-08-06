@@ -44,17 +44,18 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 
 export default {
   data: () => ({
   }),
   computed: {
-    ...mapGetters('questionario', ['getAnswers']),
+    ...mapFields('questionario', ['answers']),
     ...mapGetters(['getModulos']),
     modulosComRespostas () {
       return this.getModulos.map(modulo => ({
         nome: modulo.nome,
-        answers: this.getAnswers.filter(answer => answer.modulo.includes(modulo.id))
+        answers: this.answers.filter(answer => answer.modulo.includes(modulo.id))
       }))
         .filter(modulo => modulo.answers.length > 0)
     }
