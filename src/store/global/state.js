@@ -1,4 +1,5 @@
 export default {
   usuario: {},
-  modulos: []
+  modulos: [],
+  loading: false
 }

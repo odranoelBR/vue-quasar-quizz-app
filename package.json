@@ -31,6 +31,7 @@
     "firebaseui": "^4.2.0",
     "global": "^4.4.0",
     "localforage": "^1.7.3",
+    "lodash": "^4.17.19",
     "quasar": "^1.12.13",
     "vue-rollbar": "^1.0.0",
     "vuefire": "^2.2.0",

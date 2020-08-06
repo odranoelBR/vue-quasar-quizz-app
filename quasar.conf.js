@@ -76,7 +76,8 @@ module.exports = function (ctx) {
         'QForm',
         'QKnob',
         'QBanner',
-        'QTooltip'
+        'QTooltip',
+        'QInnerLoading'
       ],
 
       directives: [
@@ -85,7 +86,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'LocalStorage', 'Notify'
+        'LocalStorage', 'Notify', 'Loading'
       ]
     },
 

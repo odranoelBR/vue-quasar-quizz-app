@@ -1,13 +1,14 @@
-import { db } from 'boot/firebase'
 import types from './types'
-
+import globalTypes from '../global/types'
+import { db } from 'boot/firebase'
+import { getDefaultConfigQuestionary } from './state'
 export default {
   updateAnswer ({ dispatch }, payload) {
     payload['idUsuario'] = this.state.usuario.id
     db.collection('respostas')
       .add(payload)
       .then(function () {
-        dispatch('bindAnswers')
+        dispatch('getAnswers')
       })
       .catch(function (error) {
         // console.error('Error writing document: ', error)
@@ -22,17 +23,21 @@ export default {
       })
   },
   getQuestions ({ state, commit }) {
+    commit(globalTypes.SET_LOADING, true, { root: true })
     db.collection('perguntas')
       .limit(state.configQuestionary.qtdQuestoes)
       .where('nivel', '==', state.configQuestionary.nivel)
       .where('modulo', '==', `modulos/${state.choosedQuestionary.id}`)
       .get()
       .then(snapshot => {
-        const data = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }))
+        let data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        data.forEach(question => {
+          question.respostas.forEach(resposta => {
+            resposta.selecionada = false
+          })
+        })
         commit(types.SET_QUESTIONS, data)
+        commit(globalTypes.SET_LOADING, false, { root: true })
       })
   },
   nextQuestion ({ state }) {
@@ -45,36 +50,18 @@ export default {
 
     state.currentQuestionIndex--
   },
-  updateCurrentQuestionChoice ({ state }, payload) {
-    state.questions[state.currentQuestionIndex].answers[payload].selected = true
-  },
-  setQuestions ({ state }, payload) {
-    payload.forEach(question => {
-      question.respostas.forEach(resposta => {
-        resposta.selecionada = false
-      })
-    })
-    state.questions = payload
+  updateCurrentQuestionChoice ({ commit }, payload) {
+    commit(types.UPDATE_CURRENT_ANSWER_CHOICE, payload)
   },
   resetChoices ({ getters }) {
     getters.getCurrentQuestion.respostas.forEach(element => {
       element.selecionada = false
     })
   },
-  resetState ({ state, commit }) {
-    state.currentQuestionIndex = 0
-    state.configQuestionary = {
-      cronometro: false,
-      correcaoFinal: false,
-      qtdQuestoes: 3,
-      nivel: 1
-    }
-    let questions = state.questions.forEach(question => {
-      question.respostas.forEach(resposta => {
-        resposta.selecionada = false
-      })
-    })
-    commit(types.SET_QUESTIONS, questions)
+  resetState ({ commit }) {
+    commit(types.SET_CURRENT_QUESTION_INDEX, 0)
+    commit(types.SET_QUESTIONS, [])
+    commit(types.SET_CONFIG_QUESTIONARY, getDefaultConfigQuestionary())
   }
 
 }

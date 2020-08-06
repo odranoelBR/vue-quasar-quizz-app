@@ -1,25 +1,19 @@
-import { vuexfireMutations } from 'vuexfire'
-import { db } from 'boot/firebase'
 
 import state from './state'
 import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
+import mutations from './mutations'
+import actions from './actions'
+import { getField, updateField } from 'vuex-map-fields'
 
 export default {
-  getters,
+  getters: {
+    ...getters,
+    getField
+  },
   mutations: {
-    ...mutations, ...vuexfireMutations
+    ...mutations,
+    updateField
   },
-  actions: {
-    ...actions,
-    bindModulos: (context) => {
-      db.collection('modulos')
-        .get()
-        .then(snapshot => {
-          context.commit('setModulos', snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-        })
-    }
-  },
+  actions,
   state
 }

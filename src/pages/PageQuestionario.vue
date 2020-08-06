@@ -58,7 +58,7 @@
     </div>
   </q-page>
 
-  <q-page v-else>
+  <q-page v-else-if="!loading">
     <div-sem-questoes-cadastradas />
   </q-page>
 </template>
@@ -69,6 +69,9 @@ import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
 export default {
+  created () {
+    this.getQuestions()
+  },
   components: {
     FormQuestionario, DivSemQuestoesCadastradas
   },
@@ -80,6 +83,7 @@ export default {
   }),
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao']),
+    ...mapFields(['loading']),
     ...mapFields('questionario', ['configQuestionary', 'answers']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
@@ -89,7 +93,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('questionario', ['updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    ...mapActions('questionario', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
     setDisableAnalise (flag) {
       this.disableAnalise = flag
     },
@@ -100,7 +104,6 @@ export default {
       this.resetChoices(respostaIndex)
     },
     updateCurrent (respostaIndex) {
-      console.log(respostaIndex)
       this.updateCurrentQuestionChoice(respostaIndex)
     },
     back () {
@@ -125,4 +128,7 @@ export default {
 }
 </script>
 <style scoped>
+[v-cloak] {
+  display: none;
+}
 </style>

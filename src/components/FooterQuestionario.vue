@@ -47,7 +47,6 @@
 
 <script>
 import StopWatch from 'components/StopWatch'
-import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
@@ -68,10 +67,8 @@ export default {
     StopWatch
   },
   methods: {
-    ...mapActions('questionario', ['getQuestions']),
     run () {
       if (!this.running) {
-        this.getQuestions()
         this.changePage()
         return
       }
