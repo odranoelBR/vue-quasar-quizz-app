@@ -21,7 +21,7 @@
           <div class="col-4">
             <span class="text-subtitle1 text-blue-grey-3">Questão
               <span class="text-h6 text-white">{{ currentIndex }}</span>
-              / {{ qtdQuestoes }} </span>
+              / {{ questions.length || '-' }} </span>
           </div>
           <div class="col-4 ">
             <q-btn
@@ -56,8 +56,8 @@ export default {
     perguntas: []
   }),
   computed: {
-    ...mapFields('questionario', ['currentQuestionIndex', 'choosedQuestionary']
-      .concat(['qtdQuestoes', 'nivel', 'cronometro']
+    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
+      .concat(['nivel', 'cronometro']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {
       return this.currentQuestionIndex + 1
