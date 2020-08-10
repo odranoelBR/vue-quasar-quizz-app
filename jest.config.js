@@ -42,6 +42,7 @@ module.exports = {
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '.*css$': '<rootDir>/test/jest/utils/stub.css',
+    '^boot/(.*)$': '<rootDir>/src/boot/$1',
     '^components/(.*)$': '<rootDir>/src/components/$1'
 
   },

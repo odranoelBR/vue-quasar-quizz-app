@@ -40,15 +40,15 @@ export default {
         commit(globalTypes.SET_LOADING, false, { root: true })
       })
   },
-  nextQuestion ({ state }) {
+  nextQuestion ({ commit, state }) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return
 
-    state.currentQuestionIndex++
+    commit(types.SET_CURRENT_QUESTION_INDEX, ++state.currentQuestionIndex)
   },
-  backQuestion ({ state }) {
+  backQuestion ({ commit, state }) {
     if (state.currentQuestionIndex === 0) return
 
-    state.currentQuestionIndex--
+    commit(types.SET_CURRENT_QUESTION_INDEX, --state.currentQuestionIndex)
   },
   updateCurrentQuestionChoice ({ commit }, payload) {
     commit(types.UPDATE_CURRENT_ANSWER_CHOICE, payload)
