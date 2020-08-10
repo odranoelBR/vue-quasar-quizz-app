@@ -1,4 +1,5 @@
 import types from './types'
+import { filterAnswersByModuloId, resetSelectedChoiceOfQuestions, filterQuestionsByConfig } from './helper'
 import globalTypes from '../global/types'
 import { db } from 'boot/firebase'
 import { getDefaultConfigQuestionary } from './state'
@@ -24,21 +25,20 @@ export default {
   },
   getQuestions ({ state, commit }) {
     commit(globalTypes.SET_LOADING, true, { root: true })
+
     db.collection('perguntas')
-      .limit(state.configQuestionary.qtdQuestoes)
       .where('nivel', '==', state.configQuestionary.nivel)
       .where('modulo', '==', `modulos/${state.choosedQuestionary.id}`)
       .get()
       .then(snapshot => {
         let data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-        data.forEach(question => {
-          question.respostas.forEach(resposta => {
-            resposta.selecionada = false
-          })
-        })
+        let answers = filterAnswersByModuloId(state.answers, state.choosedQuestionary.id)
+        data = filterQuestionsByConfig(data, answers, state.configQuestionary)
+        data = resetSelectedChoiceOfQuestions(data)
+
         commit(types.SET_QUESTIONS, data)
-        commit(globalTypes.SET_LOADING, false, { root: true })
       })
+      .then(() => { commit(globalTypes.SET_LOADING, false, { root: true }) })
   },
   nextQuestion ({ commit, state }) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return

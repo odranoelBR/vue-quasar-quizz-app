@@ -1,11 +1,11 @@
 import { db } from 'boot/firebase'
 
 export default {
-  getModulos (context) {
+  getModulos ({ commit }) {
     db.collection('modulos')
       .get()
       .then(snapshot => {
-        context.commit('setModulos', snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        commit('setModulos', snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
       })
   }
 }

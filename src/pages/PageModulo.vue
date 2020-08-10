@@ -55,7 +55,23 @@
           <q-btn-toggle
             dark
             v-model="repetirQuestoes"
-            toggle-color="green"
+            :toggle-color="getBtnColor(repetirQuestoes)"
+            :options="simNao"
+          />
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-item-label>Apagar respostas salvas deste modulo ?</q-item-label>
+        </q-item-section>
+        <q-item-section
+          side
+          top
+        >
+          <q-btn-toggle
+            dark
+            v-model="apagarRespostas"
+            :toggle-color="getBtnColor(apagarRespostas)"
             :options="simNao"
           />
         </q-item-section>
@@ -82,11 +98,15 @@ export default {
     ]
   }),
   computed: {
-    ...mapFields('questionario', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes']
+    ...mapFields('questionario', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes', 'apagarRespostas']
       .map(field => `configQuestionary.${field}`))
   },
   methods: {
-    ...mapActions('questionario', ['resetState'])
+    ...mapActions('questionario', ['resetState']),
+    getBtnColor (model) {
+      if (model) return 'positive'
+      return 'negative'
+    }
   }
 }
 </script>

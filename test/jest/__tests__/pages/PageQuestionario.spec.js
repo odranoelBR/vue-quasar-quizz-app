@@ -3,7 +3,7 @@
 import { mountQuasar } from '../../utils/index'
 import Vuex from 'vuex'
 import PageQuestionario from 'src/pages/PageQuestionario'
-import { questionOne, answerOne } from './dataHelper'
+import { questionOne, answerOne } from '../dataHelper'
 
 jest.mock('vuex-map-fields', () => ({
   getterType: jest.fn(),
