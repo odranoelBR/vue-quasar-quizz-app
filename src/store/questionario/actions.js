@@ -11,8 +11,13 @@ export default {
       .then(function () {
         dispatch('getAnswers')
       })
-      .catch(function (error) {
-        // console.error('Error writing document: ', error)
+  },
+  deleteAnswers ({ rootState, state }) {
+    db.collection('respostas')
+      .where('idUsuario', '==', rootState.usuario.id)
+      .where('modulo', '==', `modulos/${state.choosedQuestionary.id}`)
+      .delete()
+      .then(function () {
       })
   },
   getAnswers: ({ rootState, commit }) => {
@@ -23,7 +28,11 @@ export default {
         commit(types.SET_ANSWERS, snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
       })
   },
-  getQuestions ({ state, commit }) {
+  getQuestions ({ state, commit, dispatch }) {
+    if (state.configQuestionary.apagarRespostas) {
+      commit(types.SET_ANSWERS, [])
+      dispatch('deleteAnswers')
+    }
     commit(globalTypes.SET_LOADING, true, { root: true })
 
     db.collection('perguntas')

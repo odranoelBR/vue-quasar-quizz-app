@@ -94,12 +94,8 @@ export default {
   },
   methods: {
     ...mapActions('questionario', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
-    setDisableAnalise (flag) {
-      this.disableAnalise = flag
-    },
-    setRespostaAnalisada (flag) {
-      this.respostaAnalisada = flag
-    },
+    setDisableAnalise (flag) { this.disableAnalise = flag },
+    setRespostaAnalisada (flag) { this.respostaAnalisada = flag },
     reset (respostaIndex) {
       this.resetChoices(respostaIndex)
     },
