@@ -44,7 +44,7 @@
           />
         </q-item-section>
       </q-item>
-      <q-item>
+      <!-- <q-item>
         <q-item-section>
           <q-item-label>Repetir questões ?</q-item-label>
         </q-item-section>
@@ -59,7 +59,7 @@
             :options="simNao"
           />
         </q-item-section>
-      </q-item>
+      </q-item> -->
       <q-item>
         <q-item-section>
           <q-item-label>Apagar respostas salvas deste modulo ?</q-item-label>

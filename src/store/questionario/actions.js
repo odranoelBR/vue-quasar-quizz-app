@@ -16,9 +16,14 @@ export default {
     db.collection('respostas')
       .where('idUsuario', '==', rootState.usuario.id)
       .where('modulo', '==', `modulos/${state.choosedQuestionary.id}`)
-      .delete()
-      .then(function () {
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => doc.ref.delete())
       })
+
+    // .delete()
+    // .then(function () {
+    // })
   },
   getAnswers: ({ rootState, commit }) => {
     db.collection('respostas')

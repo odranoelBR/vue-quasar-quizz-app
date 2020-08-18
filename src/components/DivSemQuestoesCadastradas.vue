@@ -11,6 +11,7 @@
           color="primary"
         />
       </template>
+      Você respondeu todas as questões /
       Sem Questões Cadastradas desta disciplina
     </q-banner>
     <span
