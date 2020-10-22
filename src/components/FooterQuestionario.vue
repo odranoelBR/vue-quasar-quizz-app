@@ -19,9 +19,12 @@
       <q-toolbar-title>
         <div class="row text-center items-center">
           <div class="col-4">
-            <span class="text-subtitle1 text-blue-grey-3">Questão
-              <span class="text-h6 text-white">{{ currentIndex }}</span>
-              / {{ questions.length || '-' }} </span>
+            <span class="text-subtitle1 text-blue-grey-3 text-weight-light">Questão
+              <span class="text-h4 text-white text-weight-bold">{{ currentIndex }}</span>
+              /
+              <span class="text-h5">{{ questions.length || '-' }}</span>
+
+            </span>
           </div>
           <div class="col-4 ">
             <q-btn

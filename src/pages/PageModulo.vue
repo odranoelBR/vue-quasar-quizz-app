@@ -39,7 +39,7 @@
           <q-btn-toggle
             dark
             v-model="nivel"
-            toggle-color="green"
+            :toggle-color="nivel == 1 ? 'green' : 'warning'"
             :options="tipos"
           />
         </q-item-section>

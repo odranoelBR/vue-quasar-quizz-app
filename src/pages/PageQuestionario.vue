@@ -29,7 +29,7 @@
       >
         <div class="col-auto">
           <q-btn
-            color="positive"
+            color="primary"
             v-if="!disableAnalise && algumaRespostaSelecionada"
             @click="analisar"
           >
@@ -116,7 +116,7 @@ export default {
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
       this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
       this.$q.notify({
-        ...{ position: 'bottom-right', classes: 'notify-questionario' }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
+        ...{ position: 'bottom-right', classes: 'notify-questionario', group: false }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
       })
     }
 

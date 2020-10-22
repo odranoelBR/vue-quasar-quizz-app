@@ -10,6 +10,7 @@
     </div>
     <div class="col">
       <span class="text-white text-h6"> {{ nome }} </span>
+      <span :class="className">{{ nivelWrited }}</span>
     </div>
   </div>
 </template>
@@ -18,7 +19,13 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
-    ...mapFields('questionario', ['choosedQuestionary.nome'])
+    ...mapFields('questionario', ['choosedQuestionary.nome', 'configQuestionary.nivel']),
+    nivelWrited () {
+      return this.nivel === 1 ? 'Básico' : 'Avançado'
+    },
+    className () {
+      return this.nivel === 1 ? 'text-green' : 'text-warning'
+    }
   },
   methods: {
     goHome () {

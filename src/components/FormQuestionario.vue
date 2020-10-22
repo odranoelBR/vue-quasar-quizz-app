@@ -15,29 +15,24 @@
     <q-separator class="q-pb-md bg-info" />
 
     <div
-      class="row question-row"
+      class="row question-row q-pb-xs"
       v-for="(resposta, index) in currentQuestion.respostas"
       :key="index"
     >
       <q-chip
-        class="fit"
-        :outline="getOutline(resposta)"
-        square
-        :color="getButtonColor(resposta)"
-        text-color="white"
-        :selected="resposta.selecionada"
+        :color="getColor(resposta)"
+        class="fit answer-chip"
+        clickable
         :disable="respostaAnalisada"
         @click="toggleChoice(index)"
       >
-        <q-avatar
-          class="full-height"
-          :icon="`mdi-alpha-${resposta.letra}`"
+        <img
+          :src="getIcon(resposta)"
+          alt=""
         >
-          )
-        </q-avatar>
-
         <span
           v-html="resposta.texto"
+          :style="resposta.selecionada ? 'color: white' : ''"
           class="texto-courier"
         />
       </q-chip>
@@ -68,6 +63,13 @@ export default {
     }
   },
   methods: {
+    getIcon (resposta) {
+      if (resposta.selecionada) {
+        return 'statics/checked.svg'
+      }
+
+      return `statics/${resposta.letra}.svg`
+    },
     syncronize () {
       this.$emit('resposta-analisada', false)
       this.$emit('disable-analise', false)
@@ -94,14 +96,17 @@ export default {
       }
       return 'primary'
     },
-    getOutline (resposta) {
+    getColor (resposta) {
       if (this.respostaAnalisada && resposta.correta) {
-        return false
+        return 'positive'
+      }
+      if (this.respostaAnalisada && !resposta.correta && resposta.selecionada) {
+        return 'negative'
       }
       if (!resposta.selecionada) {
-        return true
+        return ''
       }
-      return false
+      return 'primary'
     }
   }
 }
