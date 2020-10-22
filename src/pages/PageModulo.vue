@@ -1,89 +1,102 @@
 <template>
-  <div>
+  <div class="text-white">
     <span class="text-white text-italic">Preparar questionário</span>
     <q-separator
       color="accent"
       style="opacity: 0.3"
-      class="q-mt-xs q-mb-md"
+      class="q-mt-xs q-mb-xl"
     />
 
-    <q-list class="text-white">
-      <q-item>
-        <div class="row items-center">
-          <div class="col-9">
-            <q-item-section>
-              <q-item-label>Quantidade de questões</q-item-label>
-            </q-item-section>
-          </div>
-          <div class="col">
-            <q-item-section>
-              <q-input
-                dark
-                filled
-                dense
-                mask="##"
-                v-model.number="qtdQuestoes"
-              />
-            </q-item-section>
-          </div>
-        </div>
-      </q-item>
-      <q-item>
-        <q-item-section>
-          <q-item-label>Nível</q-item-label>
-        </q-item-section>
-        <q-item-section
-          side
-          top
+    <div class="row q-pb-xs text-weight-thin">
+      <div class="col">
+        <q-item-label>Questões</q-item-label>
+      </div>
+    </div>
+    <div class="row q-pb-lg ">
+      <div class="col">
+        <q-btn
+          flat
+          size="32px"
         >
-          <q-btn-toggle
-            dark
-            v-model="nivel"
-            :toggle-color="nivel == 1 ? 'green' : 'warning'"
-            :options="tipos"
-          />
-        </q-item-section>
-      </q-item>
-      <!-- <q-item>
-        <q-item-section>
-          <q-item-label>Repetir questões ?</q-item-label>
-        </q-item-section>
-        <q-item-section
-          side
-          top
+          -
+        </q-btn>
+        {{ qtdQuestoes }}
+        <q-btn
+          flat
+          size="28px"
         >
-          <q-btn-toggle
-            dark
-            v-model="repetirQuestoes"
-            :toggle-color="getBtnColor(repetirQuestoes)"
-            :options="simNao"
-          />
-        </q-item-section>
-      </q-item> -->
-      <q-item>
-        <q-item-section>
-          <q-item-label>Apagar respostas salvas deste modulo ?</q-item-label>
-        </q-item-section>
-        <q-item-section
-          side
-          top
+          +
+        </q-btn>
+      </div>
+    </div>
+
+    <div class="row q-pb-sm text-weight-thin">
+      <div class="col">
+        <q-label>Nível</q-label>
+      </div>
+    </div>
+    <div class="row q-pb-lg items-center">
+      <div class="col">
+        <q-btn
+          class="fit"
+          color="positive"
+          @click="nivel = 1"
         >
-          <q-btn-toggle
-            dark
-            v-model="apagarRespostas"
-            :toggle-color="getBtnColor(apagarRespostas)"
-            :options="simNao"
-          />
-        </q-item-section>
-      </q-item>
-    </q-list>
+          Básico
+        </q-btn>
+      </div>
+      <div class="col ">
+        <arrow-animated :toggle="nivel === 1" />
+      </div>
+      <div class="col">
+        <q-btn
+          class="fit"
+          color="negative"
+          @click="nivel = 2"
+        >
+          Avançado
+        </q-btn>
+      </div>
+    </div>
+
+    <div class="row q-pb-sm text-weight-thin">
+      <div class="col">
+        <q-label>Apagar respostas salvas deste modulo ?</q-label>
+      </div>
+    </div>
+    <div class="row items-center justify-center">
+      <div class="col-4">
+        <q-btn
+          class="fit"
+          color="positive"
+          @click="apagarRespostas = false"
+        >
+          Não
+        </q-btn>
+      </div>
+      <div class="col-4">
+        <arrow-animated :toggle="!apagarRespostas" />
+      </div>
+      <div class="col-4">
+        <q-btn
+          class="fit"
+          @click="apagarRespostas = true"
+          color="negative"
+        >
+          Sim
+        </q-btn>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
-
+import ArrowAnimated from 'components/ArrowAnimated.vue'
 export default {
+  components: {
+    ArrowAnimated
+  },
   created () {
     this.resetState()
   },
