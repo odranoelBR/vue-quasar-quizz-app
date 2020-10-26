@@ -109,16 +109,6 @@ export default {
   created () {
     this.resetState()
   },
-  data: () => ({
-    tipos: [
-      { label: 'Básico', value: 1 },
-      { label: 'Avançado', value: 2 }
-    ],
-    simNao: [
-      { label: 'Sim', value: true },
-      { label: 'Não', value: false }
-    ]
-  }),
   computed: {
     ...mapFields('questionario', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes', 'apagarRespostas']
       .map(field => `configQuestionary.${field}`))

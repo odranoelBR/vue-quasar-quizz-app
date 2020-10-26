@@ -56,6 +56,52 @@
         </q-btn>
       </div>
     </div>
+    <q-dialog
+      full-height
+      full-width
+      v-model="dialog"
+    >
+      <q-card class="column justify-between">
+        <q-card-section class="no-padding">
+          <object
+            class="q-pt-lg q-pb-lg"
+            id="my-svg"
+            data="statics/success.svg"
+          />
+
+          <div class="row no-wrap items-center text-center">
+            <div class="col text-h6 ellipsis">
+              Parabéns!
+            </div>
+          </div>
+        </q-card-section>
+
+        <q-card-section class="col text-center bg-secondary">
+          <div class="text-subtitle1">
+            Acertou {{ respostasCorretas }} de {{ configQuestionary.qtdQuestoes }}
+          </div>
+        </q-card-section>
+
+        <q-card-section class="column bg-secondary">
+          <q-btn
+            class="answer-chip q-mb-md"
+            color="primary"
+            @click="$router.push('historico')"
+          >
+            Histórico
+          </q-btn>
+
+          <q-btn
+            class="answer-chip "
+            color="accent"
+            v-close-popup
+            @click="$router.push(`modulo/${choosedQuestionary.id}`)"
+          >
+            Novo caderno
+          </q-btn>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 
   <q-page v-else-if="!loading">
@@ -68,6 +114,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
+import Vivus from 'vivus'
 export default {
   created () {
     this.getQuestions()
@@ -79,17 +126,32 @@ export default {
     respostaCorreta: { icon: 'thumb_up', color: 'positive' },
     respostaErrada: { icon: 'thumb_down', color: 'negative' },
     disableAnalise: false,
-    respostaAnalisada: false
+    respostaAnalisada: false,
+    dialog: true
   }),
+  watch: {
+    dialog () {
+      // eslint-disable-next-line no-new
+      new Vivus('my-svg', { duration: 200 })
+    },
+    cadernoEstaFinalizado () {
+      if (this.cadernoEstaFinalizado) {
+        this.dialog = true
+      }
+    }
+  },
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao']),
+    ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'cadernoEstaFinalizado']),
     ...mapFields(['loading']),
-    ...mapFields('questionario', ['configQuestionary', 'answers']),
+    ...mapFields('questionario', ['configQuestionary', 'answers', 'choosedQuestionary']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     },
     answer () {
       return this.answers.find(answer => answer.idQuestao === this.getCurrentQuestion.id)
+    },
+    respostasCorretas () {
+      return this.answers.filter(modulo => modulo.correta).length
     }
   },
   methods: {
@@ -115,9 +177,13 @@ export default {
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
       this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
+      this.finalizar()
       this.$q.notify({
         ...{ position: 'bottom-right', classes: 'notify-questionario', group: false }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
       })
+    },
+    finalizar () {
+
     }
 
   }

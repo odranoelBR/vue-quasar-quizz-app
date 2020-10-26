@@ -1,7 +1,7 @@
 export const getDefaultConfigQuestionary = () => ({
   cronometro: false,
   correcaoFinal: false,
-  qtdQuestoes: 3,
+  qtdQuestoes: 10,
   nivel: 1,
   repetirQuestoes: false,
   apagarRespostas: false

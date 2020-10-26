@@ -50,6 +50,9 @@ export default {
         data = filterQuestionsByConfig(data, answers, state.configQuestionary)
         data = resetSelectedChoiceOfQuestions(data)
 
+        let configQuestionary = state.configQuestionary
+        configQuestionary.qtdQuestoes = data.length
+        commit(types.SET_CONFIG_QUESTIONARY, configQuestionary)
         commit(types.SET_QUESTIONS, data)
       })
       .then(() => { commit(globalTypes.SET_LOADING, false, { root: true }) })

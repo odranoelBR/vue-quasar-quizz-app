@@ -8,3 +8,9 @@ export function ehUltimaQuestao (state) {
 export function ehPrimeiraQuestao (state) {
   return state.currentQuestionIndex === 0
 }
+export function cadernoEstaFinalizado (state) {
+  return state.questions
+    .filter(question => state.answers
+      .some(answer => answer.idQuestao === question.id)
+    ).length === state.configQuestionary.qtdQuestoes
+}
