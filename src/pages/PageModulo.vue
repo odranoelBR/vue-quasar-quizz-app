@@ -8,39 +8,44 @@
     />
 
     <div class="row q-pb-xs text-weight-thin">
-      <div class="col">
-        <q-item-label>Questões</q-item-label>
+      <div class="col letter-space">
+        Questões
       </div>
     </div>
-    <div class="row q-pb-lg ">
+    <div class="row q-pb-xl items-center">
       <div class="col">
         <q-btn
-          flat
-          size="32px"
-        >
-          -
-        </q-btn>
+          class="fit add-remove"
+          color="primary"
+          icon="remove"
+          @click="qtdQuestoes--"
+        />
+      </div>
+      <div class="col text-center text-h3">
         {{ qtdQuestoes }}
+      </div>
+      <div class="col">
         <q-btn
-          flat
-          size="28px"
-        >
-          +
-        </q-btn>
+          class="fit add-remove"
+          color="accent"
+          icon="add"
+          @click="qtdQuestoes++"
+        />
       </div>
     </div>
 
     <div class="row q-pb-sm text-weight-thin">
-      <div class="col">
-        <q-label>Nível</q-label>
+      <div class="col letter-space">
+        Nível
       </div>
     </div>
-    <div class="row q-pb-lg items-center">
+    <div class="row q-pb-xl items-center">
       <div class="col">
         <q-btn
           class="fit"
-          color="positive"
+          color="primary"
           @click="nivel = 1"
+          :outline="nivel == 2"
         >
           Básico
         </q-btn>
@@ -51,8 +56,9 @@
       <div class="col">
         <q-btn
           class="fit"
-          color="negative"
+          color="accent"
           @click="nivel = 2"
+          :outline="nivel == 1"
         >
           Avançado
         </q-btn>
@@ -60,16 +66,17 @@
     </div>
 
     <div class="row q-pb-sm text-weight-thin">
-      <div class="col">
-        <q-label>Apagar respostas salvas deste modulo ?</q-label>
+      <div class="col letter-space">
+        Apagar respostas salvas deste modulo ?
       </div>
     </div>
     <div class="row items-center justify-center">
       <div class="col-4">
         <q-btn
           class="fit"
-          color="positive"
+          color="primary"
           @click="apagarRespostas = false"
+          :outline="apagarRespostas"
         >
           Não
         </q-btn>
@@ -81,7 +88,8 @@
         <q-btn
           class="fit"
           @click="apagarRespostas = true"
-          color="negative"
+          color="accent"
+          :outline="!apagarRespostas"
         >
           Sim
         </q-btn>
@@ -93,6 +101,7 @@
 import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import ArrowAnimated from 'components/ArrowAnimated.vue'
+
 export default {
   components: {
     ArrowAnimated

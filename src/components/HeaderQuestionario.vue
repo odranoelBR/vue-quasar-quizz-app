@@ -24,7 +24,7 @@ export default {
       return this.nivel === 1 ? 'Básico' : 'Avançado'
     },
     className () {
-      return this.nivel === 1 ? 'text-green' : 'text-warning'
+      return this.nivel === 1 ? 'text-blue-4' : 'text-accent'
     }
   },
   methods: {
