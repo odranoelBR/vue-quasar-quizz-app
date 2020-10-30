@@ -55,12 +55,11 @@ import { mapFields } from 'vuex-map-fields'
 export default {
   data: () => ({
     menuAtual: 'play',
-    running: false,
     perguntas: []
   }),
   computed: {
     ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
-      .concat(['nivel', 'cronometro']
+      .concat(['nivel', 'cronometro', 'running']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {
       return this.currentQuestionIndex + 1

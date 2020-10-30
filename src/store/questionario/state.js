@@ -4,7 +4,8 @@ export const getDefaultConfigQuestionary = () => ({
   qtdQuestoes: 10,
   nivel: 1,
   repetirQuestoes: false,
-  apagarRespostas: false
+  apagarRespostas: false,
+  running: false
 })
 export const state = {
   questions: [],
