@@ -61,31 +61,48 @@
       full-width
       v-model="dialog"
     >
-      <q-card class="column justify-between">
+      <q-card class="column justify-between bg-dialog">
         <q-card-section class="no-padding">
-          <object
-            class="q-pt-lg q-pb-lg"
-            id="my-svg"
-            data="statics/success.svg"
-          />
+          <div style="min-height: 250px">
+            <transition
+              :duration="5000"
+              enter-active-class="animated slideInLeft"
+              leave-active-class="animated slideOutLeft"
+            >
+              <img
+                v-if="trophy"
+                class="q-pt-lg q-pb-lg"
+                src="statics/success.svg"
+                alt=""
+              >
+            </transition>
+          </div>
 
           <div class="row no-wrap items-center text-center">
-            <div class="col text-h6 ellipsis">
+            <div class="col text-h4 ellipsis text-bold">
               Parabéns!
             </div>
           </div>
         </q-card-section>
 
-        <q-card-section class="col text-center bg-secondary">
-          <div class="text-subtitle1">
-            Acertou {{ respostasCorretas }} de {{ configQuestionary.qtdQuestoes }}
+        <q-card-section class="col text-center bg-dialog q-pt-sm">
+          <div class="text-h3 text-positive">
+            {{ porcentagemAcertos }}%
+            Acerto
+          </div>
+          <div class="text-h6 q-pt-xl">
+            Você completou as questões!
+          </div>
+          <div class="text-h6">
+            Foi <span class="text-h5 text-accent">{{ respostasCorretas }}</span> acerto
+            de    <span class="text-h5 text-accent">{{ configQuestionary.qtdQuestoes }}</span>
           </div>
         </q-card-section>
 
-        <q-card-section class="column bg-secondary">
+        <q-card-section class="column ">
           <q-btn
             class="answer-chip q-mb-md"
-            color="primary"
+            color="secondary"
             @click="$router.push('historico')"
           >
             Histórico
@@ -114,7 +131,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
-import Vivus from 'vivus'
+// import Vivus from 'vivus'
 export default {
   created () {
     this.getQuestions()
@@ -127,12 +144,16 @@ export default {
     respostaErrada: { icon: 'thumb_down', color: 'negative' },
     disableAnalise: false,
     respostaAnalisada: false,
-    dialog: true
+    dialog: false,
+    trophy: false
   }),
   watch: {
     dialog () {
-      // eslint-disable-next-line no-new
-      new Vivus('my-svg', { duration: 200 })
+      if (this.dialog) {
+        setTimeout(() => {
+          this.trophy = true
+        }, 2)
+      }
     },
     cadernoEstaFinalizado () {
       if (this.cadernoEstaFinalizado) {
@@ -152,6 +173,10 @@ export default {
     },
     respostasCorretas () {
       return this.answers.filter(modulo => modulo.correta).length
+    },
+    porcentagemAcertos () {
+      return (this.respostasCorretas / this.configQuestionary.qtdQuestoes * 100)
+        .toString().substr(0, 5)
     }
   },
   methods: {
