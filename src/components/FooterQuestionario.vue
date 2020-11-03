@@ -41,6 +41,7 @@
             v-show="getCurrentQuestion.bizu"
           >
             <q-btn
+              fab
               color="primary"
               @click="showBizu"
             >
@@ -65,6 +66,7 @@
 <script>
 import StopWatch from 'components/StopWatch'
 import { mapFields } from 'vuex-map-fields'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -72,7 +74,8 @@ export default {
     perguntas: []
   }),
   computed: {
-    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary', 'getCurrentQuestion']
+    ...mapGetters('questionario', ['getCurrentQuestion']),
+    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
       .concat(['nivel', 'cronometro', 'running']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {
