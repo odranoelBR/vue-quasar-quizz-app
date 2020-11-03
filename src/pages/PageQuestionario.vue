@@ -13,10 +13,12 @@
       @reset="reset"
       @update="updateCurrent"
       @disable-analise="setDisableAnalise"
+      @created="getImagem"
       @resposta-analisada="setRespostaAnalisada "
       :answer="answer"
       :current-question="getCurrentQuestion"
       :resposta-analisada="respostaAnalisada"
+      :url-for-image="urlForImage"
     />
 
     <div class="row q-pa-xs q-gutter-sm justify-between text-right">
@@ -29,6 +31,7 @@
       >
         <div class="col-auto">
           <q-btn
+            style="height: 41px"
             color="primary"
             v-if="!disableAnalise && algumaRespostaSelecionada"
             @click="analisar"
@@ -37,9 +40,11 @@
           </q-btn>
         </div>
       </transition>
+
       <div class="col">
         <q-btn
           color="accent"
+          style="height: 41px"
           @click="back"
           v-show="!ehPrimeiraQuestao"
         >
@@ -49,6 +54,7 @@
       <div class="col-auto">
         <q-btn
           color="accent"
+          style="height: 41px"
           @click="next"
           v-show="!ehUltimaQuestao"
         >
@@ -90,7 +96,7 @@
             {{ porcentagemAcertos }}%
             Acerto
           </div>
-          <div class="text-h6 q-pt-xl">
+          <div class="text-h6 q-pt-md">
             Você completou as questões!
           </div>
           <div class="text-h6">
@@ -164,7 +170,7 @@ export default {
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'cadernoEstaFinalizado']),
     ...mapFields(['loading']),
-    ...mapFields('questionario', ['configQuestionary', 'answers', 'choosedQuestionary']),
+    ...mapFields('questionario', ['configQuestionary', 'answers', 'choosedQuestionary', 'urlForImage']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     },
@@ -180,7 +186,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('questionario', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices']),
+    ...mapActions('questionario', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'getImage']),
     setDisableAnalise (flag) { this.disableAnalise = flag },
     setRespostaAnalisada (flag) { this.respostaAnalisada = flag },
     reset (respostaIndex) {
@@ -202,13 +208,23 @@ export default {
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
       this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
-      this.finalizar()
       this.$q.notify({
         ...{ position: 'bottom-right', classes: 'notify-questionario', group: false }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
       })
     },
-    finalizar () {
-
+    showBizu () {
+      this.$q.notify({
+        message: this.getCurrentQuestion.bizu,
+        color: 'primary',
+        position: 'top',
+        timeout: '3000',
+        avatar: 'statics/idea.svg'
+      })
+    },
+    getImagem () {
+      if (this.getCurrentQuestion.image) {
+        this.getImage(this.getCurrentQuestion.id)
+      }
     }
 
   }

@@ -1,10 +1,24 @@
 <template>
   <div>
-    <span
-      class="text-white texto-courier"
-      style="font-size: 11pt"
-      v-html="currentQuestion.texto"
+    <div class="row q-pb-md">
+      <span
+        class="text-white texto-courier"
+        style="font-size: 11pt"
+        v-html="currentQuestion.texto"
+      />
+    </div>
+
+    <q-img
+      :src="urlForImage"
+      v-if="urlForImage"
     />
+    <div class="row q-pt-md">
+      <span
+        class="text-white texto-courier"
+        style="font-size: 11pt"
+        v-html="currentQuestion.posTexto"
+      />
+    </div>
 
     <div class="row">
       <span class="text-caption text-blue-grey-3">
@@ -54,7 +68,14 @@ export default {
     respostaAnalisada: {
       type: Boolean,
       required: true
+    },
+    urlForImage: {
+      type: String,
+      default: () => false
     }
+  },
+  created () {
+    this.$emit('created')
   },
   watch: {
     'currentQuestion.id': {

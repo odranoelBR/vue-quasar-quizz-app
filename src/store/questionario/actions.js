@@ -1,7 +1,7 @@
 import types from './types'
 import { filterAnswersByModuloId, resetSelectedChoiceOfQuestions, filterQuestionsByConfig } from './helper'
 import globalTypes from '../global/types'
-import { db } from 'boot/firebase'
+import { db, storage } from 'boot/firebase'
 import { getDefaultConfigQuestionary } from './state'
 export default {
   updateAnswer ({ dispatch }, payload) {
@@ -79,6 +79,15 @@ export default {
     commit(types.SET_CURRENT_QUESTION_INDEX, 0)
     commit(types.SET_QUESTIONS, [])
     commit(types.SET_CONFIG_QUESTIONARY, getDefaultConfigQuestionary())
+    commit(types.SET_URL_FOR_IMAGE, null)
+  },
+  getImage ({ commit }, id) {
+    let storageRef = storage.ref(`images/${id}.jpg`)
+    storageRef.getDownloadURL().then(function (url) {
+      commit(types.SET_URL_FOR_IMAGE, url)
+    }).catch(() => {
+      commit(types.SET_URL_FOR_IMAGE, null)
+    })
   }
 
 }

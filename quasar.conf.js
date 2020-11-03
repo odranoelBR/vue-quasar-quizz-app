@@ -78,7 +78,8 @@ module.exports = function (ctx) {
         'QBanner',
         'QTooltip',
         'QInnerLoading',
-        'QDialog'
+        'QDialog',
+        'QImg'
       ],
 
       directives: [

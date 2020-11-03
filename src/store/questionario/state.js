@@ -12,5 +12,6 @@ export const state = {
   currentQuestionIndex: 0,
   choosedQuestionary: { name: '' },
   configQuestionary: getDefaultConfigQuestionary(),
-  answers: []
+  answers: [],
+  urlForImage: null
 }

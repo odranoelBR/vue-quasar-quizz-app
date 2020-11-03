@@ -13,6 +13,9 @@ export default {
   [types.SET_CONFIG_QUESTIONARY] (state, payload) {
     state.configQuestionary = payload
   },
+  [types.SET_URL_FOR_IMAGE] (state, payload) {
+    state.urlForImage = payload
+  },
   [types.UPDATE_CURRENT_ANSWER_CHOICE] (state, payload) {
     state.questions[state.currentQuestionIndex].respostas[payload].selecionada = true
   }

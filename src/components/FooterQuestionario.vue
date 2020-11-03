@@ -37,6 +37,20 @@
             />
           </div>
           <div
+            class="col-auto"
+            v-show="getCurrentQuestion.bizu"
+          >
+            <q-btn
+              color="primary"
+              @click="showBizu"
+            >
+              <img
+                src="statics/idea.svg"
+                alt=""
+              >
+            </q-btn>
+          </div>
+          <div
             class="col-4"
             v-if="cronometro"
           >
@@ -58,7 +72,7 @@ export default {
     perguntas: []
   }),
   computed: {
-    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
+    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary', 'getCurrentQuestion']
       .concat(['nivel', 'cronometro', 'running']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {
@@ -81,6 +95,15 @@ export default {
       if (!this.$route.path.includes('questionario')) {
         this.$router.push('/questionario')
       }
+    },
+    showBizu () {
+      this.$q.notify({
+        message: this.getCurrentQuestion.bizu,
+        color: 'primary',
+        position: 'top',
+        timeout: '3000',
+        avatar: 'statics/idea.svg'
+      })
     }
   }
 }
