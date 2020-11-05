@@ -22,10 +22,10 @@ export default function (/* { store, ssrContext } */) {
     let isAuthenticated = LocalStorage.has('usuario')
     let nextRouteIsLogin = to.path === '/login'
     if (isAuthenticated && nextRouteIsLogin) {
-      store().commit('setUsuario', LocalStorage.getItem('usuario'))
+      store().dispatch('getUser', LocalStorage.getItem('usuario').id)
       next('/')
     } else if (isAuthenticated) {
-      store().commit('setUsuario', LocalStorage.getItem('usuario'))
+      store().dispatch('getUser', LocalStorage.getItem('usuario').id)
       next()
     } else if (!isAuthenticated && nextRouteIsLogin) {
       next()

@@ -3,6 +3,8 @@ import { filterAnswersByModuloId, resetSelectedChoiceOfQuestions, filterQuestion
 import globalTypes from '../global/types'
 import { db, storage } from 'boot/firebase'
 import { getDefaultConfigQuestionary } from './state'
+import { LocalStorage } from 'quasar'
+
 export default {
   updateAnswer ({ dispatch }, payload) {
     payload['idUsuario'] = this.state.usuario.id
@@ -27,7 +29,7 @@ export default {
   },
   getAnswers: ({ rootState, commit }) => {
     db.collection('respostas')
-      .where('idUsuario', '==', rootState.usuario.id)
+      .where('idUsuario', '==', LocalStorage.getItem('usuario').id)
       .get()
       .then(snapshot => {
         commit(types.SET_ANSWERS, snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))

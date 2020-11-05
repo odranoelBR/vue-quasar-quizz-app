@@ -69,7 +69,7 @@
 import ArrowAnimated from 'components/ArrowAnimated.vue'
 import SvgLeftHand from 'components/SvgLeftHand.vue'
 import SvgRightHand from 'components/SvgRightHand.vue'
-
+import { mapActions } from 'vuex'
 export default {
   components: {
     ArrowAnimated, SvgLeftHand, SvgRightHand
@@ -78,7 +78,16 @@ export default {
     somErro: false,
     maoDireita: true
   }),
+  created () {
+    this.$watch('somErro', () => this.update())
+    this.$watch('maoDireita', () => this.update())
+  },
   methods: {
+    ...mapActions(['updateUser']),
+    update () {
+      // this.updateUser()
+      console.log('123')
+    }
   }
 
 }
