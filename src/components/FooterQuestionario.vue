@@ -29,7 +29,7 @@
           <div class="col-4 ">
             <q-btn
               fab
-              class="shadow-18"
+              class="shadow-5"
               color="primary"
               size="xl"
               :icon="running ? 'mdi-stop' : 'mdi-play'"
@@ -37,16 +37,37 @@
             />
           </div>
           <div
+            class="col"
+            v-show="getCurrentQuestion.bizu"
+          >
+            <q-btn
+              fab
+              class="shadow-5"
+              color="primary"
+              style="padding: 10px"
+              padding="none"
+              @click="showBizu"
+            >
+              <img
+                src="statics/idea.svg"
+                alt=""
+              >
+            </q-btn>
+          </div>
+          <div
             class="col-auto"
             v-show="getCurrentQuestion.bizu"
           >
             <q-btn
               fab
+              class="shadow-5"
               color="primary"
-              @click="showBizu"
+              padding="none"
+              style="padding: 10px"
+              @click="video = true"
             >
               <img
-                src="statics/idea.svg"
+                src="statics/youtube.svg"
                 alt=""
               >
             </q-btn>
@@ -60,6 +81,15 @@
         </div>
       </q-toolbar-title>
     </q-toolbar>
+    <q-dialog
+      v-model="video"
+      full-height
+    >
+      <q-video
+        :src="getCurrentQuestion.link"
+        allowfullscreen
+      />
+    </q-dialog>
   </q-footer>
 </template>
 
@@ -71,7 +101,8 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     menuAtual: 'play',
-    perguntas: []
+    perguntas: [],
+    video: false
   }),
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion']),

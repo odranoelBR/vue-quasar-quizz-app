@@ -79,11 +79,12 @@ module.exports = function (ctx) {
         'QTooltip',
         'QInnerLoading',
         'QDialog',
-        'QImg'
+        'QImg',
+        'QVideo'
       ],
 
       directives: [
-        'Ripple', 'ClosePopup'
+        'Ripple', 'ClosePopup', 'TouchSwipe'
       ],
 
       // Quasar plugins

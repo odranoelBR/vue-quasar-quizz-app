@@ -13713,10 +13713,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vivus@^0.4.3:
-  version "0.4.3"
-  resolved "http://10.52.140.102/repository/npm-fab-agrupado-internet-ccarj/vivus/-/vivus-0.4.3.tgz#d7cd1b8b9053756b21cdc5731f2308510c5f0557"
-  integrity sha1-180bi5BTdWshzcVzHyMIUQxfBVc=
+vivus@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/vivus/-/vivus-0.4.5.tgz#61d18c2ac8f48cab5d250fc3df1badfcb32d669a"
+  integrity sha512-dBM5QDcO0JUnoeGUROhMYVBW4Qry637iQ1o6vLDaEVzu0TAQ3tVlzeQlLGYPjegCxcY1nC8FtyTjsZ8rqXVL4Q==
 
 vm-browserify@^1.0.1:
   version "1.1.2"

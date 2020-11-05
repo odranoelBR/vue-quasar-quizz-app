@@ -34,7 +34,7 @@
     "localforage": "^1.7.3",
     "lodash": "^4.17.19",
     "quasar": "^1.12.13",
-    "vivus": "^0.4.3",
+    "vivus": "^0.4.5",
     "vue-rollbar": "^1.0.0",
     "vuefire": "^2.2.0",
     "vuex-map-fields": "^1.4.0",

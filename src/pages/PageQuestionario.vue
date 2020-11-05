@@ -19,6 +19,8 @@
       :current-question="getCurrentQuestion"
       :resposta-analisada="respostaAnalisada"
       :url-for-image="urlForImage"
+      v-touch-swipe.mouse.right="handleSwipeRight"
+      v-touch-swipe.mouse.left="handleSwipeLeft"
     />
 
     <div class="row q-pa-xs q-gutter-sm justify-between text-right">
@@ -101,7 +103,7 @@
           </div>
           <div class="text-h6">
             Foi <span class="text-h5 text-accent">{{ respostasCorretas }}</span> acerto
-            de    <span class="text-h5 text-accent">{{ configQuestionary.qtdQuestoes }}</span>
+            de <span class="text-h5 text-accent">{{ configQuestionary.qtdQuestoes }}</span>
           </div>
         </q-card-section>
 
@@ -194,6 +196,12 @@ export default {
     },
     updateCurrent (respostaIndex) {
       this.updateCurrentQuestionChoice(respostaIndex)
+    },
+    handleSwipeRight ({ distance }) {
+      if (distance.x > 10) { this.back() }
+    },
+    handleSwipeLeft ({ distance }) {
+      if (distance.x > 10) { this.next() }
     },
     back () {
       this.respostaAnalisada = false
