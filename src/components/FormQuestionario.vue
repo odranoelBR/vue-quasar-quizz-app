@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row q-pb-md">
+    <div class="row q-pb-sm">
       <span
         class="text-white texto-courier"
         style="font-size: 11pt"
@@ -9,10 +9,14 @@
     </div>
 
     <q-img
+      class="q-mb-sm q-mt-sm"
       :src="urlForImage"
       v-if="urlForImage"
     />
-    <div class="row q-pt-md">
+    <div
+      class="row q-pb-sm"
+      v-show="currentQuestion.posTexto"
+    >
       <span
         class="text-white texto-courier"
         style="font-size: 11pt"
@@ -21,7 +25,7 @@
     </div>
 
     <div class="row">
-      <span class="text-caption text-blue-grey-3">
+      <span class="text-caption text-blue-grey-3 q-pb-md">
         {{ currentQuestion.referencia }}
       </span>
     </div>

@@ -1,4 +1,5 @@
 import { db } from 'boot/firebase'
+import { Notify } from 'quasar'
 
 export default {
   getModulos ({ commit }) {
@@ -16,12 +17,12 @@ export default {
         commit('setUsuario', { ...snapshot.data(), id })
       })
   },
-  updateUser ({ rootState, commit }) {
+  updateUser ({ rootState, commit }, payload) {
     db.collection('usuarios')
       .doc(rootState.usuario.id)
-      .get()
+      .update(payload)
       .then(snapshot => {
-        console.log(snapshot)
+        Notify.create({ message: 'Atualizado!', color: 'positive' })
       })
   }
 }

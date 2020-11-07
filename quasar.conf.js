@@ -80,7 +80,8 @@ module.exports = function (ctx) {
         'QInnerLoading',
         'QDialog',
         'QImg',
-        'QVideo'
+        'QVideo',
+        'QSkeleton'
       ],
 
       directives: [

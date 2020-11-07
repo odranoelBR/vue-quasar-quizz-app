@@ -23,7 +23,16 @@
       v-touch-swipe.mouse.left="handleSwipeLeft"
     />
 
-    <div class="row q-pa-xs q-gutter-sm justify-between text-right">
+    <div class="row q-pa-xs q-gutter-sm justify-around ">
+      <div class="col">
+        <q-icon
+          name="keyboard_arrow_left"
+          color="white"
+          size="30px"
+          @click="back"
+          v-show="!ehPrimeiraQuestao"
+        />
+      </div>
       <transition
         appear
         :duration="{ enter: 300, leave: 300 }"
@@ -31,7 +40,7 @@
         enter-active-class="animated fadeIn"
         leave-active-class="animated fadeOut"
       >
-        <div class="col-auto">
+        <div class="col">
           <q-btn
             style="height: 41px"
             color="primary"
@@ -43,25 +52,14 @@
         </div>
       </transition>
 
-      <div class="col">
-        <q-btn
-          color="accent"
-          style="height: 41px"
-          @click="back"
-          v-show="!ehPrimeiraQuestao"
-        >
-          <q-icon name="arrow_back" />
-        </q-btn>
-      </div>
-      <div class="col-auto">
-        <q-btn
-          color="accent"
-          style="height: 41px"
+      <div class="col text-right">
+        <q-icon
+          name="keyboard_arrow_right"
+          color="white"
+          size="30px"
           @click="next"
           v-show="!ehUltimaQuestao"
-        >
-          <q-icon name="arrow_forward" />
-        </q-btn>
+        />
       </div>
     </div>
     <q-dialog
@@ -127,6 +125,7 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+    <dialog-tutorial />
   </q-page>
 
   <q-page v-else-if="!loading">
@@ -139,13 +138,14 @@ import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
 import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
+import DialogTutorial from 'components/DialogTutorial'
 // import Vivus from 'vivus'
 export default {
   created () {
     this.getQuestions()
   },
   components: {
-    FormQuestionario, DivSemQuestoesCadastradas
+    FormQuestionario, DivSemQuestoesCadastradas, DialogTutorial
   },
   data: () => ({
     respostaCorreta: { icon: 'thumb_up', color: 'positive' },

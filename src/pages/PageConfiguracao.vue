@@ -85,7 +85,7 @@ export default {
   methods: {
     ...mapActions(['updateUser']),
     update () {
-      // this.updateUser()
+      this.updateUser(this.$data)
       console.log('123')
     }
   }
