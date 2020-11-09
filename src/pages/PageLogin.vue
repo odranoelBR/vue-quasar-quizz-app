@@ -79,6 +79,9 @@ export default {
           let usuario = {
             nome: this.nome,
             email: this.email,
+            somErro: false,
+            tutorial: true,
+            maoDireita: true,
             data: new Date()
           }
           db.collection('usuarios').add(usuario)

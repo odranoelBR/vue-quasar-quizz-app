@@ -8,7 +8,9 @@
         @click="goHome"
       />
     </div>
+
     <div class="col">
+      <span>{{ process.env.DEV }}</span>
       <span class="text-white text-h6"> {{ nome }} </span>
       <span :class="className">{{ nivelWrited }}</span>
     </div>

@@ -1,5 +1,9 @@
 export default {
-  usuario: {},
+  usuario: {
+    somErro: false,
+    tutorial: false,
+    maoDireita: true
+  },
   modulos: [],
   loading: false
 }

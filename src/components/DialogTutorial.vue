@@ -57,11 +57,21 @@
             </div>
           </div>
         </transition>
-        Arraste o dedo na tela para passar questões.
+        <span
+          class="text-primary"
+          style="font-size: 17px"
+        >
+          Arraste o dedo para passar questões.
+        </span>
       </q-card-section>
-      <q-card-section>
-        Você pode desligar este dica nas configurações!
-      </q-card-section>
+
+      <q-card-actions
+        style="margin-top:12vw"
+        class="text-weight-thin"
+      >
+        <span>Você pode desligar estas dicas nas </span>
+        <span class="text-bold q-pl-xs"> configurações!</span>
+      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
@@ -73,9 +83,9 @@ export default {
       this.show = !this.show
     }, 1000)
 
-    setInterval(() => {
-      this.dialog = false
-    }, 5000)
+    // setInterval(() => {
+    //   this.dialog = false
+    // }, 5000)
   },
   data: () => ({
     dialog: true,
@@ -89,7 +99,5 @@ export default {
   right: 0;
   bottom: 76px;
   left: 0;
-}
-#drag-hand {
 }
 </style>

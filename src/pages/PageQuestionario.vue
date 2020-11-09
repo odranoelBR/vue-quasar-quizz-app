@@ -125,7 +125,7 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <dialog-tutorial />
+    <dialog-tutorial v-if="usuario.tutorial" />
   </q-page>
 
   <q-page v-else-if="!loading">
@@ -171,7 +171,7 @@ export default {
   },
   computed: {
     ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'cadernoEstaFinalizado']),
-    ...mapFields(['loading']),
+    ...mapFields(['loading', 'usuario']),
     ...mapFields('questionario', ['configQuestionary', 'answers', 'choosedQuestionary', 'urlForImage']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
@@ -215,10 +215,18 @@ export default {
       this.respostaAnalisada = true
       this.disableAnalise = true
       let answer = this.getCurrentQuestion.respostas.find(resposta => resposta.selecionada)
+      this.emiteSom(answer)
       this.updateAnswer({ idQuestao: this.getCurrentQuestion.id, letra: answer.letra, modulo: this.getCurrentQuestion.modulo, correta: answer.correta })
       this.$q.notify({
         ...{ position: 'bottom-right', classes: 'notify-questionario', group: false }, ...(answer.correta ? this.respostaCorreta : this.respostaErrada)
       })
+    },
+    emiteSom (answer) {
+      if (this.usuario.somErro && !answer.correta) {
+        // eslint-disable-next-line no-new
+        let audio = new Audio('statics/erro.mp3')
+        audio.play()
+      }
     },
     showBizu () {
       this.$q.notify({

@@ -9,6 +9,7 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev",
+    "build-teste": "quasar build TESTE=true",
     "build": "quasar build",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",

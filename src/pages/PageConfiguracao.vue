@@ -42,6 +42,38 @@
 
     <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
+        Dicas e tutoriais ?
+      </div>
+    </div>
+
+    <div class="row q-pb-xl items-center">
+      <div class="col">
+        <q-btn
+          class="fit"
+          color="primary"
+          @click="tutorial = false"
+          :outline="tutorial"
+        >
+          Não
+        </q-btn>
+      </div>
+      <div class="col ">
+        <arrow-animated :toggle="!tutorial" />
+      </div>
+      <div class="col">
+        <q-btn
+          class="fit"
+          color="accent"
+          @click="tutorial = true"
+          :outline="!tutorial"
+        >
+          Sim
+        </q-btn>
+      </div>
+    </div>
+
+    <div class="row q-pb-xs text-weight-thin">
+      <div class="col letter-space">
         Qual sua mão principal ?
       </div>
     </div>
@@ -70,23 +102,23 @@ import ArrowAnimated from 'components/ArrowAnimated.vue'
 import SvgLeftHand from 'components/SvgLeftHand.vue'
 import SvgRightHand from 'components/SvgRightHand.vue'
 import { mapActions } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
     ArrowAnimated, SvgLeftHand, SvgRightHand
   },
-  data: () => ({
-    somErro: false,
-    maoDireita: true
-  }),
+  computed: {
+    ...mapFields(['usuario.somErro', 'usuario.maoDireita', 'usuario.tutorial'])
+  },
   created () {
-    this.$watch('somErro', () => this.update())
-    this.$watch('maoDireita', () => this.update())
+    this.$watch('somErro', () => this.update({ somErro: this.somErro }))
+    this.$watch('maoDireita', () => this.update({ maoDireita: this.maoDireita }))
+    this.$watch('tutorial', () => this.update({ tutorial: this.tutorial }))
   },
   methods: {
     ...mapActions(['updateUser']),
-    update () {
-      this.updateUser(this.$data)
-      console.log('123')
+    update (data) {
+      this.updateUser(data)
     }
   }
 
