@@ -13,6 +13,7 @@ export default {
     this.getModulos()
     this.getAnswers()
   },
+
   methods: {
     ...mapActions(['getModulos']),
     ...mapActions('questionario', ['getAnswers'])

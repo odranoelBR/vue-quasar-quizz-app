@@ -3,6 +3,12 @@
     view="lHh Lpr lFf"
     style="background-color: #1D2833"
   >
+    <div
+      class="row text-center"
+      v-if="envDev"
+    >
+      <span class="text-white fixed-top">Ambiente de {{ envDev ? 'TESTE' : '' }}</span>
+    </div>
     <div class="q-pa-lg">
       <header-questionario v-if="questionario" />
       <app-header v-else />
@@ -54,6 +60,9 @@ export default {
     AppHeader, AppFooter, HeaderQuestionario, FooterQuestionario
   },
   computed: {
+    envDev () {
+      return process.env.DEV
+    },
     questionario () {
       return this.$route.path.includes('modulo/') || this.$route.path === '/questionario'
     }
