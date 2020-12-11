@@ -167,6 +167,12 @@ export default {
       if (this.cadernoEstaFinalizado) {
         this.dialog = true
       }
+    },
+    getCurrentQuestion: {
+      deep: true,
+      handler () {
+        this.getImagem()
+      }
     }
   },
   computed: {

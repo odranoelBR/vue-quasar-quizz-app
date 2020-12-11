@@ -80,7 +80,7 @@ export default {
             nome: this.nome,
             email: this.email,
             somErro: false,
-            tutorial: true,
+            tutorial: false,
             maoDireita: true,
             data: new Date()
           }

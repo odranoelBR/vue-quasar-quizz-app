@@ -53,7 +53,6 @@ import AppHeader from 'layouts/AppHeader.vue'
 import AppFooter from 'layouts/AppFooter.vue'
 import HeaderQuestionario from 'components/HeaderQuestionario.vue'
 import FooterQuestionario from 'components/FooterQuestionario.vue'
-
 export default {
   name: 'Layout',
   components: {
@@ -61,7 +60,7 @@ export default {
   },
   computed: {
     envDev () {
-      return process.env.DEV
+      return process.env.DEVELOPMENT
     },
     questionario () {
       return this.$route.path.includes('modulo/') || this.$route.path === '/questionario'

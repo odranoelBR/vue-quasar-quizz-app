@@ -20,10 +20,10 @@
         active-class="my-menu-link"
       >
         <q-item-section avatar>
-          <q-icon name="mdi-help-circle-outline" />
+          <q-icon name="leaderboard" />
         </q-item-section>
 
-        <q-item-section>Ajuda</q-item-section>
+        <q-item-section>Estatisticas</q-item-section>
       </q-item>
       <q-item
         clickable

@@ -1,6 +1,5 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
-console.log(process.env.DEV)
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)

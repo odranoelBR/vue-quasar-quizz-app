@@ -11,11 +11,8 @@
       "scripts"
     ]
   },
-  "@quasar/dotenv": {
-    "env_development": ".env.test",
-    "env_production": ".env.production",
+  "@quasar/qenv": {
     "common_root_object": "none",
-    "create_env_files": true,
-    "add_env_to_gitignore": true
+    "add_qenv_to_gitignore": false
   }
 }

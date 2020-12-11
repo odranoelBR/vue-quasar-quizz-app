@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="row q-pb-xs text-weight-thin">
+    <!-- <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
         Qual sua mão principal ?
       </div>
@@ -94,18 +94,18 @@
       >
         <svg-right-hand :choosed-hand="maoDireita" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import ArrowAnimated from 'components/ArrowAnimated.vue'
-import SvgLeftHand from 'components/SvgLeftHand.vue'
-import SvgRightHand from 'components/SvgRightHand.vue'
+// import SvgLeftHand from 'components/SvgLeftHand.vue'
+// import SvgRightHand from 'components/SvgRightHand.vue'
 import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
-    ArrowAnimated, SvgLeftHand, SvgRightHand
+    ArrowAnimated// , SvgLeftHand, SvgRightHand
   },
   computed: {
     ...mapFields(['usuario.somErro', 'usuario.maoDireita', 'usuario.tutorial'])
