@@ -9,7 +9,8 @@ const routes = [
       { path: '/configuracoes', component: () => import('pages/PageConfiguracao.vue') },
       { path: '/historico', component: () => import('pages/PageHistorico.vue') },
       { path: '/questionario', component: () => import('pages/PageQuestionario.vue') },
-      { path: '/minha-conta', component: () => import('pages/PageMinhaConta.vue') }
+      { path: '/minha-conta', component: () => import('pages/PageMinhaConta.vue') },
+      { path: '/estatistica', component: () => import('pages/PageEstatistica.vue') }
     ]
   },
   {

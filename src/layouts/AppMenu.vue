@@ -23,7 +23,9 @@
           <q-icon name="leaderboard" />
         </q-item-section>
 
-        <q-item-section>Estatisticas</q-item-section>
+        <q-item-section @click="goEstatistica">
+          Estatisticas
+        </q-item-section>
       </q-item>
       <q-item
         clickable
@@ -63,6 +65,9 @@ export default {
     },
     goMinhaConta () {
       this.$router.push('minha-conta')
+    },
+    goEstatistica () {
+      this.$router.push('estatistica')
     }
   }
 }
