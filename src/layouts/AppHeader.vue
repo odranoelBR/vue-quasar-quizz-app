@@ -9,7 +9,7 @@
         >
       </div>
       <div class="col-auto">
-        {{ getUsuario.nome }}
+        {{ getUser.nome }}
       </div>
       <div class="col text-left">
         <q-icon
@@ -42,7 +42,6 @@
 <script>
 import AppMenu from 'layouts/AppMenu'
 import { mapGetters } from 'vuex'
-// import SearchMenu from 'components/SearchMenu'
 export default {
   data: () => ({
     menuOpen: false,
@@ -53,7 +52,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(['getUsuario']),
+    ...mapGetters(['getUser']),
     arrowIcon () {
       return `mdi-arrow-${this.menuOpen ? 'up' : 'down'}`
     },

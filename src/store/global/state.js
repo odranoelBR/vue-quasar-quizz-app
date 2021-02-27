@@ -1,8 +1,8 @@
 export default {
-  usuario: {
-    somErro: false,
+  user: {
+    errorSound: false,
     tutorial: false,
-    maoDireita: true
+    rightHand: true
   },
   modulos: [],
   loading: false

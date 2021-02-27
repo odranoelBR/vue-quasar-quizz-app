@@ -10,31 +10,31 @@
       >
         <q-card-section>
           <div class="text-h6 text-grey-6 text-center">
-            Dados da conta
+            {{ $t('messages.myAcc') }}
           </div>
         </q-card-section>
 
         <div class="row q-pa-md justify-center q-pt-md">
           <q-input
-            v-model="usuario.nome"
-            placeholder="Nome"
+            v-model="user.nome"
+            :placeholder="$t('words.name')"
             class="full-width"
             type="text"
             lazy-rules
             :rules="[
-              val => val !== null && val !== '' || 'Preencha o nome',
+              val => val !== null && val !== '' || $t('messages.validationFillName')
             ]"
           />
         </div>
         <div class="row q-pa-md justify-center">
           <q-input
-            v-model="usuario.email"
-            placeholder="Email"
+            v-model="user.email"
+            :placeholder="$t('words.email')"
             class="full-width"
             disable
             type="email"
             :rules="[
-              val => val !== null && val !== '' || 'Preencha o email',
+              val => val !== null && val !== '' || $t('messages.validationFillEmail')
             ]"
           />
         </div>
@@ -43,7 +43,7 @@
             type="submit"
             color="primary"
           >
-            Atualizar
+            {{ $t('words.update') }}
           </q-btn>
         </div>
       </q-form>
@@ -57,15 +57,15 @@ import { Notify } from 'quasar'
 
 export default {
   data: () => ({
-    usuario: {}
+    user: {}
   }),
   computed: {
-    ...mapGetters(['getUsuario'])
+    ...mapGetters(['getUser'])
   },
   watch: {
-    getUsuario: {
+    getUser: {
       handler () {
-        this.usuario = this.getUsuario
+        this.user = this.getUser
       },
       immediate: true
     }
@@ -77,14 +77,14 @@ export default {
 
       this.$refs.form.validate().then(success => {
         if (success) {
-          var usuarioRef = db.collection('usuarios').doc(this.getUsuario.id)
+          var usuarioRef = db.collection('usuarios').doc(this.getUser.id)
 
           usuarioRef.update({
-            nome: vm.usuario.nome
+            nome: vm.user.nome
           })
             .then(function (docRef) {
-              vm.setUsuario(vm.usuario)
-              vm.$q.localStorage.set('usuario', vm.usuario)
+              vm.setUsuario(vm.user)
+              vm.$q.localStorage.set('usuario', vm.user)
               Notify.create({ message: 'Atualizado!', color: 'positive' })
             })
             .catch(function () {

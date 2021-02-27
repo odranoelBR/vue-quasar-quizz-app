@@ -1,6 +1,6 @@
 <template>
   <div class="q-mt-sm text-white">
-    <span class="text-white text-italic">Configurações</span>
+    <span class="text-white text-italic">{{ $t('words.configurations') }}</span>
 
     <q-separator
       color="accent"
@@ -10,7 +10,7 @@
 
     <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
-        Emitir som ao errar ?
+        {{ $t('messages.soundOnError') }}
       </div>
     </div>
 
@@ -19,30 +19,30 @@
         <q-btn
           class="fit"
           color="primary"
-          @click="somErro = false"
-          :outline="somErro"
+          @click="errorSound = false"
+          :outline="errorSound"
         >
-          Não
+          {{ $t('words.no') }}
         </q-btn>
       </div>
       <div class="col ">
-        <arrow-animated :toggle="!somErro" />
+        <arrow-animated :toggle="!errorSound" />
       </div>
       <div class="col">
         <q-btn
           class="fit"
           color="accent"
-          @click="somErro = true"
-          :outline="!somErro"
+          @click="errorSound = true"
+          :outline="!errorSound"
         >
-          Sim
+          {{ $t('words.yes') }}
         </q-btn>
       </div>
     </div>
 
     <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
-        Dicas e tutoriais ?
+        {{ $t('messages.tipsTutorials') }}
       </div>
     </div>
 
@@ -54,7 +54,7 @@
           @click="tutorial = false"
           :outline="tutorial"
         >
-          Não
+          {{ $t('words.no') }}
         </q-btn>
       </div>
       <div class="col ">
@@ -67,7 +67,7 @@
           @click="tutorial = true"
           :outline="!tutorial"
         >
-          Sim
+          {{ $t('words.yes') }}
         </q-btn>
       </div>
     </div>
@@ -108,11 +108,11 @@ export default {
     ArrowAnimated// , SvgLeftHand, SvgRightHand
   },
   computed: {
-    ...mapFields(['usuario.somErro', 'usuario.maoDireita', 'usuario.tutorial'])
+    ...mapFields(['user.errorSound', 'user.rightHand', 'user.tutorial'])
   },
   created () {
-    this.$watch('somErro', () => this.update({ somErro: this.somErro }))
-    this.$watch('maoDireita', () => this.update({ maoDireita: this.maoDireita }))
+    this.$watch('errorSound', () => this.update({ errorSound: this.errorSound }))
+    this.$watch('rightHand', () => this.update({ rightHand: this.rightHand }))
     this.$watch('tutorial', () => this.update({ tutorial: this.tutorial }))
   },
   methods: {

@@ -14,21 +14,21 @@
       <q-route-tab
         name="alarms"
         icon="alarm"
-        label="Histórico"
+        :label="$t('historic')"
         to="historico"
         exact
       />
       <q-route-tab
         name="mails"
         icon="mail"
-        label="Modulos"
+        :label="$t('modules')"
         to="/"
         exact
       />
       <q-route-tab
         name="configs"
         icon="mdi-settings"
-        label="Config."
+        :label="$t('config.')"
         to="configuracoes"
         exact
       />
@@ -40,13 +40,7 @@
 export default {
   data: () => ({
     tab: 'mails'
-  }),
-  computed: {
-  },
-  components: {
-  },
-  methods: {
-  }
+  })
 }
 </script>
 

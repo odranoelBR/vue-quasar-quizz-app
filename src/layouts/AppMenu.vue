@@ -11,7 +11,7 @@
       padding
     >
       <q-item-label header>
-        Menu
+        {{ $t('words.menu') }}
       </q-item-label>
 
       <q-item
@@ -23,8 +23,8 @@
           <q-icon name="leaderboard" />
         </q-item-section>
 
-        <q-item-section @click="goEstatistica">
-          Estatisticas
+        <q-item-section @click="goStatistics">
+          {{ $t('words.statistics') }}
         </q-item-section>
       </q-item>
       <q-item
@@ -36,8 +36,8 @@
           <q-icon name="mdi-account-circle-outline" />
         </q-item-section>
 
-        <q-item-section @click="goMinhaConta">
-          Minha conta
+        <q-item-section @click="goMyAccount">
+          {{ $t('messages.myAcc') }}
         </q-item-section>
       </q-item>
     </q-list>
@@ -63,10 +63,10 @@ export default {
     beforeHide () {
       this.$emit('hide')
     },
-    goMinhaConta () {
+    goMyAccount () {
       this.$router.push('minha-conta')
     },
-    goEstatistica () {
+    goStatistics () {
       this.$router.push('estatistica')
     }
   }
