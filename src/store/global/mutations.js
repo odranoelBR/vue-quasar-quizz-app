@@ -1,12 +1,12 @@
-import types from './types'
+import { SET_LOADING, SET_USER, SET_MODULES } from './types'
 export default {
-  [types.SET_LOADING] (state, payload) {
+  [SET_LOADING] (state, payload) {
     state.loading = payload
   },
-  setUsuario (state, payload) {
-    state.usuario = payload
+  [SET_USER] (state, payload) {
+    state.user = payload
   },
-  setModulos (state, payload) {
-    state.modulos = payload
+  [SET_MODULES] (state, payload) {
+    state.modules = payload
   }
 }

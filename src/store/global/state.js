@@ -4,6 +4,6 @@ export default {
     tutorial: false,
     rightHand: true
   },
-  modulos: [],
+  modules: [],
   loading: false
 }

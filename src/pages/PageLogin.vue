@@ -70,7 +70,7 @@ export default {
     nome: ''
   }),
   methods: {
-    ...mapMutations(['setUsuario']),
+    ...mapMutations(['setUser']),
     saveUser () {
       let vm = this
 
@@ -87,7 +87,7 @@ export default {
           db.collection('usuarios').add(usuario)
             .then(function (docRef) {
               usuario.id = docRef.id
-              vm.setUsuario(usuario)
+              vm.setUser(usuario)
               vm.$q.localStorage.set('usuario', usuario)
 
               vm.$router.push('/')

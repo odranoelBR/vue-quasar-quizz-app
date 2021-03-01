@@ -71,7 +71,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUsuario']),
+    ...mapMutations(['SET_USER']),
     saveUser () {
       let vm = this
 
@@ -83,7 +83,7 @@ export default {
             nome: vm.user.nome
           })
             .then(function (docRef) {
-              vm.setUsuario(vm.user)
+              vm.setUser(vm.user)
               vm.$q.localStorage.set('usuario', vm.user)
               Notify.create({ message: 'Atualizado!', color: 'positive' })
             })

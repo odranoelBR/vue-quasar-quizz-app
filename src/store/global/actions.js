@@ -1,13 +1,13 @@
 import { db } from 'boot/firebase'
 import { Notify } from 'quasar'
 import { i18n } from 'src/boot/i18n'
-
+import { SET_USER, SET_MODULES } from './types'
 export default {
   getModulos ({ commit }) {
     db.collection('modulos')
       .get()
       .then(snapshot => {
-        commit('setModulos', snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+        commit(SET_MODULES, snapshot.empty ? [] : snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })))
       })
   },
   getUser ({ commit }, id) {
@@ -15,7 +15,7 @@ export default {
       .doc(id)
       .get()
       .then(snapshot => {
-        commit('setUsuario', { ...snapshot.data(), id })
+        commit(SET_USER, { ...snapshot.data(), id })
       })
   },
   updateUser ({ rootState, commit }, payload) {

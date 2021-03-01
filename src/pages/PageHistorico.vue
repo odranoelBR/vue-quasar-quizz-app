@@ -2,7 +2,7 @@
   <div class="column q-gutter-sm">
     <div
       class="col-6"
-      v-for="(modulo, index) in modulosComRespostas"
+      v-for="(modulo, index) in modulesWithResponses"
       :key="index"
     >
       <q-card>
@@ -50,7 +50,7 @@ export default {
   computed: {
     ...mapFields('questionary', ['answers']),
     ...mapGetters(['getModulos']),
-    modulosComRespostas () {
+    modulesWithResponses () {
       return this.getModulos.map(modulo => ({
         nome: modulo.nome,
         answers: this.answers.filter(answer => answer.modulo.includes(modulo.id))
