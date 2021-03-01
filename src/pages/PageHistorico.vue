@@ -43,15 +43,14 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
     ...mapFields('questionary', ['answers']),
-    ...mapGetters(['getModulos']),
+    ...mapFields(['modules']),
     modulesWithResponses () {
-      return this.getModulos.map(modulo => ({
+      return this.modules.map(modulo => ({
         nome: modulo.nome,
         answers: this.answers.filter(answer => answer.modulo.includes(modulo.id))
       }))

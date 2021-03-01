@@ -9,7 +9,7 @@
         >
       </div>
       <div class="col-auto">
-        {{ getUser.nome }}
+        {{ user.nome }}
       </div>
       <div class="col text-left">
         <q-icon
@@ -41,7 +41,7 @@
 </template>
 <script>
 import AppMenu from 'layouts/AppMenu'
-import { mapGetters } from 'vuex'
+import { mapFields } from 'vuex-map-fields'
 export default {
   data: () => ({
     menuOpen: false,
@@ -52,7 +52,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters(['getUser']),
+    ...mapFields(['user']),
     arrowIcon () {
       return `mdi-arrow-${this.menuOpen ? 'up' : 'down'}`
     },

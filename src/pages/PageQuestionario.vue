@@ -101,7 +101,7 @@
           </div>
           <div class="text-h6">
             Foi <span class="text-h5 text-accent">{{ respostasCorretas }}</span> acerto
-            de <span class="text-h5 text-accent">{{ configQuestionary.qtdQuestoes }}</span>
+            de <span class="text-h5 text-accent">{{ configQuestionary.questionsSize }}</span>
           </div>
         </q-card-section>
 
@@ -176,9 +176,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'cadernoEstaFinalizado']),
-    ...mapFields(['loading', 'usuario']),
-    ...mapFields('questionario', ['configQuestionary', 'answers', 'choosedQuestionary', 'urlForImage']),
+    ...mapGetters('questionary', ['getCurrentQuestion', 'ehUltimaQuestao', 'ehPrimeiraQuestao', 'cadernoEstaFinalizado']),
+    ...mapFields(['loading', 'user']),
+    ...mapFields('questionary', ['configQuestionary', 'answers', 'choosedQuestionary', 'urlForImage']),
     algumaRespostaSelecionada () {
       return this.getCurrentQuestion.respostas.some(resposta => resposta.selecionada)
     },
@@ -189,12 +189,12 @@ export default {
       return this.answers.filter(modulo => modulo.correta).length
     },
     porcentagemAcertos () {
-      return (this.respostasCorretas / this.configQuestionary.qtdQuestoes * 100)
+      return (this.respostasCorretas / this.configQuestionary.questionsSize * 100)
         .toString().substr(0, 5)
     }
   },
   methods: {
-    ...mapActions('questionario', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'getImage']),
+    ...mapActions('questionary', ['getQuestions', 'updateAnswer', 'nextQuestion', 'backQuestion', 'updateCurrentQuestionChoice', 'resetChoices', 'getImage']),
     setDisableAnalise (flag) { this.disableAnalise = flag },
     setRespostaAnalisada (flag) { this.respostaAnalisada = flag },
     reset (respostaIndex) {

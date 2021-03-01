@@ -10,12 +10,12 @@ import { mapActions } from 'vuex'
 export default {
   name: 'App',
   created () {
-    this.getModulos()
+    this.getModules()
     this.getAnswers()
   },
 
   methods: {
-    ...mapActions(['getModulos']),
+    ...mapActions(['getModules']),
     ...mapActions('questionary', ['getAnswers'])
   }
 }

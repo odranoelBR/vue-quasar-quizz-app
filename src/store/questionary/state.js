@@ -1,10 +1,10 @@
 export const getDefaultConfigQuestionary = () => ({
-  cronometro: false,
+  chronometer: false,
   correcaoFinal: false,
-  qtdQuestoes: 10,
-  nivel: 1,
-  repetirQuestoes: false,
-  apagarRespostas: false,
+  questionsSize: 10,
+  level: 1,
+  repeatQuestions: false,
+  eraseQuestions: false,
   running: false
 })
 export const state = {

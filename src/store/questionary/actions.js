@@ -1,6 +1,5 @@
 import types from './types'
 import { filterAnswersByModuloId, resetSelectedChoiceOfQuestions, filterQuestionsByConfig } from './helper'
-import globalTypes from '../global/types'
 import { db, storage } from 'boot/firebase'
 import { getDefaultConfigQuestionary } from './state'
 import { LocalStorage } from 'quasar'
@@ -36,14 +35,14 @@ export default {
       })
   },
   getQuestions ({ state, commit, dispatch }) {
-    if (state.configQuestionary.apagarRespostas) {
+    if (state.configQuestionary.eraseQuestions) {
       commit(types.SET_ANSWERS, [])
       dispatch('deleteAnswers')
     }
-    commit(globalTypes.SET_LOADING, true, { root: true })
+    commit(types.SET_LOADING, true, { root: true })
 
     db.collection('perguntas')
-      .where('nivel', '==', state.configQuestionary.nivel)
+      .where('nivel', '==', state.configQuestionary.level)
       .where('modulo', '==', `modulos/${state.choosedQuestionary.id}`)
       .get()
       .then(snapshot => {
@@ -53,11 +52,11 @@ export default {
         data = resetSelectedChoiceOfQuestions(data)
 
         let configQuestionary = state.configQuestionary
-        configQuestionary.qtdQuestoes = data.length
+        configQuestionary.questionsSize = data.length
         commit(types.SET_CONFIG_QUESTIONARY, configQuestionary)
         commit(types.SET_QUESTIONS, data)
       })
-      .then(() => { commit(globalTypes.SET_LOADING, false, { root: true }) })
+      .then(() => { commit(types.SET_LOADING, false, { root: true }) })
   },
   nextQuestion ({ commit, state }) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return

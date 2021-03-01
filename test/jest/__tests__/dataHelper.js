@@ -1,7 +1,7 @@
 const questionOne = {
   id: 'CVAKZNtLrxDaaMNWa9v8',
   modulo: 'modulos/Jom34TmjNRvbvYEwGo5M',
-  nivel: 1,
+  level: 1,
   referencia: 'art. 362',
   respostas: [
     { correta: false, letra: 'a', texto: 'a avó materna' },

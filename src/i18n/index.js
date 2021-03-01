@@ -12,7 +12,10 @@ export default {
       name: 'Name',
       email: 'Email',
       update: 'Update',
-      question: 'Question | Questions'
+      question: 'Question | Questions',
+      basic: 'Basic',
+      advanced: 'advanced',
+      level: 'Level'
     },
     messages: {
       soundOnError: 'Sound when you miss ?',
@@ -20,7 +23,9 @@ export default {
       myAcc: 'My Account',
       validationFillName: 'Fill in the name',
       validationFillEmail: 'Fill in the email',
-      parcentOfQuestions: '% of Questions'
+      parcentOfQuestions: '% of Questions',
+      eraseSavedResponses: 'Erase saved responses from this module ?',
+      whatHand: 'What is your main hand ?'
     }
   },
   'pt-BR': {
@@ -36,7 +41,10 @@ export default {
       name: 'Nome',
       email: 'Email',
       update: 'Atualizar',
-      question: 'Questão | Questões'
+      question: 'Questão | Questões',
+      basic: 'Básico',
+      advanced: 'Avançado',
+      level: 'Nível'
     },
     messages: {
       soundOnError: 'Emitir som ao erra ?',
@@ -44,7 +52,10 @@ export default {
       myAcc: 'Minha Conta',
       validationFillName: 'Preencha o nome',
       validationFillEmail: 'Preencha o email',
-      parcentOfQuestions: '% de Questões'
+      parcentOfQuestions: '% de Questões',
+      eraseSavedResponses: 'Apagar respostas salvas deste modulo ?',
+      whatHand: 'Qual sua mão principal ?'
+
     }
   }
 }

@@ -6,9 +6,9 @@ let filterAnswersByModuloId = (answers, moduloId) => {
 }
 
 let filterQuestionsByConfig = (questions, answers, config) => {
-  let data = config.repetirQuestoes ? questions : questions.filter(question => !answers.includes(question.id))
+  let data = config.repeatQuestions ? questions : questions.filter(question => !answers.includes(question.id))
 
-  return data.slice(0, config.qtdQuestoes)
+  return data.slice(0, config.questionsSize)
 }
 
 let resetSelectedChoiceOfQuestions = (questions) => {

@@ -12,5 +12,5 @@ export function cadernoEstaFinalizado (state) {
   return state.questions
     .filter(question => state.answers
       .some(answer => answer.idQuestao === question.id)
-    ).length === state.configQuestionary.qtdQuestoes
+    ).length === state.configQuestionary.questionsSize
 }

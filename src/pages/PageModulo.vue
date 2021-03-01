@@ -9,7 +9,7 @@
 
     <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
-        Questões
+        {{ $tc('words.question', 2) }}
       </div>
     </div>
     <div class="row q-pb-xl items-center">
@@ -18,25 +18,25 @@
           class="fit add-remove"
           color="primary"
           icon="remove"
-          @click="qtdQuestoes--"
+          @click="questionsSize--"
         />
       </div>
       <div class="col text-center text-h3">
-        {{ qtdQuestoes }}
+        {{ questionsSize }}
       </div>
       <div class="col">
         <q-btn
           class="fit add-remove"
           color="accent"
           icon="add"
-          @click="qtdQuestoes++"
+          @click="questionsSize++"
         />
       </div>
     </div>
 
     <div class="row q-pb-sm text-weight-thin">
       <div class="col letter-space">
-        Nível
+        {{ $t('words.level') }}
       </div>
     </div>
     <div class="row q-pb-xl items-center">
@@ -44,30 +44,30 @@
         <q-btn
           class="fit"
           color="primary"
-          @click="nivel = 1"
-          :outline="nivel == 2"
+          @click="level = 1"
+          :outline="level == 2"
         >
-          Básico
+          {{ $t('words.basic') }}
         </q-btn>
       </div>
       <div class="col ">
-        <arrow-animated :toggle="nivel === 1" />
+        <arrow-animated :toggle="level === 1" />
       </div>
       <div class="col">
         <q-btn
           class="fit"
           color="accent"
-          @click="nivel = 2"
-          :outline="nivel == 1"
+          @click="level = 2"
+          :outline="level == 1"
         >
-          Avançado
+          {{ $t('words.advanced') }}
         </q-btn>
       </div>
     </div>
 
     <div class="row q-pb-sm text-weight-thin">
       <div class="col letter-space">
-        Apagar respostas salvas deste modulo ?
+        {{ $t('messages.eraseSavedResponses') }}
       </div>
     </div>
     <div class="row items-center justify-center">
@@ -75,23 +75,23 @@
         <q-btn
           class="fit"
           color="primary"
-          @click="apagarRespostas = false"
-          :outline="apagarRespostas"
+          @click="eraseQuestions = false"
+          :outline="eraseQuestions"
         >
-          Não
+          {{ $t('words.no') }}
         </q-btn>
       </div>
       <div class="col-4">
-        <arrow-animated :toggle="!apagarRespostas" />
+        <arrow-animated :toggle="!eraseQuestions" />
       </div>
       <div class="col-4">
         <q-btn
           class="fit"
-          @click="apagarRespostas = true"
+          @click="eraseQuestions = true"
           color="accent"
-          :outline="!apagarRespostas"
+          :outline="!eraseQuestions"
         >
-          Sim
+          {{ $t('words.yes') }}
         </q-btn>
       </div>
     </div>
@@ -110,7 +110,7 @@ export default {
     this.resetState()
   },
   computed: {
-    ...mapFields('questionary', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes', 'apagarRespostas']
+    ...mapFields('questionary', ['chronometer', 'correcaoFinal', 'questionsSize', 'level', 'repeatQuestions', 'eraseQuestions']
       .map(field => `configQuestionary.${field}`))
   },
   methods: {

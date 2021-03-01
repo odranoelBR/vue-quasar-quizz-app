@@ -74,7 +74,7 @@
           </div>
           <div
             class="col-4"
-            v-if="cronometro"
+            v-if="chronometer"
           >
             <stop-watch :running="running" />
           </div>
@@ -107,7 +107,7 @@ export default {
   computed: {
     ...mapGetters('questionary', ['getCurrentQuestion']),
     ...mapFields('questionary', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
-      .concat(['nivel', 'cronometro', 'running']
+      .concat(['level', 'chronometer', 'running']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {
       return this.currentQuestionIndex + 1

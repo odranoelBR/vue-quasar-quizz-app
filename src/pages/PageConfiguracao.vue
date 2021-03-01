@@ -19,7 +19,7 @@
         <q-btn
           class="fit"
           color="primary"
-          @click="errorSound = false"
+          @click="update({errorSound: false})"
           :outline="errorSound"
         >
           {{ $t('words.no') }}
@@ -32,7 +32,7 @@
         <q-btn
           class="fit"
           color="accent"
-          @click="errorSound = true"
+          @click="update({errorSound: true})"
           :outline="!errorSound"
         >
           {{ $t('words.yes') }}
@@ -51,7 +51,7 @@
         <q-btn
           class="fit"
           color="primary"
-          @click="tutorial = false"
+          @click="update({tutorial: false})"
           :outline="tutorial"
         >
           {{ $t('words.no') }}
@@ -64,7 +64,7 @@
         <q-btn
           class="fit"
           color="accent"
-          @click="tutorial = true"
+          @click="update({tutorial: true})"
           :outline="!tutorial"
         >
           {{ $t('words.yes') }}
@@ -72,48 +72,43 @@
       </div>
     </div>
 
-    <!-- <div class="row q-pb-xs text-weight-thin">
+    <div class="row q-pb-xs text-weight-thin">
       <div class="col letter-space">
-        Qual sua mão principal ?
+        {{ $t('messages.whatHand') }}
       </div>
     </div>
 
     <div class="row q-pb-xl items-center justitfy-center">
       <div
         class="col text-center"
-        @click="maoDireita = false"
+        @click="update({rightHand: false})"
       >
-        <svg-left-hand :choosed-hand="!maoDireita" />
+        <svg-left-hand :choosed-hand="!rightHand" />
       </div>
       <div class="col text-center">
-        <arrow-animated :toggle="!maoDireita" />
+        <arrow-animated :toggle="!rightHand" />
       </div>
       <div
         class="col text-center"
-        @click="maoDireita = true"
+        @click="update({rightHand: true})"
       >
-        <svg-right-hand :choosed-hand="maoDireita" />
+        <svg-right-hand :choosed-hand="rightHand" />
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
 import ArrowAnimated from 'components/ArrowAnimated.vue'
-// import SvgLeftHand from 'components/SvgLeftHand.vue'
-// import SvgRightHand from 'components/SvgRightHand.vue'
+import SvgLeftHand from 'components/SvgLeftHand.vue'
+import SvgRightHand from 'components/SvgRightHand.vue'
 import { mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
-    ArrowAnimated// , SvgLeftHand, SvgRightHand
+    ArrowAnimated, SvgLeftHand, SvgRightHand
   },
   computed: {
     ...mapFields(['user.errorSound', 'user.rightHand', 'user.tutorial'])
-  },
-  created () {
-    this.$watch('errorSound', () => this.update({ errorSound: this.errorSound }))
-    this.$watch('rightHand', () => this.update({ rightHand: this.rightHand }))
-    this.$watch('tutorial', () => this.update({ tutorial: this.tutorial }))
   },
   methods: {
     ...mapActions(['updateUser']),

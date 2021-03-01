@@ -14,16 +14,16 @@
       <div class="row q-gutter-lg">
         <div
           class="col-3"
-          v-for="(modulo, index) in modulosMilitar"
+          v-for="(module, index) in modulosMilitar"
           :key="index"
         >
           <q-btn
             no-caps
-            :to="`modulo/${modulo.id}`"
+            :to="`modulo/${module.id}`"
             color="primary"
-            @click="choose(modulo)"
+            @click="choose(module)"
           >
-            <span class="text-weight-light">{{ modulo.nome }}</span>
+            <span class="text-weight-light">{{ module.nome }}</span>
           </q-btn>
         </div>
       </div>
@@ -39,16 +39,16 @@
       <div class="row q-gutter-lg">
         <div
           class="col-3"
-          v-for="(modulo, index) in modulosSVA"
+          v-for="(module, index) in modulosSVA"
           :key="index"
         >
           <q-btn
-            :to="`modulo/${modulo.id}`"
+            :to="`modulo/${module.id}`"
             class="fit"
             color="primary"
-            @click="choose(modulo)"
+            @click="choose(module)"
           >
-            <span class="text-weight-light">{{ modulo.nome }}</span>
+            <span class="text-weight-light">{{ module.nome }}</span>
           </q-btn>
         </div>
       </div>
@@ -56,26 +56,24 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapGetters } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import { db } from 'boot/firebase'
 
 export default {
   computed: {
-    ...mapGetters(['getUsuario', 'getModulos']),
-    ...mapFields('questionario', ['choosedQuestionary']),
+    ...mapFields(['modules']),
+    ...mapFields('questionary', ['choosedQuestionary']),
     modulosMilitar () {
-      return this.getModulos.filter(modulo => modulo.tipo === 'MILITAR')
+      return this.modules.filter(modulo => modulo.tipo === 'MILITAR')
     },
     modulosSVA () {
-      return this.getModulos.filter(modulo => modulo.tipo === 'SVA')
+      return this.modules.filter(modulo => modulo.tipo === 'SVA')
     }
   },
   firestore: {
     respostas: db.collection('modulos')
   },
   methods: {
-    ...mapMutations(['setModulos']),
     choose (modulo) {
       this.choosedQuestionary = modulo
     }

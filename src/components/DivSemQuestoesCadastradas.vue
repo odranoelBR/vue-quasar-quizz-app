@@ -38,7 +38,7 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
-    ...mapFields('questionario', ['choosedQuestionary'])
+    ...mapFields('questionary', ['choosedQuestionary'])
   }
 }
 </script>

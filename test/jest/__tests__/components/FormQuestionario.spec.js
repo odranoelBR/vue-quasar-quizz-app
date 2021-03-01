@@ -11,7 +11,7 @@ describe('Montar form Questionario sem estar respondido', () => {
       currentQuestion: {
         id: "CVAKZNtLrxDaaMNWa9v8",
         modulo: "modulos/Jom34TmjNRvbvYEwGo5M",
-        nivel: 1,
+        level: 1,
         referencia: "art. 362",
         respostas: [
           { correta: false, letra: 'a', texto: 'a avó materna' },
@@ -58,7 +58,7 @@ describe('Montar form Questionario já respondido', () => {
       currentQuestion: {
         id: "CVAKZNtLrxDaaMNWa9v8",
         modulo: "modulos/Jom34TmjNRvbvYEwGo5M",
-        nivel: 1,
+        level: 1,
         referencia: "art. 362",
         respostas: [
           { correta: false, letra: 'a', texto: 'a avó materna' },
