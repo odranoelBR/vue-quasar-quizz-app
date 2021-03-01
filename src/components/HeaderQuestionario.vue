@@ -20,7 +20,7 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
-    ...mapFields('questionario', ['choosedQuestionary.nome', 'configQuestionary.nivel']),
+    ...mapFields('questionary', ['choosedQuestionary.nome', 'configQuestionary.nivel']),
     nivelWrited () {
       return this.nivel === 1 ? 'Básico' : 'Avançado'
     },

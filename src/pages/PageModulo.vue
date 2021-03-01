@@ -110,11 +110,11 @@ export default {
     this.resetState()
   },
   computed: {
-    ...mapFields('questionario', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes', 'apagarRespostas']
+    ...mapFields('questionary', ['cronometro', 'correcaoFinal', 'qtdQuestoes', 'nivel', 'repetirQuestoes', 'apagarRespostas']
       .map(field => `configQuestionary.${field}`))
   },
   methods: {
-    ...mapActions('questionario', ['resetState']),
+    ...mapActions('questionary', ['resetState']),
     getBtnColor (model) {
       if (model) return 'positive'
       return 'negative'

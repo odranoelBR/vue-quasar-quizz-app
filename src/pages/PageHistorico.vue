@@ -48,7 +48,7 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   computed: {
-    ...mapFields('questionario', ['answers']),
+    ...mapFields('questionary', ['answers']),
     ...mapGetters(['getModulos']),
     modulosComRespostas () {
       return this.getModulos.map(modulo => ({

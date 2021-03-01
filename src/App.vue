@@ -16,7 +16,7 @@ export default {
 
   methods: {
     ...mapActions(['getModulos']),
-    ...mapActions('questionario', ['getAnswers'])
+    ...mapActions('questionary', ['getAnswers'])
   }
 }
 </script>

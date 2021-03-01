@@ -11,14 +11,16 @@ export default {
       menu: 'Menu',
       name: 'Name',
       email: 'Email',
-      update: 'Update'
+      update: 'Update',
+      question: 'Question | Questions'
     },
     messages: {
       soundOnError: 'Sound when you miss ?',
       tipsTutorials: 'Tips and Tutorials ?',
       myAcc: 'My Account',
       validationFillName: 'Fill in the name',
-      validationFillEmail: 'Fill in the email'
+      validationFillEmail: 'Fill in the email',
+      parcentOfQuestions: '% of Questions'
     }
   },
   'pt-BR': {
@@ -33,14 +35,16 @@ export default {
       menu: 'Menu',
       name: 'Nome',
       email: 'Email',
-      update: 'Atualizar'
+      update: 'Atualizar',
+      question: 'Questão | Questões'
     },
     messages: {
       soundOnError: 'Emitir som ao erra ?',
       tipsTutorials: 'Dicas e tutoriais ?',
       myAcc: 'Minha Conta',
       validationFillName: 'Preencha o nome',
-      validationFillEmail: 'Preencha o email'
+      validationFillEmail: 'Preencha o email',
+      parcentOfQuestions: '% de Questões'
     }
   }
 }

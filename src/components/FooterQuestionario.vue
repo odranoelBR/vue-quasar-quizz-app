@@ -105,8 +105,8 @@ export default {
     video: false
   }),
   computed: {
-    ...mapGetters('questionario', ['getCurrentQuestion']),
-    ...mapFields('questionario', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
+    ...mapGetters('questionary', ['getCurrentQuestion']),
+    ...mapFields('questionary', ['currentQuestionIndex', 'questions', 'choosedQuestionary']
       .concat(['nivel', 'cronometro', 'running']
         .map(field => `configQuestionary.${field}`))),
     currentIndex () {

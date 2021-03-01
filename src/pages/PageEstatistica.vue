@@ -3,7 +3,7 @@
     <q-card id="card-login">
       <q-card-section>
         <div class="text-h6 text-grey-6 text-center">
-          EAOF de 2004 a 2019
+          2004 to 2019
         </div>
       </q-card-section>
       <q-card-section style="padding: 8px">
@@ -18,15 +18,14 @@
 <script>
 import Chart from 'chart.js'
 import { mapFields } from 'vuex-map-fields'
-/* eslint-disable */
 export default {
   mounted () {
     let element = document.getElementById('myChart').getContext('2d')
     let data = {
-      labels: Object.keys(this.atual),
+      labels: Object.keys(this.now),
       datasets: [{
-        label: '% de questões',
-        data: Object.values(this.atual),
+        label: this.$t('messages.parcentOfQuestions'),
+        data: Object.values(this.now),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -76,6 +75,7 @@ export default {
         borderWidth: 1
       }]
     }
+    // eslint-disable-next-line no-new
     new Chart(element, {
       type: 'horizontalBar',
       data: data,
@@ -83,13 +83,8 @@ export default {
       }
     })
   },
-  data: () => ({
-  }),
   computed: {
-    ...mapFields('estatistica', ['atual'])
-  },
-  methods: {
-
+    ...mapFields('statistics', ['now'])
   }
 }
 </script>

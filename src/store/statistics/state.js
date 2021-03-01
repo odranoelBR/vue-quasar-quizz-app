@@ -1,6 +1,6 @@
 export const state = {
   total: 113,
-  atual: {
+  now: {
     'Escala de serviço': 12,
     'Férias': 10,
     'Moviment. Competências': 9,

@@ -1,5 +1,6 @@
 import { db } from 'boot/firebase'
 import { Notify } from 'quasar'
+import { i18n } from 'src/boot/i18n'
 
 export default {
   getModulos ({ commit }) {
@@ -22,7 +23,7 @@ export default {
       .doc(rootState.usuario.id)
       .update(payload)
       .then(snapshot => {
-        Notify.create({ message: 'Atualizado!', color: 'positive' })
+        Notify.create({ message: i18n.t('words.update'), color: 'positive' })
       })
   }
 }
