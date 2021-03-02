@@ -14,21 +14,21 @@
       <q-route-tab
         name="alarms"
         icon="alarm"
-        :label="$t('historic')"
+        :label="$t('words.historic')"
         to="historico"
         exact
       />
       <q-route-tab
         name="mails"
         icon="mail"
-        :label="$t('modules')"
+        :label="$t('words.modules')"
         to="/"
         exact
       />
       <q-route-tab
         name="configs"
         icon="mdi-settings"
-        :label="$t('config.')"
+        :label="$t('words.config')"
         to="configuracoes"
         exact
       />
