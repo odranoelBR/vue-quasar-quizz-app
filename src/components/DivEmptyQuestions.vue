@@ -11,8 +11,7 @@
           color="primary"
         />
       </template>
-      Você respondeu todas as questões /
-      Sem Questões Cadastradas desta disciplina
+      {{ $t('messages.emptyQuestions') }}
     </q-banner>
     <q-banner class="bg-blue-grey-1 q-mt-md">
       <template v-slot:avatar>
@@ -21,13 +20,13 @@
           color="accent"
         />
       </template>
-      Você pode apagar as respostas salvas das questões!
+      {{ $t('messages.canErase') }}
       <q-btn
         color="accent"
         v-close-popup
         @click="$router.push(`modulo/${choosedQuestionary.id}`)"
       >
-        Novo caderno
+        {{ $t('messages.newQuestion') }}
       </q-btn>
     </q-banner>
   </div>

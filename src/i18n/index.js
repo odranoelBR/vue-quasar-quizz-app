@@ -25,7 +25,12 @@ export default {
       validationFillEmail: 'Fill in the email',
       parcentOfQuestions: '% of Questions',
       eraseSavedResponses: 'Erase saved responses from this module ?',
-      whatHand: 'What is your main hand ?'
+      whatHand: 'What is your main hand ?',
+      emptyQuestions: 'You answered all questions / Can\'t find questions for this module.',
+      canErase: 'Want erase answers and remake ?',
+      newQuestion: 'New Quizz',
+      swipTip: 'Swip to move between questions.',
+      offTips: 'You can turn tips off on configs.'
     }
   },
   'pt-BR': {
@@ -54,7 +59,12 @@ export default {
       validationFillEmail: 'Preencha o email',
       parcentOfQuestions: '% de Questões',
       eraseSavedResponses: 'Apagar respostas salvas deste modulo ?',
-      whatHand: 'Qual sua mão principal ?'
+      whatHand: 'Qual sua mão principal ?',
+      emptyQuestions: 'Você respondeu todas as questões / Não encontrei questões deste modulo',
+      canErase: 'Deseja apagar respostas e refazer ?',
+      newQuestion: 'Novas questões',
+      swipTip: 'Arraste o dedo para passar questões.',
+      offTips: 'Você pode desligar as dicas nas configurarções'
 
     }
   }

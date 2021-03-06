@@ -26,7 +26,7 @@ describe('Montar form Questionario sem estar respondido', () => {
   const wrapper = mountQuasar(FormQuestionario, options)
 
   it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
-    expect(wrapper.emitted()['resposta-analisada'].length).toBe(1)
+    expect(wrapper.emitted()['analised-answer'].length).toBe(1)
   })
   it('Verifica cor de botão para resposta NÃO analisada', () => {
     let resposta = { correta: false }
@@ -73,7 +73,7 @@ describe('Montar form Questionario já respondido', () => {
   const wrapper = mountQuasar(FormQuestionario, options)
 
   it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
-    expect(wrapper.emitted()['resposta-analisada'].length).toBe(2)
+    expect(wrapper.emitted()['analised-answer'].length).toBe(2)
   })
   it('Verifica cor de botão para resposta analisada', () => {
     let resposta = { correta: false }

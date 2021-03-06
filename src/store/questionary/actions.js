@@ -1,4 +1,5 @@
 import types from './types'
+import { SET_LOADING } from '../global/types'
 import { filterAnswersByModuloId, resetSelectedChoiceOfQuestions, filterQuestionsByConfig } from './helper'
 import { db, storage } from 'boot/firebase'
 import { getDefaultConfigQuestionary } from './state'
@@ -39,7 +40,7 @@ export default {
       commit(types.SET_ANSWERS, [])
       dispatch('deleteAnswers')
     }
-    commit(types.SET_LOADING, true, { root: true })
+    commit(SET_LOADING, true, { root: true })
 
     db.collection('perguntas')
       .where('nivel', '==', state.configQuestionary.level)
@@ -56,7 +57,7 @@ export default {
         commit(types.SET_CONFIG_QUESTIONARY, configQuestionary)
         commit(types.SET_QUESTIONS, data)
       })
-      .then(() => { commit(types.SET_LOADING, false, { root: true }) })
+      .then(() => { commit(SET_LOADING, false, { root: true }) })
   },
   nextQuestion ({ commit, state }) {
     if ((state.currentQuestionIndex + 1) === state.questions.length) return

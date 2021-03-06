@@ -14,10 +14,10 @@
       @update="updateCurrent"
       @disable-analise="setDisableAnalise"
       @created="getImagem"
-      @resposta-analisada="setRespostaAnalisada "
+      @analised-answer="setRespostaAnalisada "
       :answer="answer"
       :current-question="getCurrentQuestion"
-      :resposta-analisada="respostaAnalisada"
+      :analised-answer="respostaAnalisada"
       :url-for-image="urlForImage"
       v-touch-swipe.mouse.right="handleSwipeRight"
       v-touch-swipe.mouse.left="handleSwipeLeft"
@@ -111,7 +111,7 @@
             color="secondary"
             @click="$router.push('historico')"
           >
-            Histórico
+            {{ $t('words.historic') }}
           </q-btn>
 
           <q-btn
@@ -120,7 +120,7 @@
             v-close-popup
             @click="$router.push(`modulo/${choosedQuestionary.id}`)"
           >
-            Novo caderno
+            {{ $t('messages.newQuestion') }}
           </q-btn>
         </q-card-section>
       </q-card>
@@ -129,7 +129,7 @@
   </q-page>
 
   <q-page v-else-if="!loading">
-    <div-sem-questoes-cadastradas />
+    <div-empty-questions />
   </q-page>
 </template>
 
@@ -137,7 +137,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
 import FormQuestionario from 'components/FormQuestionario'
-import DivSemQuestoesCadastradas from 'components/DivSemQuestoesCadastradas'
+import DivEmptyQuestions from 'components/DivEmptyQuestions'
 import DialogTutorial from 'components/DialogTutorial'
 // import Vivus from 'vivus'
 export default {
@@ -145,7 +145,7 @@ export default {
     this.getQuestions()
   },
   components: {
-    FormQuestionario, DivSemQuestoesCadastradas, DialogTutorial
+    FormQuestionario, DivEmptyQuestions, DialogTutorial
   },
   data: () => ({
     respostaCorreta: { icon: 'thumb_up', color: 'positive' },

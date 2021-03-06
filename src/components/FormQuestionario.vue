@@ -34,23 +34,23 @@
 
     <div
       class="row question-row q-pb-xs"
-      v-for="(resposta, index) in currentQuestion.respostas"
+      v-for="(item, index) in currentQuestion.respostas"
       :key="index"
     >
       <q-chip
-        :color="getColor(resposta)"
+        :color="getColor(item)"
         class="fit answer-chip"
         clickable
-        :disable="respostaAnalisada"
-        @click="toggleChoice(index)"
+        :disable="analisedAnswer"
+        @click="toggleChoice(item)"
       >
         <img
-          :src="getIcon(resposta)"
+          :src="getIcon(answer)"
           alt=""
         >
         <span
-          v-html="resposta.texto"
-          :style="resposta.selecionada ? 'color: white' : ''"
+          v-html="item.texto"
+          :style="item.selecionada ? 'color: white' : ''"
           class="texto-courier"
         />
       </q-chip>
@@ -69,7 +69,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    respostaAnalisada: {
+    analisedAnswer: {
       type: Boolean,
       required: true
     },
@@ -96,7 +96,7 @@ export default {
       return `statics/${resposta.letra}.svg`
     },
     syncronize () {
-      this.$emit('resposta-analisada', false)
+      this.$emit('analised-answer', false)
       this.$emit('disable-analise', false)
       if (!this.answer) return
 
@@ -104,7 +104,7 @@ export default {
         if (resposta.letra === this.answer.letra) {
           resposta.selecionada = true
           this.$emit('disable-analise', true)
-          this.$emit('resposta-analisada', true)
+          this.$emit('analised-answer', true)
         }
       })
     },
@@ -113,19 +113,19 @@ export default {
       this.$emit('update', respostaIndex)
     },
     getButtonColor (resposta) {
-      if (this.respostaAnalisada && resposta.correta) {
+      if (this.analisedAnswer && resposta.correta) {
         return 'positive'
       }
-      if (this.respostaAnalisada && !resposta.correta && resposta.selecionada) {
+      if (this.analisedAnswer && !resposta.correta && resposta.selecionada) {
         return 'negative'
       }
       return 'primary'
     },
     getColor (resposta) {
-      if (this.respostaAnalisada && resposta.correta) {
+      if (this.analisedAnswer && resposta.correta) {
         return 'positive'
       }
-      if (this.respostaAnalisada && !resposta.correta && resposta.selecionada) {
+      if (this.analisedAnswer && !resposta.correta && resposta.selecionada) {
         return 'negative'
       }
       if (!resposta.selecionada) {

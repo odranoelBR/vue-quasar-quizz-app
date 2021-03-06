@@ -7,7 +7,7 @@
       class="row text-center"
       v-if="envDev"
     >
-      <span class="text-white fixed-top">Ambiente de {{ envDev ? 'TESTE' : '' }}</span>
+      <span class="text-white fixed-top">Dev</span>
     </div>
     <div class="q-pa-lg">
       <header-questionario v-if="questionario" />

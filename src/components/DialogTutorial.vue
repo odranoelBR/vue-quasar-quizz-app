@@ -61,7 +61,7 @@
           class="text-primary"
           style="font-size: 17px"
         >
-          Arraste o dedo para passar questões.
+          {{ $t('messages.swipTip') }}
         </span>
       </q-card-section>
 
@@ -69,8 +69,8 @@
         style="margin-top:12vw"
         class="text-weight-thin"
       >
-        <span>Você pode desligar estas dicas nas </span>
-        <span class="text-bold q-pl-xs"> configurações!</span>
+        <span>{{ $t('messages.swipTips') }} </span>
+        <span class="text-bold q-pl-xs"> {{ $t(words.configurations) }}!</span>
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -82,10 +82,6 @@ export default {
     setInterval(() => {
       this.show = !this.show
     }, 1000)
-
-    // setInterval(() => {
-    //   this.dialog = false
-    // }, 5000)
   },
   data: () => ({
     dialog: true,
