@@ -10,7 +10,7 @@
       <span class="text-white fixed-top">Dev</span>
     </div>
     <div class="q-pa-lg">
-      <header-questionario v-if="questionario" />
+      <header-questionary v-if="questionary" />
       <app-header v-else />
 
       <q-page-container class="padding q-pt-md">
@@ -30,8 +30,8 @@
         enter-active-class="animated slideInUp"
         leave-active-class="animated slideOutDown"
       >
-        <footer-questionario
-          v-if="questionario"
+        <footer-questionary
+          v-if="questionary"
           :key="1"
         />
         <app-footer
@@ -51,18 +51,18 @@
 <script>
 import AppHeader from 'layouts/AppHeader.vue'
 import AppFooter from 'layouts/AppFooter.vue'
-import HeaderQuestionario from 'components/HeaderQuestionario.vue'
-import FooterQuestionario from 'components/FooterQuestionary.vue'
+import HeaderQuestionary from 'components/HeaderQuestionary.vue'
+import FooterQuestionary from 'components/FooterQuestionary.vue'
 export default {
   name: 'Layout',
   components: {
-    AppHeader, AppFooter, HeaderQuestionario, FooterQuestionario
+    AppHeader, AppFooter, HeaderQuestionary, FooterQuestionary
   },
   computed: {
     envDev () {
       return process.env.DEVELOPMENT
     },
-    questionario () {
+    questionary () {
       return this.$route.path.includes('modulo/') || this.$route.path === '/questionario'
     }
   }

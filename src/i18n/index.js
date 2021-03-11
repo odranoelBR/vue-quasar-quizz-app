@@ -14,7 +14,7 @@ export default {
       update: 'Update',
       question: 'Question | Questions',
       basic: 'Basic',
-      advanced: 'advanced',
+      advanced: 'Advanced',
       level: 'Level'
     },
     messages: {

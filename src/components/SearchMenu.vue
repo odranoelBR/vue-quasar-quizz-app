@@ -13,7 +13,6 @@
       />
     </div>
   </q-menu>
-
 </template>
 <script>
 export default {

@@ -49,7 +49,6 @@ export default {
   }),
   components: {
     AppMenu
-
   },
   computed: {
     ...mapFields(['user']),

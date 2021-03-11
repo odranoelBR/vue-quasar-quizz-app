@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapFields('questionary', ['choosedQuestionary.nome', 'configQuestionary.level']),
     nivelWrited () {
-      return this.level === 1 ? 'Básico' : 'Avançado'
+      return this.level === 1 ? this.$t('words.basic') : this.$t('words.advanced')
     },
     className () {
       return this.level === 1 ? 'text-blue-4' : 'text-accent'

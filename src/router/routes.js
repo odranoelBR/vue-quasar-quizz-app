@@ -4,13 +4,13 @@ const routes = [
     path: '/',
     component: () => import('layouts/Layout.vue'),
     children: [
-      { path: '', component: () => import('pages/PageModulos.vue') },
-      { path: '/modulo/:id', component: () => import('pages/PageModulo.vue') },
-      { path: '/configuracoes', component: () => import('pages/PageConfiguracao.vue') },
-      { path: '/historico', component: () => import('pages/PageHistorico.vue') },
-      { path: '/questionario', component: () => import('pages/PageQuestionario.vue') },
-      { path: '/minha-conta', component: () => import('pages/PageMinhaConta.vue') },
-      { path: '/estatistica', component: () => import('pages/PageEstatistica.vue') }
+      { path: '', component: () => import('pages/PageModules.vue') },
+      { path: '/modulo/:id', component: () => import('pages/PageModule.vue') },
+      { path: '/configuracoes', component: () => import('pages/PageConfiguration.vue') },
+      { path: '/historico', component: () => import('pages/PageHistoric.vue') },
+      { path: '/questionario', component: () => import('pages/PageQuestionary.vue') },
+      { path: '/minha-conta', component: () => import('pages/PageMyAcc.vue') },
+      { path: '/estatistica', component: () => import('pages/PageEstatistic.vue') }
     ]
   },
   {
