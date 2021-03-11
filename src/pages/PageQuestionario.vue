@@ -8,7 +8,7 @@
       class="q-mb-md"
     />
 
-    <form-questionario
+    <form-questionary
       v-if="getCurrentQuestion.id"
       @reset="reset"
       @update="updateCurrent"
@@ -136,7 +136,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { mapFields } from 'vuex-map-fields'
-import FormQuestionario from 'components/FormQuestionario'
+import FormQuestionary from 'components/FormQuestionary'
 import DivEmptyQuestions from 'components/DivEmptyQuestions'
 import DialogTutorial from 'components/DialogTutorial'
 // import Vivus from 'vivus'
@@ -145,7 +145,7 @@ export default {
     this.getQuestions()
   },
   components: {
-    FormQuestionario, DivEmptyQuestions, DialogTutorial
+    FormQuestionary, DivEmptyQuestions, DialogTutorial
   },
   data: () => ({
     respostaCorreta: { icon: 'thumb_up', color: 'positive' },

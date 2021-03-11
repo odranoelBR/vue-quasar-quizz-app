@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import { mountQuasar } from '../../utils/index'
-import FormQuestionario from 'src/components/FormQuestionario'
+import FormQuestionary from 'src/components/FormQuestionary'
 
-describe('Montar form Questionario sem estar respondido', () => {
+describe('Mount questionary without be answered', () => {
 
   let options = {
     propsData: {
@@ -23,27 +23,27 @@ describe('Montar form Questionario sem estar respondido', () => {
       }
     }
   }
-  const wrapper = mountQuasar(FormQuestionario, options)
+  const wrapper = mountQuasar(FormQuestionary, options)
 
-  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
+  it('check if syncronize returns when not find answer DB', () => {
     expect(wrapper.emitted()['analised-answer'].length).toBe(1)
   })
-  it('Verifica cor de botão para resposta NÃO analisada', () => {
+  it('check button color for NOT answered question', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
   })
-  it('Verifica linha de botão para resposta não analisada e NÃO selecionada', () => {
+  it('check button line for NOT selected, NOT analised', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getOutline(resposta)).toBe(true)
   })
-  it('Verifica linha de botão para resposta não analisada e SELECIONADA', () => {
+  it('check button line for NOT analised and selected question', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
 })
 
 
-describe('Montar form Questionario já respondido', () => {
+describe('Mount questionary answered', () => {
 
   let options = {
     propsData: {
@@ -70,28 +70,28 @@ describe('Montar form Questionario já respondido', () => {
       }
     }
   }
-  const wrapper = mountQuasar(FormQuestionario, options)
+  const wrapper = mountQuasar(FormQuestionary, options)
 
-  it('Verifica se syncronize retorna ao nao encontrar resposta em banco ', () => {
+  it('check if syncronize returns when NOT findn answerd DB', () => {
     expect(wrapper.emitted()['analised-answer'].length).toBe(2)
   })
-  it('Verifica cor de botão para resposta analisada', () => {
+  it('check button color for analised question', () => {
     let resposta = { correta: false }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('primary')
   })
-  it('Verifica se botão da resposta esta vermelho', () => {
+  it('check button color if question is selected but wrong', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getButtonColor(resposta)).toBe('negative')
   })
-  it('Verifica LINHA de botão para resposta analisada e selecionada', () => {
+  it('check button line for analised and selected answer', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
-  it('Verifica LINHA de botão para resposta não analisada e SELECIONADA', () => {
+  it('check button line for NOT analised and selected answer', () => {
     let resposta = { correta: false, selecionada: true }
     expect(wrapper.vm.getOutline(resposta)).toBe(false)
   })
-  it('Verifica se resposta já salva esta selecionada', async () => {
+  it('check if saved question is selected', async () => {
     expect(wrapper.vm.currentQuestion.respostas[3].selecionada).toBe(true)
   })
 })

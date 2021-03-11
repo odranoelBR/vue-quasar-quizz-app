@@ -52,7 +52,7 @@
 import AppHeader from 'layouts/AppHeader.vue'
 import AppFooter from 'layouts/AppFooter.vue'
 import HeaderQuestionario from 'components/HeaderQuestionario.vue'
-import FooterQuestionario from 'components/FooterQuestionario.vue'
+import FooterQuestionario from 'components/FooterQuestionary.vue'
 export default {
   name: 'Layout',
   components: {

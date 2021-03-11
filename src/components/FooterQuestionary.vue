@@ -19,7 +19,7 @@
       <q-toolbar-title>
         <div class="row text-center items-center">
           <div class="col-4">
-            <span class="text-subtitle1 text-blue-grey-3 text-weight-light">Questão
+            <span class="text-subtitle1 text-blue-grey-3 text-weight-light">{{ $tc('words.question', 1) }}
               <span class="text-h4 text-white text-weight-bold">{{ currentIndex }}</span>
               /
               <span class="text-h5">{{ questions.length || '-' }}</span>
@@ -46,7 +46,7 @@
               color="primary"
               style="padding: 10px"
               padding="none"
-              @click="showBizu"
+              @click="showTip"
             >
               <img
                 src="statics/idea.svg"
@@ -100,8 +100,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    menuAtual: 'play',
-    perguntas: [],
     video: false
   }),
   computed: {
@@ -130,7 +128,7 @@ export default {
         this.$router.push('/questionario')
       }
     },
-    showBizu () {
+    showTip () {
       this.$q.notify({
         message: this.getCurrentQuestion.bizu,
         color: 'primary',
